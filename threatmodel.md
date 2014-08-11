@@ -2,11 +2,15 @@
 WORK IN PROGRESS
 Please try to use markdown syntax so we are able to post it on github etc.
 There is a manual but more or less regular backup to http://gitlab.dfi.local/dfi/threat-model
+
 ## Threat Model Information
-|Description| A software distribution that helps organisations implement a secure* email/groupware solution. It combines LEAP as an encrypted mail provider with Mailpile as UI into a web based frontend|
-|Participants|Folker Bernitt, Christoph Klünter, Smari McCarthy|
-|Reviewer|no one yet|
-* In this context secure means that communication cannot be intercepted trivially by adversary parties. The goal is not, and arguably cannot be, to make communiction secure against all known and unknown adversaries.
+###Description
+A software distribution that helps organisations implement a secure* email/groupware solution. It combines LEAP as an encrypted mail provider with Mailpile as UI into a web based frontend
+
+(*)In this context secure means that communication cannot be intercepted trivially by adversary parties. The goal is not, and arguably cannot be, to make communiction secure against all known and unknown adversaries.
+###Participants
+Folker Bernitt, Christoph Klünter, Smari McCarthy, Lisa Junger
+
 ## Assumptions
 * Platform providers obtain an authentic copy of Pixelated
 * Users have some kind of certificate check in place (e.g. do not accept untrusted certificates)
@@ -19,6 +23,7 @@ There is a manual but more or less regular backup to http://gitlab.dfi.local/dfi
 4. The frontend in form of the Mailpile dispatcher is a custom development by the pixelated team
 5. The pixelated platform only provides encrypted access to its various services, e.g. HTTPS or SMTPS (see below for details about boundaries)
 ## Entry Points
+
 |Name|Protocol|Port|encryption|auth|description|
 |-------|----|----------|-----------|
 |SSH|SSH|22|SSH|authorized keys|ssh access| |SMTP|SMTP|25|STARTTLS| | |

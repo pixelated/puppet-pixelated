@@ -115,16 +115,17 @@ LEAP sets up Nagios to monitor the instances. Analysis of how Nagios accesses ho
 
 ## Trust Levels
 
-|Nr|Name|login Page|Nicknym Service|Soledad Service|Mailpile Service|Direct accessible from Internet|
-|--|----|----------|---------------|---------------|----------------|------------------------|
-|1.| Anoymous Web User|Yes|Yes|No|No|Yes|
-|2.|User with invalid login credentials|Yes|Yes|No|No|Yes|
-|3.|User with valid login credentials|Yes|yes|Yes|Yes|Yes|
-|4.|Nicknym user|Yes|Yes|No|No|Yes|
-|5.|Soledad user|Yes|Yes|Yes|No|Yes|
-|5.|Multipile Server Process|Yes|Yes|Yes|Yes|No|
-|6.|Multipile Dispatcher Process|Yes|Yes|No|Yes|Yes|
-|7.|Admin user|Yes|Yes|yes|yes|No|
+|Nr|Name                               |login Page|Nicknym Service|Soledad Service|Mailpile Service|Direct accessible from Internet|
+|--|-----------------------------------|----------|---------------|---------------|----------------|-------------------------------|
+|1.|Anoymous Web User                  |Yes       |Yes            |No             |No              |Yes                            |
+|2.|User with invalid login credentials|Yes       |Yes            |No             |No              |Yes                            |
+|3.|User with valid login credentials  |Yes       |yes            |Yes            |Yes             |Yes                            |
+|4.|Nicknym user                       |Yes       |Yes            |No             |No              |Yes                            |
+|5.|Soledad user                       |Yes       |Yes            |Yes            |No              |Yes                            |
+|5.|Multipile Server Process           |Yes       |Yes            |Yes            |Yes             |No                             |
+|6.|Multipile Dispatcher Process       |Yes       |Yes            |No             |Yes             |Yes                            |
+|7.|Admin user                         |Yes       |Yes            |yes            |yes             |No                             |
+
 
 ## System Users / Privilege Seperation
 As multiple users are accessing the pixelated platform it is important to isolate the users from each other as good as possible to avoid accidental access to secret data. For achiving purposes it makes sense to implement some kind of privilege seperation.

@@ -22,6 +22,7 @@ Folker Bernitt, Christoph Klünter, Smari McCarthy, Lisa Junger
 3. The MUA is provided by [Mailpile](https://www.mailpile.is "Mailpiles homepage")
 4. The frontend in form of the Mailpile dispatcher is a custom development by the pixelated team
 5. The pixelated platform only provides encrypted access to its various services, e.g. HTTPS or SMTPS (see below for details about boundaries)
+
 ## Entry Points
 
 |Name|Protocol|Port|encryption|auth|description|
@@ -33,6 +34,7 @@ Folker Bernitt, Christoph Klünter, Smari McCarthy, Lisa Junger
 |api|HTTPS|4430|SSL/TLS|session-id| | |
 |Nicknym|HTTPS|6425|SSL/TLS| |Key lookup service|
 |Soledad|?|2323|?| |Couchdb external interface|
+
 ## Assets/Data
 ### Encrypted mails
 - - Symetrically encrypted mails stored in a couchdb database

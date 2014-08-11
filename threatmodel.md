@@ -114,6 +114,7 @@ Unencrypted data:
 LEAP sets up Nagios to monitor the instances. Analysis of how Nagios accesses hosts is pending
 
 ## Trust Levels
+
 |Nr|Name|login Page|Nicknym Service|Soledad Service|Mailpile Service|Direct accessible from Internet|
 |--|----|----------|---------------|---------------|----------------|------------------------|
 |1.| Anoymous Web User|Yes|Yes|No|No|Yes|

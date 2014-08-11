@@ -46,12 +46,15 @@ Folker Bernitt, Christoph Klünter, Smari McCarthy, Lisa Junger
   - The key needs to be unlocked on the server-side, therefore the server needs access to the plaintext passphrase as well
 - LEAP provides a key look service (key server) which provides public keys for all registered users
 - The intention of the pixelated plattform is to never persist unencrypted mail on the server
+
 ### User credentials
 - The server has to keep a list of user credentials (username and password) to authenticate and authorize users
 - The password might either be used directly as the gpg passphrase or to unlock the gpg private key passphrase
+
 ### Email adressess
 - The server stores a list of all valid email adresses
   - Poorly chosen can hint to the owner
+
 ### Mailpile persisted data
 All data that mailpile persists is stored on the server, among others this includes
 - keyword search index (with hashed  and salted keywords)
@@ -59,10 +62,12 @@ All data that mailpile persists is stored on the server, among others this inclu
 - encrypted mail index
 - encrypted contacts/vcards
 - (currently) unencrypted logfile with web requests
+
 ### LEAP persited data
 All data that the LEAP provider persists
 - Logfiles (SMTP, HTTP, couchdb)
 - encrypted mails in couchdb
+
 ### Log files
 - Some typical server logs are gerenated, IP adresses have to be anonymized as good as possible
 - Might reveal user behaviour like times when mails are read

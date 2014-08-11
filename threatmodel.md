@@ -25,31 +25,33 @@ Folker Bernitt, Christoph Klünter, Smari McCarthy, Lisa Junger
 
 ## Entry Points
 
-|Name|Protocol|Port|encryption|auth|description|
-|-------|----|----------|-----------|
-|SSH|SSH|22|SSH|authorized keys|ssh access| |SMTP|SMTP|25|STARTTLS| | |
-|SMTP|SMTP|465|STARTTLS|ssh client auth | | |SMTP|SMTP|487|STARTTLS| | |
-|Web|HTTP|80|none| |Redirects to HTTPS|
-|Web|HTTPS|443|SSL/TLS| |Different web-applications, e.g. user and admin interface|
-|api|HTTPS|4430|SSL/TLS|session-id| | |
-|Nicknym|HTTPS|6425|SSL/TLS| |Key lookup service|
-|Soledad|?|2323|?| |Couchdb external interface|
+|Name|Protocol|Port|encryption|auth           |description|
+|----|--------|----|----------|---------------|-----------|
+|SSH |SSH     |22  |SSH       |authorized keys|ssh access | 
+|SMTP|SMTP    |25  |STARTTLS  |               |           |
+|SMTP|SMTP    |465 |STARTTLS  |ssh client auth|           |
+|SMTP|SMTP    |487 |STARTTLS  |               |           |
+|Web |HTTP    |80  |none      |               |Redirects to HTTPS|
+|Web |HTTPS   |443 |SSL/TLS   |               |Different web-applications, e.g. user and admin interface|
+|api |HTTPS   |4430|SSL/TLS   |session-id     |           |
+|Nicknym|HTTPS|6425|SSL/TLS   |               |Key lookup service|
+|Soledad|?    |2323|?         |               |Couchdb external interface|
 
 ## Assets/Data
 ### Encrypted mails
-- - Symetrically encrypted mails stored in a couchdb database
-- - GPG encrypted mails stored in a couchdb database (incoming mail)
+- Symetrically encrypted mails stored in a couchdb database
+- GPG encrypted mails stored in a couchdb database (incoming mail)
 - GPG public and private key
-- - Being a SaaS model the server needs access to the (encrypted) private key
-- - - The key needs to be unlocked on the server-side, therefore the server needs access to the plaintext passphrase as well
-- - LEAP provides a key look service (key server) which provides public keys for all registered users
-- - The intention of the pixelated plattform is to never persist unencrypted mail on the server
+  - Being a SaaS model the server needs access to the (encrypted) private key
+  - The key needs to be unlocked on the server-side, therefore the server needs access to the plaintext passphrase as well
+- LEAP provides a key look service (key server) which provides public keys for all registered users
+- The intention of the pixelated plattform is to never persist unencrypted mail on the server
 ### User credentials
-- - The server has to keep a list of user credentials (username and password) to authenticate and authorize users
-- - The password might either be used directly as the gpg passphrase or to unlock the gpg private key passphrase
+- The server has to keep a list of user credentials (username and password) to authenticate and authorize users
+- The password might either be used directly as the gpg passphrase or to unlock the gpg private key passphrase
 ### Email adressess
-- - The server stores a list of all valid email adresses
-- - - Poorly chosen can hint to the owner
+- The server stores a list of all valid email adresses
+  - Poorly chosen can hint to the owner
 ### Mailpile persisted data
 All data that mailpile persists is stored on the server, among others this includes
 - keyword search index (with hashed  and salted keywords)
@@ -62,8 +64,8 @@ All data that the LEAP provider persists
 - Logfiles (SMTP, HTTP, couchdb)
 - encrypted mails in couchdb
 ### Log files
-- - Some typical server logs are gerenated, IP adresses have to be anonymized as good as possible
-- - Might reveal user behaviour like times when mails are read
+- Some typical server logs are gerenated, IP adresses have to be anonymized as good as possible
+- Might reveal user behaviour like times when mails are read
 ## Data Transports at boundaries
 ### HTTPS access through Web-Frontend
 The pixelated plattform provides a web front by which users can access (read and write) emails. This transport is secured using a recent SSL version. Using perfect forward secrecy is mandatory.  Each user has full access to his account. Mails are moved unencrypted through this transport (decryption happens on the server).

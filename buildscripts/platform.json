@@ -49,7 +49,7 @@
       "ssh_password": "{{user `ssh_password`}}",
       "guest_os_type": "Debian",
       "guest_additions_mode": "disable",
-      "vm_name": "leap",
+      "vm_name": "pixelated",
       "iso_url": "{{user `iso_url`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
@@ -99,7 +99,7 @@
       "ssh_port": 22,
       "ssh_username": "{{user `ssh_username`}}",
       "ssh_wait_timeout": "10000s",
-      "vm_name": "leap",
+      "vm_name": "pixelated",
       "net_device": "virtio-net",
       "disk_interface": "virtio",
       "shutdown_command": "echo '{{user `ssh_password`}}' | /usr/bin/sudo -S /sbin/shutdown -h now"

@@ -47,7 +47,7 @@
       "http_directory": "resources",
       "boot_wait": "5s",
       "ssh_password": "{{user `ssh_password`}}",
-      "guest_os_type": "Debian_64",
+      "guest_os_type": "Debian",
       "guest_additions_mode": "disable",
       "vm_name": "leap",
       "iso_url": "{{user `iso_url`}}",

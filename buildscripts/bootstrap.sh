@@ -30,7 +30,7 @@ cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 leap add-user --self
 leap cert ca
 leap cert csr
-leap node add leap ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad,monitoring tags:production
+leap node add leap ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
 jq '.["couch.master"]="true"' nodes/leap.json > nodes/leap.json.tmp
 mv nodes/leap.json.tmp nodes/leap.json
 sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/leap/leap_ssh.pub'

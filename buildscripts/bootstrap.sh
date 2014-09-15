@@ -67,7 +67,7 @@ if [ $? -eq 1 ]; then
   exit 1
 fi
 
-leap deploy
+leap -v 3 deploy
 if [ $? -eq 1 ]; then
   echo "deploy failed"
   exit 1

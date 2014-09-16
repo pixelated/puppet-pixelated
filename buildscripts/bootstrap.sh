@@ -13,6 +13,8 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+echo 'Acquire::http { Proxy "http://192.168.135.115:3124";};' > /etc/apt/apt.conf.d/01-aptcacher
+echo 'Acquire::https { Proxy "https://";};' >> /etc/apt/apt.conf.d/01-aptcacher
 echo "deb http://debian.mirror.iphh.net/debian wheezy-backports main" > /etc/apt/sources.list.d/backports.list
 apt-get update
 apt-get -y install puppet rsync ruby-hiera-puppet git ruby1.9.1-dev rake jq

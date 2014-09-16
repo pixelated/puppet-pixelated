@@ -24,13 +24,13 @@ echo "installing leap"
 echo "==============================================="
 #gem install leap_cli
 cd /tmp
-git clone -b master https://leap.se/git/leap_cli.git
+git clone -b develop https://leap.se/git/leap_cli.git
 cd leap_cli
 rake build
 rake install
 mkdir /home/leap
 cd /home/leap
-git clone -b master https://leap.se/git/leap_platform.git
+git clone -b develop https://leap.se/git/leap_platform.git
 cd /home/leap/leap_platform
 #git fetch origin
 #git checkout develop
@@ -58,7 +58,8 @@ leap add-user --self
 leap cert ca
 leap cert csr
 leap node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
-jq '.["couch.master"]="true"' nodes/pixelated.json > nodes/pixelated.json.tmp
+# use bigcouch instead of couchdb, so we DON'T provide couch.master=true here
+#jq '.["couch.master"]="true"' nodes/pixelated.json > nodes/pixelated.json.tmp
 mv nodes/pixelated.json.tmp nodes/pixelated.json
 sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/leap/leap_ssh.pub'
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json

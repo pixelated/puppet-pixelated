@@ -11,10 +11,7 @@ leap add-user --self
 leap cert ca
 leap cert csr
 leap node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
-# use bigcouch instead of couchdb, so we DON'T provide couch.master=true here
-#jq '.["couch.master"]="true"' nodes/pixelated.json > nodes/pixelated.json.tmp
-mv nodes/pixelated.json.tmp nodes/pixelated.json
-sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/leap/leap_ssh.pub'
+sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/leap_ssh.pub'
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
 leap node init pixelated 

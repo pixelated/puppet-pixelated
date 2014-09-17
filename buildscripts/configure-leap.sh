@@ -11,7 +11,7 @@ leap add-user --self
 leap cert ca
 leap cert csr
 leap node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
-sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/leap_ssh.pub'
+sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
 leap node init pixelated 

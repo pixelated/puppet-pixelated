@@ -7,5 +7,5 @@ echo "deb http://packages.pixelated-project.org/debian wheezy main"          >> 
 apt-key adv --keyserver pool.sks-keyservers.net --recv-key 1E34A1828E207901 # install the leap apt key
 apt-key adv --keyserver pool.sks-keyservers.net --recv-key 287A1542472DC0E3 # install the pixelated apt key
 apt-get update
-apt-get install pixelated-dispatcher
+apt-get -y install pixelated-dispatcher
 

@@ -1,26 +1,27 @@
+OPTS='--no-color'
 
 echo "==============================================="
 echo "configuring leap"
 echo "==============================================="
 mkdir /home/leap/configuration
 cd /home/leap/configuration
-leap new --contacts no-reply@wazokazi.is --domain example.wazokazi.is --name LEAP_Example --platform=/home/leap/leap_platform .
+leap $OPTS new --contacts no-reply@wazokazi.is --domain example.wazokazi.is --name LEAP_Example --platform=/home/leap/leap_platform .
 ssh-keygen -f /root/.ssh/id_rsa -P ""
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
-leap add-user --self
-leap cert ca
-leap cert csr
-leap node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
+leap $OPTS add-user --self
+leap $OPTS cert ca
+leap $OPTS cert csr
+leap $OPTS node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad tags:production
 sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
-leap node init pixelated 
+leap $OPTS node init pixelated 
 if [ $? -eq 1 ]; then
   echo "node init failed"
   exit 1
 fi
 
-leap -v 3 deploy
+leap $OPTS -v 3 deploy
 if [ $? -eq 1 ]; then
   echo "deploy failed"
   exit 1

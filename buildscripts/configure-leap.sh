@@ -15,7 +15,7 @@ leap $OPTS node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx
 sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
-leap $OPTS node init pixelated.example.wazokazi.is
+leap $OPTS node init pixelated 
 if [ $? -eq 1 ]; then
   echo "node init failed"
   exit 1

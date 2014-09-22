@@ -20,7 +20,7 @@ rake build
 rake install
 mkdir /home/leap
 cd /home/leap
-git clone -b develop https://leap.se/git/leap_platform.git
+git clone -b develop https://github.com/pixelated-project/leap_platform.git
 cd /home/leap/leap_platform
 git submodule sync
 git submodule update --init

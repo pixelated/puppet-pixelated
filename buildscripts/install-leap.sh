@@ -16,7 +16,7 @@ echo "==============================================="
 cd /tmp
 git clone -b develop https://leap.se/git/leap_cli.git
 cd leap_cli
-git checkout bf6c804a7ed36043d6f43c1e38172b11ed50160a
+git checkout 937092ff3cccfeeeb415f9bbb959c9f4591ec006
 rake build
 rake install
 mkdir /home/leap

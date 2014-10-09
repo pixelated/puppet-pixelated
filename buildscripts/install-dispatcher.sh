@@ -7,4 +7,6 @@ echo "deb http://packages.pixelated-project.org/debian wheezy main"          >> 
 apt-key adv --keyserver pool.sks-keyservers.net --recv-key 287A1542472DC0E3 # install the pixelated apt key
 apt-get update
 apt-get -t wheezy-backports -y install pixelated-dispatcher
+apt-get install -t wheezy-backports linux-image-amd64
+apt-get install -t wheezy-backports lxc-docker
 

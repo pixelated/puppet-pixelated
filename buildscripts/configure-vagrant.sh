@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install linux linux-headers-amd64
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install linux-headers-amd64
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install virtualbox-guest-additions
 
 sudo mkdir /home/vagrant/.ssh

@@ -4,7 +4,10 @@ echo "==============================================="
 echo "installing virtualbox guest additions"
 echo "==============================================="
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install linux-headers-amd64
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install virtualbox-guest-additions
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install virtualbox-guest-additions-iso
+sudo  mount -o loop /usr/share/virtualbox/VBoxGuestAdditions.iso /mnt
+sudo /mnt/VBoxLinuxAdditions.run
+sudo umount /mnt
 
 echo "==============================================="
 echo "adding ssh-key"

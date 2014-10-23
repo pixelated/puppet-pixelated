@@ -26,3 +26,8 @@ echo "==============================================="
 sudo usermod -p '\$6\$chPyDBu4\$r.9lJnTa5q7yZbX//3khkkKyTpFsWels5D/zMJ1p5qvLz4034Bu8vOIUBt9bkAFkU2aP7ZGxGtHTHuf90NYOI.' vagrant
 sudo usermod -p '\$6\$chPyDBu4\$r.9lJnTa5q7yZbX//3khkkKyTpFsWels5D/zMJ1p5qvLz4034Bu8vOIUBt9bkAFkU2aP7ZGxGtHTHuf90NYOI.' root
 
+sudo sync
+echo "==============================================="
+echo "setup ready"
+echo "==============================================="
+sudo cat /home/vagrant/.ssh/authorized_keys

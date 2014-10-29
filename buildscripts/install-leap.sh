@@ -26,3 +26,9 @@ cd /home/leap/leap_platform
 git submodule sync
 git submodule update --init
 
+echo "==============================================="
+echo "cleaning up"
+echo "==============================================="
+apt-get -f install
+sync
+sleep 10

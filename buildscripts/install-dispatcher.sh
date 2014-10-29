@@ -8,3 +8,9 @@ apt-key adv --keyserver pool.sks-keyservers.net --recv-key 287A1542472DC0E3 # in
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-amd64 lxc-docker
 
+echo "==============================================="
+echo "cleaning up"
+echo "==============================================="
+apt-get -f install
+sync
+sleep 10

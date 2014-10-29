@@ -28,3 +28,12 @@ echo "==============================================="
 echo "setup ready"
 echo "==============================================="
 sudo cat /home/vagrant/.ssh/authorized_keys
+
+
+echo "==============================================="
+echo "cleaning up"
+echo "==============================================="
+
+apt-get -f install
+sync
+sleep 10

@@ -23,7 +23,6 @@ echo "==============================================="
 sudo usermod -p '\$6\$chPyDBu4\$r.9lJnTa5q7yZbX//3khkkKyTpFsWels5D/zMJ1p5qvLz4034Bu8vOIUBt9bkAFkU2aP7ZGxGtHTHuf90NYOI.' vagrant
 sudo usermod -p '\$6\$chPyDBu4\$r.9lJnTa5q7yZbX//3khkkKyTpFsWels5D/zMJ1p5qvLz4034Bu8vOIUBt9bkAFkU2aP7ZGxGtHTHuf90NYOI.' root
 
-sudo sync
 echo "==============================================="
 echo "setup ready"
 echo "==============================================="
@@ -34,6 +33,13 @@ echo "==============================================="
 echo "cleaning up"
 echo "==============================================="
 
-apt-get -f install
-sync
+sudo apt-get -f install
+sudo apt-get autoremove
+sudo sync
 sleep 10
+
+echo "==============================================="
+echo "done"
+echo "==============================================="
+
+sudo poweroff

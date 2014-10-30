@@ -1,3 +1,4 @@
+#!/bin/sh -x
 OPTS='--no-color'
 
 echo "==============================================="
@@ -22,7 +23,7 @@ if [ $? -eq 1 ]; then
   exit 1
 fi
 
-leap $OPTS -v 3 deploy
+leap $OPTS -v 2 deploy
 if [ $? -eq 1 ]; then
   echo "deploy failed"
   exit 1

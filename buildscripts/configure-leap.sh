@@ -8,11 +8,11 @@ cd /home/leap/configuration
 leap $OPTS new --contacts no-reply@wazokazi.is --domain example.wazokazi.is --name LEAP_Example --platform=/home/leap/leap_platform .
 ssh-keygen -f /root/.ssh/id_rsa -P ""
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
+sh -c 'cat /etc/ssh/ssh_host_rsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 leap $OPTS add-user --self
 leap $OPTS cert ca
 leap $OPTS cert csr
-leap $OPTS node add pixelated ip_address:$(facter ipaddress)  services:webapp,mx,couchdb,soledad,monitor tags:production
-sh -c 'cat /etc/ssh/ssh_host_ecdsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
+leap $OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor tags:production
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
 leap $OPTS node init pixelated 

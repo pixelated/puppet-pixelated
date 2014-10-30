@@ -16,9 +16,10 @@ echo "==============================================="
 cd /tmp
 git clone -b develop https://leap.se/git/leap_cli.git
 cd leap_cli
-git checkout 937092ff3cccfeeeb415f9bbb959c9f4591ec006
+git checkout develop 
 rake build
 rake install
+
 mkdir /home/leap
 cd /home/leap
 git clone -b develop https://github.com/pixelated-project/leap_platform.git

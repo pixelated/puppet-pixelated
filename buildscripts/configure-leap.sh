@@ -1,4 +1,9 @@
-#!/bin/sh -x
+#!/bin/sh
+
+# exit on any error
+set -e
+set -x 
+
 OPTS='--no-color'
 
 echo "==============================================="

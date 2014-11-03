@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# exit on any error
+set -e
+
 echo "==============================================="
 echo "installing virtualbox guest additions"
 echo "==============================================="

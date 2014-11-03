@@ -1,4 +1,9 @@
 #!/bin/sh
+
+# exit on any error
+set -e
+
+# exit
 echo "==============================================="
 echo "installing pixelated platform"
 echo "==============================================="

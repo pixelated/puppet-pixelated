@@ -19,7 +19,7 @@ echo "==============================================="
 cd /tmp
 git clone -b develop https://leap.se/git/leap_cli.git
 cd leap_cli
-git checkout develop 
+git checkout 1ba5abc1a9359a00cee2da06b9766eb0bdda9f29
 rake build
 rake install
 

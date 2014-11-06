@@ -15,13 +15,13 @@ apt-get clean
 echo "==============================================="
 echo "installing leap"
 echo "==============================================="
-gem install leap_cli
-#cd /tmp
-#git clone -b develop https://leap.se/git/leap_cli.git
-#cd leap_cli
-#git checkout develop 
-#rake build
-#rake install
+#gem install leap_cli
+cd /tmp
+git clone -b develop https://leap.se/git/leap_cli.git
+cd leap_cli
+git checkout develop 
+rake build
+rake install
 
 mkdir /home/leap
 cd /home/leap

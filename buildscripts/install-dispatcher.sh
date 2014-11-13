@@ -17,7 +17,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-
 echo "==============================================="
 echo "Pinning SSL Fingerprint"
 echo "==============================================="
-FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d'=' -f 2
+FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d'=' -f 2)
 echo "PIXELATED_MANAGER_FINGERPRINT=$FINGERPRINT" >> /etc/default/pixelated-dispatcher-proxy
 
 echo "==============================================="

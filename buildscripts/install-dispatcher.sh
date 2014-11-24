@@ -19,6 +19,7 @@ echo "Pinning SSL Fingerprint"
 echo "==============================================="
 FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d'=' -f 2)
 echo "PIXELATED_MANAGER_FINGERPRINT=$FINGERPRINT" >> /etc/default/pixelated-dispatcher-proxy
+cat /etc/default/pixelated-dispatcher-proxy
 
 echo "==============================================="
 echo "cleaning up"

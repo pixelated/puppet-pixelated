@@ -24,6 +24,8 @@ cat /etc/default/pixelated-dispatcher-proxy
 echo "==============================================="
 echo "cleaning up"
 echo "==============================================="
+rm /etc/apt/apt.conf.d/01-apt-cacher
+apt-get update
 apt-get -f install
 sync
 sleep 10

@@ -16,19 +16,13 @@ echo "==============================================="
 echo "installing leap"
 echo "==============================================="
 #gem install leap_cli
-cd /tmp
-git clone -b develop https://leap.se/git/leap_cli.git
-cd leap_cli
-git checkout develop 
+git clone -b develop https://leap.se/git/leap_cli.git /tmp/leap_cli
+cd /tmp/leap_cli
 rake build
 rake install
 
 mkdir /home/leap
-cd /home/leap
-git clone -b develop https://github.com/pixelated-project/leap_platform.git
-cd /home/leap/leap_platform
-git submodule sync
-git submodule update --init
+git clone -b develop --recursive https://github.com/pixelated-project/leap_platform.git /home/leap/leap_platform
 
 echo "==============================================="
 echo "cleaning up"

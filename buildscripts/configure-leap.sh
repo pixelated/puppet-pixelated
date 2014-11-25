@@ -29,6 +29,10 @@ git init
 git add .
 git commit -m"configured provider"
 
+git submodule add https://github.com/pixelated-project/pixelated-platform.git files/puppet
+git add files/puppet
+git commit -m 'added pixelated submodule'
+
 leap $OPTS node init pixelated 
 if [ $? -eq 1 ]; then
   echo "node init failed"

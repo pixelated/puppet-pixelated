@@ -23,6 +23,12 @@ leap $OPTS cert csr
 leap $OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor tags:production
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
+leap $OPTS compile
+
+git init
+git add .
+git commit -m"configured provider"
+
 leap $OPTS node init pixelated 
 if [ $? -eq 1 ]; then
   echo "node init failed"
@@ -34,6 +40,9 @@ if [ $? -eq 1 ]; then
   echo "deploy failed"
   exit 1
 fi
+
+git add .
+git commit -m"initialized and deployed provider"
 
 echo "==============================================="
 echo "setting node to demo-mode"

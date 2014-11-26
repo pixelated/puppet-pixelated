@@ -45,10 +45,10 @@ if [ $? -eq 1 ]; then
   exit 1
 fi
 
-set +x
+set +e
 git add .
 git commit -m"initialized and deployed provider"
-set -x
+set -e
 
 echo "==============================================="
 echo "setting node to demo-mode"

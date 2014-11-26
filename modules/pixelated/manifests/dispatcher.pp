@@ -1,5 +1,6 @@
 # configure the pixelated dispatcher
 class pixelated::dispatcher{
+  include pixelated::apt
   # define macro for  services
   file { '/etc/shorewall/macro.pixelated_dispatcher':
     content => 'PARAM   -       -       tcp    8080',

@@ -7,8 +7,13 @@ class pixelated::apt {
     require => Exec[add_pixelated_key],
     notify  =>  Exec[refresh_apt],
   }
+
+  file { '/home/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc':
+    source => 'puppet:///modules/pixelated/0x287A1542472DC0E3_packages@pixelated-project.org.asc',
+    notify => Exec['add_pixelated_key']
+  }
   exec{'add_pixelated_key':
-    command     => '/usr/bin/apt-key adv --keyserver pool.sks-keyservers.net --recv-key 287A1542472DC0E3',
+    command     => '/usr/bin/apt-ke add /home/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc',
     refreshonly => true,
   }
 }

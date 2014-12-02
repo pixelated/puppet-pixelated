@@ -3,6 +3,10 @@
 # exit on any error
 set -e
 
+# verbose, print cmds
+set -x
+
+
 echo "==============================================="
 echo "installing virtualbox guest additions"
 echo "==============================================="

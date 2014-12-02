@@ -3,6 +3,9 @@
 # exit on any error
 set -e
 
+# verbose, print cmds
+set -x
+
 echo "==============================================="
 echo "preparing leap"
 echo "==============================================="

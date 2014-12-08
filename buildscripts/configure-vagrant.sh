@@ -17,7 +17,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install virtu
 echo "==============================================="
 echo "adding vagrant user"
 echo "==============================================="
-adduser --disabled-login --gecos '' vagrant
+/usr/sbin/adduser --disabled-login --gecos '' vagrant
 
 echo "==============================================="
 echo "adding ssh-key"

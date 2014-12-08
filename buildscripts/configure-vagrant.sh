@@ -13,6 +13,12 @@ echo "==============================================="
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install linux-headers-amd64
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -t wheezy-backports install virtualbox-guest-dkms
 
+
+echo "==============================================="
+echo "adding vagrant user"
+echo "==============================================="
+adduser --disabled-login --gecos '' vagrant
+
 echo "==============================================="
 echo "adding ssh-key"
 echo "==============================================="

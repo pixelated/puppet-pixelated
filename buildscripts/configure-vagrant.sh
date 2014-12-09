@@ -46,8 +46,8 @@ echo "==============================================="
 echo "cleaning up"
 echo "==============================================="
 
-sudo apt-get -f install
-sudo apt-get autoremove
+DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f install
+DEBIAN_FRONTEND=noninteractive sudo apt-get -y -f autoremove
 sudo sync
 sleep 10
 

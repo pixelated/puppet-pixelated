@@ -51,6 +51,12 @@ git commit -m"initialized and deployed provider"
 set -e
 
 echo "==============================================="
+echo "testing the platform"
+echo "==============================================="
+
+leap $OPTS -v 2 test --continue
+
+echo "==============================================="
 echo "setting node to demo-mode"
 echo "==============================================="
 postconf -e default_transport="error: in demo mode"

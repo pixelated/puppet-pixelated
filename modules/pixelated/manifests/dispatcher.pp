@@ -27,5 +27,26 @@ class pixelated::dispatcher{
       policy          => 'ACCEPT',
       order           => 200;
   }
+  shorewall::rule {
+      'dkr2fw-https':
+        source      => 'dkr',
+        destination => '$FW',
+        action      => 'HTTPS(ACCEPT)',
+        order       => 201;
+  }
+  shorewall::rule {
+      'dkr2fw-leap-api':
+        source      => 'dkr',
+        destination => '$FW',
+        action      => 'leap_webapp_api(ACCEPT)',
+        order       => 202;
+  }
+  shorewall::rule {
+      'dkr2fw-leap-mx':
+        source      => 'dkr',
+        destination => '$FW',
+        action      => 'leap_mx(ACCEPT)',
+        order       => 203;
+  }
 }
 

@@ -6,8 +6,7 @@ set -e
 # verbose, print cmds
 set -x
 
-#DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-amd64 lxc-docker
-DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-3.16.0-0.bpo.4-amd64 lxc-docker
+DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-amd64 lxc-docker
 
 echo "==============================================="
 echo "Pinning SSL Fingerprint"

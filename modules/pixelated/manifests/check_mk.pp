@@ -7,7 +7,7 @@ class pixelated::check_mk {
   # https://github.com/pixelated-project/pixelated-platform/issues/20#issuecomment-66456676
   # so we ignore all aufs mounts
   file { '/etc/check_mk/conf.d/ignore_filesystems.mk':
-    source  => 'puppet:///modules/site_check_mk/ignore_filesystems.mk',
+    source  => 'puppet:///modules/check_mk/ignore_filesystems.mk',
     notify  => Exec['check_mk-refresh'],
     require => Package['check-mk-server'];
   }

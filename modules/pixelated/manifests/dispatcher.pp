@@ -1,6 +1,8 @@
 # configure the pixelated dispatcher
 class pixelated::dispatcher{
-  include pixelated::apt
+  include ::pixelated::apt
+  include ::pixelated::check_mk
+
   # Allow traffic from outside to dispatcher
   file { '/etc/shorewall/macro.pixelated_dispatcher':
     content => 'PARAM   -       -       tcp    8080',

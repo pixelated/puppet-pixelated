@@ -13,6 +13,7 @@ mkdir /home/leap/configuration
 cd /home/leap/configuration
 leap $OPTS new --contacts no-reply@try.pixelated-project.org --domain try.pixelated-project.org --name LEAP_Example --platform=/home/leap/leap_platform .
 echo -e '\n@log = "/var/log/leap/deploy.log"' >> Leapfile
+mkdir -p /var/log/leap
 ssh-keygen -f /root/.ssh/id_rsa -P ""
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 mkdir -p /home/leap/configuration/files/nodes/pixelated

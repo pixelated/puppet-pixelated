@@ -6,6 +6,7 @@ set -e
 # verbose, print cmds
 set -x
 
+DEBIAN_FRONTEND=noninteractive apt-get -t wheezy -y install python-tornado
 DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-amd64 lxc-docker
 
 echo "==============================================="

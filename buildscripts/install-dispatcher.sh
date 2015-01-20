@@ -16,6 +16,9 @@ FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fing
 echo "PIXELATED_MANAGER_FINGERPRINT=$FINGERPRINT" >> /etc/default/pixelated-dispatcher-proxy
 cat /etc/default/pixelated-dispatcher-proxy
 
+FINGERPRINT=$(openssl x509 -in /etc/x509/certs/leap_commercial.crt -noout -fingerprint -sha1 | cut -d'=' -f 2)
+echo "PIXELATED_PROVIDER_FINGERPRINT=$FINGERPRINT" >> /etc/default/pixelated-dispatcher-manager
+cat /etc/default/pixelated-dispatcher-manager
 echo "==============================================="
 echo "cleaning up"
 echo "==============================================="

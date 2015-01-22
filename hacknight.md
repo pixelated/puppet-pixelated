@@ -13,9 +13,11 @@ and how to start
 
 You will need our sourcecode to hack on it:
 Pixelated user-agent:
+
      git clone https://github.com/pixelated-project/pixelated-user-agent.git
 
 Pixelated dispatcher
+
     git clone https://github.com/pixelated-project/pixelated-dispatcher.git
 
 ## Vagrant

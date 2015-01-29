@@ -16,7 +16,7 @@
 from behave import *
 from common import *
 
-@when(u'I visit the website')
+@when(u'I visit the dispatcher')
 def step_impl(context):
     context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
 

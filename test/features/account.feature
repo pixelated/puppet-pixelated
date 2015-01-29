@@ -28,12 +28,12 @@ Feature: account
     Then I see the control-panel
 
   @login 
-  Scenario: user goes to website
-    When I visit the website
+  Scenario: user goes to dispatcher
+    When I visit the dispatcher
     Then I should see a login button
 
   @login
-  Scenario: user goes to website and enters credentials
-    When I visit the website
+  Scenario: user goes to dispatcher and enters credentials
+    When I visit the dispatcher
     And  I login
     Then I see the inbox

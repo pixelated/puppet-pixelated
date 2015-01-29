@@ -20,6 +20,7 @@ from selenium.common.exceptions import TimeoutException
 import string
 import random
 
+MAX_WAIT_IN_S = 60
 
 def random_username():
     try:
@@ -52,7 +53,7 @@ def dump_source_to(context, filename):
         out.write(context.browser.page_source.encode('utf8'))
 
 def wait_until_element_is_visible_by_locator(context, locator_tuple):
-    wait = WebDriverWait(context.browser, 10)
+    wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
     wait.until(EC.visibility_of_element_located(locator_tuple))
     return context.browser.find_element(locator_tuple[0], locator_tuple[1])
 

@@ -13,6 +13,9 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+
+from selenium.webdriver.common.by import By
+
 from behave import *
 from common import *
 
@@ -26,14 +29,18 @@ def step_impl(context):
 
 @when(u'I login')
 def step_impl(context):
+    wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
     fill_by_xpath(context, '//*[@id="email"]', random_username())
     fill_by_xpath(context, '//*[@id="password"]', random_password())
     context.browser.find_element_by_name("login").click()
 
 @then(u'I see the inbox')
 def step_impl(context):
-    context.browser.find_element_by_css_selector('#tags-shortcuts > li:nth-child(1) > a:nth-child(1)')
-    context.browser.save_screenshot('/tmp/screenshot.png')
+    try:
+        wait_until_element_is_visible_by_locator(context, (By.ID, 'tags-shortcuts'))
+        context.browser.find_element_by_css_selector('#tags-shortcuts > li:nth-child(1) > a:nth-child(1)')
+    finally:
+        context.browser.save_screenshot('/tmp/screenshot.png')
 
 @when(u'I visit the signup-page')
 def step_impl(context):

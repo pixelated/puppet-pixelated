@@ -9,6 +9,13 @@ and how to start
 * install vagrant (http://docs.vagrantup.com/v2/installation/index.html)
 * Do you have a github-account? (https://github.com)
 
+# LEAP Platform Workshop
+
+- https://pixelated-project.org/slides/hackday-berlin-platform.html
+
+# Useragent Workshop
+
+
 ## git clone 
 
 You will need our sourcecode to hack on it:

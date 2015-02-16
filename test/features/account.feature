@@ -37,3 +37,9 @@ Feature: account
     When I visit the dispatcher
     And  I login
     Then I see the inbox
+
+  @login
+  Scenario: user logs out
+    Given I visit the dispatcher
+    And  I logout
+    Then I should see a login button

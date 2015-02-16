@@ -23,6 +23,10 @@ from common import *
 def step_impl(context):
     context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
 
+@given(u'I visit the dispatcher')
+def step_impl(context):
+    context.browser.get('https://staging.pixelated-project.org:8080/')
+
 @then(u'I should see a login button')
 def step_impl(context):
     form = context.browser.find_element_by_name('login')
@@ -41,6 +45,11 @@ def step_impl(context):
         context.browser.find_element_by_css_selector('#tags-shortcuts > li:nth-child(1) > a:nth-child(1)')
     finally:
         context.browser.save_screenshot('/tmp/screenshot.png')
+
+@given(u'I logout')
+def step_impl(context):
+    find_element_by_css_selector(context,'.logout').click()
+    find_element_by_xpath(context,'//a[@title="logout"]').click()
 
 @when(u'I visit the signup-page')
 def step_impl(context):

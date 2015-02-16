@@ -21,11 +21,24 @@ from selenium.webdriver.common.by import By
 
 
 def before_all(context):
+    context.browser = webdriver.Chrome()
+    #context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    context.browser.set_window_size(1280, 1024)
+    context.browser.implicitly_wait(5)
+    context.browser.set_page_load_timeout(60)  # wait for data
     logging.disable('INFO')
 
+    context.browser.get('https://staging.pixelated-project.org/signup')
+    fill_by_xpath(context, '//*[@name="user[login]"]', 'behave-testuser')
+    fill_by_xpath(context, '//*[@name="user[password]"]','Eido6aeg3za9ooNiekiemahm')
+    fill_by_xpath(context, '//*[@name="user[password_confirmation]"]', 'Eido6aeg3za9ooNiekiemahm')
+    context.browser.find_element_by_name("button").click()
+
+    context.browser.quit()
+
 def before_feature(context, feature):
-    #context.browser = webdriver.Chrome()
-    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    context.browser = webdriver.Chrome()
+    #context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(5)
     context.browser.set_page_load_timeout(60)  # wait for data

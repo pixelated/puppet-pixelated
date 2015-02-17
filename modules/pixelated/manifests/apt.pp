@@ -2,6 +2,10 @@
 
 class pixelated::apt {
 
+  apt::preferences_snippet { ['python-requests','python-six','python-tornado','linux-image-amd64']:
+    release  => "${::lsbdistcodename}-backports",
+    priority => 999
+  }
   apt::sources_list { 'pixelated.list':
     content => "deb http://packages.pixelated-project.org/debian wheezy-snapshots main\ndeb http://packages.pixelated-project.org/debian wheezy main\n",
     require => Exec[add_pixelated_key],

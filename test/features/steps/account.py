@@ -19,6 +19,8 @@ from selenium.webdriver.common.by import By
 from behave import *
 from common import *
 
+import time
+
 @when(u'I visit the dispatcher')
 def step_impl(context):
     context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
@@ -40,10 +42,11 @@ def step_impl(context):
 
 @then(u'I see the inbox')
 def step_impl(context):
-    try:
+        # phantomjs can not deal with the interstitial. We need to load the
+        # website manually after the user-agent has started
+        time.sleep(30)
+        context.browser.get('https://staging.pixelated-project.org:8080/')
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tags-shortcuts'))
-    finally:
-        context.browser.save_screenshot('/tmp/screenshot.png')
 
 @given(u'I logout')
 def step_impl(context):

@@ -57,11 +57,11 @@ def wait_until_element_is_visible_by_locator(context, locator_tuple):
     wait.until(EC.visibility_of_element_located(locator_tuple))
     return context.browser.find_element(locator_tuple[0], locator_tuple[1])
 
-def wait_until_text_is_visible(context, text):
-	# wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
-    wait.until(find_element_containing_text(context,text))
-    return context.browser.find_element_containing_text(context,text)
-
+def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
+    MAX_WAIT_IN_S = 180
+    wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
+    wait.until(EC.visibility_of_element_located(locator_tuple))
+    return context.browser.find_element(locator_tuple[0], locator_tuple[1])
 
 
 def find_element_by_xpath(context, xpath):

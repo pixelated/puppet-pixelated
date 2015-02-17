@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+import time
+
 from selenium.webdriver.common.by import By
 
 from behave import *
@@ -43,11 +45,8 @@ def step_impl(context):
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context, (By.XPATH, '//*[contains(.,"Your message was sent!")]'))
 
-@when(u'I wait for 5 minutes')
-def step_impl(context):
-    assert True
-
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
-    assert True
+    find_element_by_css_selector(context,'.fa-inbox').click()
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, '//ul[@id="mail-list"]//*[contains(.,"Totally cool subject for testing this totally cool app")]'))
 

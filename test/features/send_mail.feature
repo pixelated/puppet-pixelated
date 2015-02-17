@@ -21,6 +21,5 @@ Feature: send_mail
     When I compose a mail
     And I press the send button
     And I see that the mail was sent
-    And I wait for 5 minutes
     Then I see the new mail in the inbox
 

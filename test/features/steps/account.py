@@ -42,7 +42,6 @@ def step_impl(context):
 def step_impl(context):
     try:
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tags-shortcuts'))
-        context.browser.find_element_by_css_selector('#tags-shortcuts > li:nth-child(1) > a:nth-child(1)')
     finally:
         context.browser.save_screenshot('/tmp/screenshot.png')
 

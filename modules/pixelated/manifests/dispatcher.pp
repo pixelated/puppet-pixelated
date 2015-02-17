@@ -1,7 +1,11 @@
-# configure the pixelated dispatcher
+# configure and install the pixelated dispatcher
 class pixelated::dispatcher{
   include ::pixelated::apt
   include ::pixelated::check_mk
+
+  package{ ['python-tornado','pixelated-dispatcher','linux-image-amd64']:
+    ensure => installed,
+  }
 
   # Allow traffic from outside to dispatcher
   file { '/etc/shorewall/macro.pixelated_dispatcher':

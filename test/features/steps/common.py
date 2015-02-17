@@ -20,7 +20,7 @@ from selenium.common.exceptions import TimeoutException
 import string
 import random
 
-MAX_WAIT_IN_S = 60
+MAX_WAIT_IN_S = 120
 
 def random_username():
     try:

@@ -21,8 +21,8 @@ from selenium.webdriver.common.by import By
 
 
 def before_all(context):
-    context.browser = webdriver.Chrome()
-    #context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    #context.browser = webdriver.Chrome()
+    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(5)
     context.browser.set_page_load_timeout(60)  # wait for data
@@ -37,8 +37,8 @@ def before_all(context):
     context.browser.quit()
 
 def before_feature(context, feature):
-    context.browser = webdriver.Chrome()
-    #context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    #context.browser = webdriver.Chrome()
+    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(5)
     context.browser.set_page_load_timeout(60)  # wait for data

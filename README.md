@@ -8,6 +8,8 @@ It is the objective of the Pixelated Platform to provide a simple to install and
 * The Pixelated Platform holds the installation scripts for the Pixelated components.
 * In this repository, you also find the Pixelated Threat Model (currently in development)
 
+![Highlevel Architecture](https://pixelated-project.org/drawings/architecture-overview.jpg)
+
 You need a running leap platform to use pixelated.
 Please refer to https://leap.se/en/docs/platform/tutorials/single-node-email to set up a leap provider.
 

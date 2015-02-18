@@ -25,14 +25,14 @@ echo "==============================================="
 mkdir /home/leap
 
 # use released leap_cli gem instead of building from source
-# gem install leap_cli
+gem install leap_cli
 
-git clone -b develop https://leap.se/git/leap_cli.git /home/leap/leap_cli
-cd /home/leap/leap_cli
-rake build
-rake install
+#git clone -b develop https://leap.se/git/leap_cli.git /home/leap/leap_cli
+#cd /home/leap/leap_cli
+#rake build
+#rake install
 
-git clone --recursive https://github.com/pixelated-project/leap_platform.git /home/leap/leap_platform
+git clone -b master --recursive https://github.com/pixelated-project/leap_platform.git /home/leap/leap_platform
 
 echo "==============================================="
 echo "cleaning up"

@@ -10,10 +10,6 @@ class pixelated::apt {
     pin      => 'release o=pixelated',
     priority => 999,
   }
-  apt::preferences_snippet {'python-tornado':
-    origin  => "packages.pixelated-project.org",
-    priority => 999
-  }
 
   apt::sources_list { 'pixelated.list':
     content => "deb http://packages.pixelated-project.org/debian wheezy-snapshots main\ndeb http://packages.pixelated-project.org/debian wheezy main\n",

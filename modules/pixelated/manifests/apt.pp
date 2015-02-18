@@ -6,6 +6,10 @@ class pixelated::apt {
     release  => "${::lsbdistcodename}-backports",
     priority => 999
   }
+  apt::preferences_snippet { 'python-tornado':
+    pin      => 'release o=pixelated',
+    priority => 999,
+  }
   apt::preferences_snippet {'python-tornado':
     origin  => "packages.pixelated-project.org",
     priority => 999

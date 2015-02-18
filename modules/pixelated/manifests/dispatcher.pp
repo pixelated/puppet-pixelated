@@ -7,13 +7,16 @@ class pixelated::dispatcher{
     ensure => installed,
   }
   
+  $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'
+  $manager_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/leap_commercial.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'
+
   exec{'set_fingerprint_for_proxy':
-    command => '/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d'=' -f 2)" >> /etc/default/pixelated-dispatcher-proxy',
+    command     => "$proxy_command",
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
   }
   exec{'set_fingerprint_for_manager':
-    command => '/bin/echo "PIXELATED_PROVIDER_FINGERPRINT=$(openssl x509 -in /etc/x509/certs/leap_commercial.crt -noout -fingerprint -sha1 | cut -d'=' -f 2)" >> /etc/default/pixelated-dispatcher-manager',
+    command => "$manager_command",
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
   }

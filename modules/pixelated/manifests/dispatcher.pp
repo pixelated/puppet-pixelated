@@ -9,12 +9,12 @@ class pixelated::dispatcher{
 
   service{'docker':
     ensure  => running,
-    require => Package['pixelated-dispatcher'],
   }
 
   exec{'configure_docker':
-    command => "/bin/sed 's/^.\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
+    command => "/bin/sed -i 's/^.\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
     notify  => Service['docker'],
+    require => Package['pixelated-dispatcher'],
   }
   
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'

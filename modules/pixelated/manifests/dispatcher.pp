@@ -62,7 +62,7 @@ class pixelated::dispatcher{
       sourcezone      => 'dkr',
       destinationzone => 'all',
       policy          => 'ACCEPT',
-      order           => 200;
+      order           => 1;
   }
   shorewall::rule {
       'dkr2fw-https':

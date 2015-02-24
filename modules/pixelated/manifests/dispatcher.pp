@@ -38,6 +38,12 @@ class pixelated::dispatcher{
     notify  => Service['shorewall'],
     require => Package['shorewall']
   }
+
+  shorewall::masq{'docker_masq':
+        interface => 'eth0',
+        source    => '172.17.0.0/16',
+  }
+
   shorewall::rule {
       'net2fw-pixelated-dispatcher':
         source      => 'net',

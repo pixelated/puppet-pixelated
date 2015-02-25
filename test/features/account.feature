@@ -40,6 +40,5 @@ Feature: account
 
   @login
   Scenario: user logs out
-    Given I visit the dispatcher
-    And  I logout
+    When  I logout
     Then I should see a login button

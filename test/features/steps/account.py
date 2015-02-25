@@ -46,12 +46,11 @@ def step_impl(context):
         # website manually after the user-agent has started
         time.sleep(30)
         context.browser.get('https://staging.pixelated-project.org:8080/')
-        wait_until_element_is_visible_by_locator(context, (By.ID, 'tags-shortcuts'))
+        wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
 
-@given(u'I logout')
+@when(u'I logout')
 def step_impl(context):
-    find_element_by_css_selector(context,'.logout').click()
-    find_element_by_xpath(context,'//a[@title="logout"]').click()
+    context.browser.get('https://staging.pixelated-project.org:8080/auth/logout')
 
 @when(u'I visit the signup-page')
 def step_impl(context):

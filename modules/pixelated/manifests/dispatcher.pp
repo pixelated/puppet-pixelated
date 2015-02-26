@@ -3,7 +3,7 @@ class pixelated::dispatcher{
   include ::pixelated::apt
   include ::pixelated::check_mk
 
-  package{ ['python-tornado','pixelated-dispatcher','linux-image-amd64']:
+  package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64']:
     ensure => installed,
   }
 
@@ -11,6 +11,14 @@ class pixelated::dispatcher{
     ensure  => running,
   }
 
+  service{'pixelated-dispatcher-manager':
+    require => Package['pixelated-dispatcher-manager']
+    ensure  => running,
+  }
+  service{'pixelated-dispatcher-proxy':
+    require => Package['pixelated-dispatcher-proxy']
+    ensure  => running,
+  }
   exec{'configure_docker':
     command => "/bin/sed -i 's/^.\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
     notify  => Service['docker'],

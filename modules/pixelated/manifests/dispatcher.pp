@@ -12,12 +12,12 @@ class pixelated::dispatcher{
   }
 
   service{'pixelated-dispatcher-manager':
-    require => Package['pixelated-dispatcher-manager']
     ensure  => running,
+    require => Package['pixelated-dispatcher-manager'],
   }
   service{'pixelated-dispatcher-proxy':
-    require => Package['pixelated-dispatcher-proxy']
     ensure  => running,
+    require => Package['pixelated-dispatcher-proxy'],
   }
   exec{'configure_docker':
     command => "/bin/sed -i 's/^.\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",

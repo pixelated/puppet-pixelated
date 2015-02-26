@@ -90,6 +90,55 @@ In the last column you can see the user name. It is possible to access the log f
     docker logs <username>
     
     
-    
+## How to setup your own Pixelated Platform
+
+All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
+
+
+### Vagrant/VirtualBox
+
+One way to run your first provider is with the use of [vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
+After you have installed both tools, execute these commands in a terminal:
+
+```bash
+
+$ mkdir pixelated-platform
+$ cd pixelated-platform
+
+$ cat > Vagrantfile <<EOF
+Vagrant.configure(2) do |config|
+  config.vm.box = "deb/wheezy-amd64"
+  config.vm.network "forwarded_port", guest: 8080, host:8080
+  config.vm.network "forwarded_port", guest: 443, host:443
+end
+EOF 
+
+$ vagrant up
+```
+
+### Installation
+
+Now ssh into your box and become root. 
+
+If you are using the vagrant/VirtualBox combination, run:
+```bash
+vagrant ssh
+sudo bash
+```
+
+The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
+
+```bash
+/usr/bin/curl https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh" | /bin/bash
+```
+
+*This might take quite a while*
+
+
+To create a mail account on your new provider, open [https://localhost/](https://localhost/) and sign up.
+To use the account, open [https://localhost:8080/](https://localhost:8080) and log into your new account.
+
+Have fun!
+
     
 

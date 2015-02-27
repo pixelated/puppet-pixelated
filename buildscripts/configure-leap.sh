@@ -1,30 +1,49 @@
-#!/bin/sh
+#!/bin/bash
 
 # exit on any error
 set -e
 set -x 
 
-OPTS='--no-color'
+usage() { echo "Usage: $0 [-p to use try.pixelated-project.org defaults]" 1>&2; exit 1; }
+
+USE_PIXELATED_DEFAULTS=
+while getopts "hp" OPT; do
+	case $OPT in
+		p)
+			USE_PIXELATED_DEFAULTS=1
+			;;
+		*)
+			usage
+			;;
+	esac
+done
+shift $((OPTIND-1))
+
+LEAP_OPTS='--no-color'
 
 echo "==============================================="
 echo "configuring leap"
 echo "==============================================="
 mkdir /home/leap/configuration
 cd /home/leap/configuration
-leap $OPTS new --contacts no-reply@try.pixelated-project.org --domain try.pixelated-project.org --name LEAP_Example --platform=/home/leap/leap_platform .
+if [ -n "$USE_PIXELATED_DEFAULTS" ] ; then
+	leap $LEAP_OPTS new --contacts no-reply@try.pixelated-project.org --domain try.pixelated-project.org --name LEAP_Example --platform=/home/leap/leap_platform .
+else
+	leap $LEAP_OPTS new --platform=/home/leap/leap_platform .
+fi
 echo -e '\n@log = "/var/log/leap/deploy.log"' >> Leapfile
 mkdir -p /var/log/leap
 ssh-keygen -f /root/.ssh/id_rsa -P ""
 cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
 mkdir -p /home/leap/configuration/files/nodes/pixelated
 sh -c 'cat /etc/ssh/ssh_host_rsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
-leap $OPTS add-user --self
-leap $OPTS cert ca
-leap $OPTS cert csr
-leap $OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor tags:production
+leap $LEAP_OPTS add-user --self
+leap $LEAP_OPTS cert ca
+leap $LEAP_OPTS cert csr
+leap $LEAP_OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor tags:production
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
-leap $OPTS compile
+leap $LEAP_OPTS compile
 
 git init
 git add .
@@ -34,13 +53,13 @@ git submodule add https://github.com/pixelated-project/pixelated-platform.git fi
 git add files/puppet
 git commit -m 'added pixelated submodule'
 
-leap $OPTS node init pixelated 
+leap $LEAP_OPTS node init pixelated
 if [ $? -eq 1 ]; then
   echo "node init failed"
   exit 1
 fi
 
-leap $OPTS -v 2 deploy
+leap $LEAP_OPTS -v 2 deploy
 if [ $? -eq 1 ]; then
   echo "deploy failed"
   exit 1
@@ -55,7 +74,7 @@ echo "==============================================="
 echo "testing the platform"
 echo "==============================================="
 
-leap $OPTS -v 2 test --continue
+leap $LEAP_OPTS -v 2 test --continue
 
 echo "==============================================="
 echo "setting node to demo-mode"

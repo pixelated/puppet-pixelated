@@ -1,0 +1,7 @@
+// this file is managed by puppet !
+
+Unattended-Upgrade::Allowed-Origins {
+	"pixelated:stable";
+	"pixelated:snapshots";
+}
+

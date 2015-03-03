@@ -2,6 +2,7 @@
 class pixelated::dispatcher{
   include ::pixelated::apt
   include ::pixelated::check_mk
+  include ::pixelated::unattended_upgrades
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64']:
     ensure => installed,

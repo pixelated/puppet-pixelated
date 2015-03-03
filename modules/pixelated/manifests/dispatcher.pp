@@ -21,7 +21,7 @@ class pixelated::dispatcher{
     require => Package['pixelated-dispatcher-proxy'],
   }
   exec{'configure_docker':
-    command => "/bin/sed -i 's/^.\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
+    command => "/bin/sed -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
     notify  => Service['docker'],
     require => Package['pixelated-dispatcher'],
   }

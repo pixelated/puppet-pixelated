@@ -129,7 +129,7 @@ sudo bash
 The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
 
 ```bash
-/usr/bin/curl https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh" | /bin/bash
+/usr/bin/curl https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh | /bin/bash
 ```
 
 *This might take quite a while*

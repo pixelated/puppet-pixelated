@@ -8,7 +8,10 @@ It is the objective of the Pixelated Platform to provide a simple to install and
 * The Pixelated Platform holds the installation scripts for the Pixelated components.
 * In this repository, you also find the Pixelated Threat Model (currently in development)
 
-![Highlevel Architecture](https://pixelated-project.org/drawings/architecture-overview.jpg)
+### High level Architecture
+#### Pixelated Platform
+
+![Highlevel Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
 
 
 ## Installing the Pixelated Platform

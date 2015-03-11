@@ -24,7 +24,7 @@ LEAP_OPTS='--no-color'
 echo "==============================================="
 echo "configuring leap"
 echo "==============================================="
-mkdir /home/leap/configuration
+mkdir -p /home/leap/configuration
 cd /home/leap/configuration
 if [ -n "$USE_PIXELATED_DEFAULTS" ] ; then
 	leap $LEAP_OPTS new --contacts no-reply@try.pixelated-project.org --domain try.pixelated-project.org --name LEAP_Example --platform=/home/leap/leap_platform .

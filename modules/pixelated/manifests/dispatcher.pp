@@ -30,12 +30,12 @@ class pixelated::dispatcher{
   $manager_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /usr/local/share/ca-certificates/leap_commercial_ca.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'
 
   exec{'set_fingerprint_for_proxy':
-    command     => "$proxy_command",
+    command     => $proxy_command,
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
   }
   exec{'set_fingerprint_for_manager':
-    command => "$manager_command",
+    command     => $manager_command,
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
     require     => File['/usr/local/share/ca-certificates/leap_commercial_ca.crt'],

@@ -89,3 +89,6 @@ def click_button(context, title, element='button'):
     button = find_element_containing_text(context, title, element_type=element)
     button.click()
 
+def save_source(context):
+    with open('/tmp/source.html', 'w') as out:
+        out.write(context.browser.page_source.encode('utf8'))

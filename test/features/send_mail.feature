@@ -24,10 +24,3 @@ Feature: send_mail
     Then I see the new mail in the inbox
     When I open the email
     Then I see a green encryption flag
-
-  # Scenario: user successfully receives encrypted mail
-  #   Given I login as behave-testuser
-  #   And I receive a mail encrypted to someone else
-  #   And I go to my Inbox
-  #   And I open the encrypted mail
-  #   Then I see a could not decrypt flag

@@ -47,7 +47,7 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, '//ul[@id="mail-list"]//*[contains(.,"Totally cool subject for testing this totally cool app")]')).click()
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH,'//ul[@id="mail-list"]//*[contains(.,"Totally cool subject for testing this totally cool app")]/parent::a')).click()
 
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
@@ -55,4 +55,4 @@ def step_impl(context):
 
 @then(u'I see a green encryption flag')
 def step_impl(context):
-    find_element_by_css_selector(context, ".encrypted.encryption-valid")
+    wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.encrypted.encryption-valid'))

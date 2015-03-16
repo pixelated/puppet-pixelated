@@ -76,10 +76,6 @@ def find_element_by_css_selector(context, css_selector):
     return wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, css_selector))
 
 
-def find_elements_by_css_selector(context, css_selector):
-    return wait_until_elements_are_visible_by_locator(context, (By.CSS_SELECTOR, css_selector))
-
-
 def find_element_containing_text(context, text, element_type='*'):
     return find_element_by_xpath(context, "//%s[contains(.,'%s')]" % (element_type, text))
 

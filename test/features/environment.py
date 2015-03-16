@@ -35,7 +35,7 @@ def before_all(context):
     context.browser.find_element_by_name("button").click()
 
     context.browser.quit()
-
+#
 def before_feature(context, feature):
     #context.browser = webdriver.Chrome()
     context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])

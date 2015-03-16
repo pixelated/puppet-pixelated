@@ -33,7 +33,7 @@ def step_impl(context):
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger'))
     context.browser.find_element_by_id("compose-trigger").click()
-    fill_by_xpath(context, '//*[@id="subject"]', 'Totally cool subject for testing this totally cool app')
+    fill_by_xpath(context, '//*[@id="subject"]', random_subject())
     fill_by_xpath(context, '//*[@id="text-box"]', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
     fill_by_xpath(context, '//input[@class="tt-input"]', 'behave-testuser@staging.pixelated-project.org')
 
@@ -47,5 +47,5 @@ def step_impl(context):
 
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, '//ul[@id="mail-list"]//*[contains(.,"Totally cool subject for testing this totally cool app")]'))
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, '//ul[@id="mail-list"]//*[contains(.,%s]' % random_subject()))
 

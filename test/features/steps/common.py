@@ -16,7 +16,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common.exceptions import TimeoutException
 import string
 import random
 
@@ -38,6 +37,13 @@ def random_password():
         randompassword=''.join(random.choice(string.lowercase) for i in range(16))
     return randompassword
 
+def random_subject():
+    try:
+        randomsubject
+    except:
+        global randomsubject
+        randomsubject='Test Email to '+ random_username()
+    return randomsubject
 
 def fill_by_xpath(context, xpath, text):
     field = context.browser.find_element_by_xpath(xpath)

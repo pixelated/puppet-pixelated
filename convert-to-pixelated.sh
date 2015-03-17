@@ -17,7 +17,7 @@
 
 # This is a simple install script that you can execute on a plain debian image, wait for some time and end up with a running leap installation
 
-
+export LC_ALL="en_US.UTF-8"
 GIT_RAW_BASE_URL="https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master"
 PIXELATED_INSTALLER_PATH="/usr/local/pixelated-installer"
 LOG_PATH="$PIXELATED_INSTALLER_PATH/logs"

@@ -110,11 +110,20 @@ $ cd pixelated-platform
 
 $ cat > Vagrantfile <<EOF
 Vagrant.configure(2) do |config|
-  config.vm.box = "deb/wheezy-amd64"
+  config.vm.box = "boxcutter/debian77"
   config.vm.network "forwarded_port", guest: 8080, host:8080
   config.vm.network "forwarded_port", guest: 443, host:443
 end
 EOF 
+
+$ vagrant up
+```
+
+Or clone pixelated-platform repository and run in a terminal:
+
+```bash
+$ git clone https://github.com/pixelated-project/pixelated-platform.git
+$ cd pixelated-platform
 
 $ vagrant up
 ```
@@ -132,7 +141,7 @@ sudo bash
 The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
 
 ```bash
-/usr/bin/curl https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh | /bin/bash
+\# wget https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh && chmod +x convert-to-pixelated.sh && ./convert-to-pixelated.sh
 ```
 
 *This might take quite a while*

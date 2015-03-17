@@ -16,8 +16,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from email.mime.text import MIMEText
 import string
 import random
+import smtplib
 
 MAX_WAIT_IN_S = 120
 
@@ -98,3 +100,18 @@ def click_button(context, title, element='button'):
 def save_source(context):
     with open('/tmp/source.html', 'w') as out:
         out.write(context.browser.page_source.encode('utf8'))
+
+def send_external_email():
+    msg = MIMEText('some test')
+    msg['Subject'] = 'Unencrypted email %s' % random_subject()
+    msg['From'] = 'behave-testuser@staging.pixelated-project.org'
+    msg['To'] = 'behave-testuser@staging.pixelated-project.org'
+
+    s = smtplib.SMTP('staging.pixelated-project.org')
+    s.sendmail('behave-testuser@staging.pixelated-project.org', ['behave-testuser@staging.pixelated-project.org'], msg.as_string())
+    s.quit()
+
+def open_email(context, subject):
+    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % subject
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string)).click()
+

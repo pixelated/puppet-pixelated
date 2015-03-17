@@ -28,6 +28,10 @@ def step_impl(context):
     fill_by_xpath(context, '//*[@id="email"]', 'behave-testuser')
     fill_by_xpath(context, '//*[@id="password"]', 'Eido6aeg3za9ooNiekiemahm')
     context.browser.find_element_by_name("login").click()
+    
+@given(u'I send an unencrypted email')
+def step_impl(context):
+    send_external_email()
 
 @when(u'I compose a mail')
 def step_impl(context):
@@ -47,8 +51,11 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
-    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % random_subject()
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string)).click()
+    open_email(context, random_subject())
+
+@when(u'I open the unencrypted email')
+def step_impl(context):
+    open_email(context, 'Unencrypted email %s' % random_subject())
 
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
@@ -58,3 +65,7 @@ def step_impl(context):
 @then(u'I see a green encryption flag')
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.encrypted.encryption-valid'))
+
+@then(u'I see a orange unencrypted email flag')
+def step_impl(context):
+    wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.not-encrypted'))

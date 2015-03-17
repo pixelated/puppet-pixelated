@@ -24,3 +24,10 @@ Feature: send_mail
     Then I see the new mail in the inbox
     When I open the email
     Then I see a green encryption flag
+
+  @plaintext
+  Scenario: user receives an unencrypted email
+    Given I send an unencrypted email
+    And I login as behave-testuser
+    When I open the unencrypted email
+    Then I see a orange unencrypted email flag

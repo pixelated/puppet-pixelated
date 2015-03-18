@@ -23,11 +23,19 @@ Feature: send_mail
     And I see that the mail was sent
     Then I see the new mail in the inbox
     When I open the email
-    Then I see a green encryption flag
+    Then I see a encrypted flag
 
-  @plaintext
+  @unencrypted
   Scenario: user receives an unencrypted email
     Given I send an unencrypted email
     And I login as behave-testuser
     When I open the unencrypted email
-    Then I see a orange unencrypted email flag
+    Then I see a unencrypted email flag
+
+  @undecryptable
+  Scenario: user receives an email we cannot decrypt
+    Given I send an email encrypted to someone else
+    And I login as behave-testuser
+    When I open the undecryptable email
+    Then I see a undecryptable flag 
+

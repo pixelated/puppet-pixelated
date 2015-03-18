@@ -101,9 +101,9 @@ def save_source(context):
     with open('/tmp/source.html', 'w') as out:
         out.write(context.browser.page_source.encode('utf8'))
 
-def send_external_email():
-    msg = MIMEText('some test')
-    msg['Subject'] = 'Unencrypted email %s' % random_subject()
+def send_external_email(subject, body):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
     msg['From'] = 'behave-testuser@staging.pixelated-project.org'
     msg['To'] = 'behave-testuser@staging.pixelated-project.org'
 

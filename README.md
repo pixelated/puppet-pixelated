@@ -141,7 +141,7 @@ sudo bash
 The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
 
 ```bash
-\# wget https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh && chmod +x convert-to-pixelated.sh && ./convert-to-pixelated.sh
+# wget https://raw.githubusercontent.com/pixelated-project/pixelated-platform/master/convert-to-pixelated.sh && chmod +x convert-to-pixelated.sh && ./convert-to-pixelated.sh
 ```
 
 *This might take quite a while*

@@ -59,12 +59,6 @@ If you haven't added version control to your LEAP configuration, you can simply 
       "tags": "production"
     }
 
-**Bug Alert:** Currently the Puppet script requires a `/home/leap` directory to exist on the LEAP provider. Please add this manually:
-
-    leap ssh node1        # log into LEAP node
-    mkdir /home/leap
-
-
 ### Installing Pixelated on the LEAP provider node
 
 With Pixelated added to the configuration simply re-run the LEAP deployment.

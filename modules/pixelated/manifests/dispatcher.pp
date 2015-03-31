@@ -27,10 +27,6 @@ class pixelated::dispatcher{
   }
 
   # logging for user agents
-  service { 'rsyslog':
-    ensure => running,
-    require => File['/etc/rsyslog.d/udp.conf']
-  }
   file { '/etc/rsyslog.d/udp.conf':
     ensure => file,
     notify => Service['rsyslog'],

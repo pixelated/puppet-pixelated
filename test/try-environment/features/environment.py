@@ -18,8 +18,8 @@ from selenium import webdriver
 
 
 def before_scenario(context, scenario):
-    context.browser = webdriver.Firefox()
-    # context.browser = webdriver.PhantomJS()
+    # context.browser = webdriver.Firefox()
+    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(5)
     context.browser.set_page_load_timeout(60)  # wait for data

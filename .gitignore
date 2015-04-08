@@ -1,1 +1,4 @@
 .vagrant/
+*.pyc
+ghostdriver.log
+.idea

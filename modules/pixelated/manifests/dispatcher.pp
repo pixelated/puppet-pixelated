@@ -25,7 +25,14 @@ class pixelated::dispatcher{
     notify  => Service['docker'],
     require => Package['pixelated-dispatcher'],
   }
-  
+
+  # logging for user agents
+  file { '/etc/rsyslog.d/udp.conf':
+    ensure => file,
+    notify => Service['rsyslog'],
+    content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
+  }
+
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'
   $manager_command ='/bin/echo "PIXELATED_PROVIDER_FINGERPRINT=$(openssl x509 -in /usr/local/share/ca-certificates/leap_commercial_ca.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'
 
@@ -95,4 +102,3 @@ class pixelated::dispatcher{
         order       => 203;
   }
 }
-

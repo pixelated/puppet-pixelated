@@ -22,7 +22,7 @@ from .page_objects import PixelatedPage
 def impl(context):
     pixelated_page = PixelatedPage(context)
     pixelated_page.compose_and_send_email({
-        'subject': 'Automated test, TBD (To Be Deleted)',
+        'subject': pixelated_page.random_subject(),
         'body': 'This is an automated test of Pixelated. Please do not delete this, it will be deleted automatically.',
         'recipients': context.pixelated_email
     })

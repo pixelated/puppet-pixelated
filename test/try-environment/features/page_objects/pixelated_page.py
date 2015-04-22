@@ -18,6 +18,8 @@ from compose_box import ComposeBox
 from maillist_actions import MailListActions
 from mail_list import MailList
 from tag_list import TagList
+import random
+import string
 
 
 class PixelatedPage(object):
@@ -45,3 +47,12 @@ class PixelatedPage(object):
 
     def go_to_trash(self):
         self.tag_list.go_to_trash()
+
+    def random_subject(self):
+        try:
+            random_subject_string
+        except:
+            global random_subject_string
+            random_string = ''.join(random.choice(string.lowercase) for i in range(8))
+            random_subject_string = 'Automated test, TBD (To Be Deleted): '+ random_string
+        return random_subject_string

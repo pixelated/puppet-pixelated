@@ -51,3 +51,4 @@ class BasePageObject(object):
     def _wait_until(self, condition_function, timeout=None):
         wait = WebDriverWait(self.context.browser, timeout or self.timeout)
         wait.until(condition_function)
+

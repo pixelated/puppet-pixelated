@@ -23,6 +23,6 @@ def impl(context):
     pixelated_page = PixelatedPage(context)
     pixelated_page.delete_mail(
         context.pixelated_email,
-        'Automated test, TBD (To Be Deleted)',
+        pixelated_page.random_subject(),
         240
     )

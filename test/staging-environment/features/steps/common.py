@@ -101,6 +101,7 @@ def save_source(context):
     with open('/tmp/source.html', 'w') as out:
         out.write(context.browser.page_source.encode('utf8'))
 
+
 def send_external_email(subject, body):
     msg = MIMEText(body)
     msg['Subject'] = subject
@@ -111,7 +112,17 @@ def send_external_email(subject, body):
     s.sendmail('behave-testuser@staging.pixelated-project.org', ['behave-testuser@staging.pixelated-project.org'], msg.as_string())
     s.quit()
 
+
 def open_email(context, subject):
     xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % subject
     wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string)).click()
 
+
+def fill_by_css_selector(context, css_selector, text):
+    field = context.browser.find_element_by_css_selector(css_selector)
+    field.send_keys(text)
+
+
+def fill_by_xpath(context, xpath, text):
+    field = context.browser.find_element_by_xpath(xpath)
+    field.send_keys(text)

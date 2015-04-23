@@ -3,14 +3,15 @@ class pixelated::dispatcher{
   include ::pixelated::apt
   include ::pixelated::check_mk
   include ::pixelated::unattended_upgrades
+  include ::pixelated::syslog
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','linux-image-3.16.0-0.bpo.4-amd64/wheezy-backports']:
     ensure => installed,
   }
 
   service{'docker':
-    ensure  => running,
-    pattern => '/usr/bin/docker',
+    ensure    => running,
+    pattern   => '/usr/bin/docker',
     hasstatus => false
   }
 
@@ -30,8 +31,8 @@ class pixelated::dispatcher{
 
   # logging for user agents
   file { '/etc/rsyslog.d/udp.conf':
-    ensure => file,
-    notify => Service['rsyslog'],
+    ensure  => file,
+    notify  => Service['rsyslog'],
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 

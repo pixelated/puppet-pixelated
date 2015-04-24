@@ -1,5 +1,5 @@
 # This file is managed by Puppet, changes may be overwritten
-if $programname contains 'user_agent' then {
+if $syslogtag contains_i 'user_agent' then {
   action(type="omfile" file="/var/log/pixelated/user-agent.log")
   stop
 }

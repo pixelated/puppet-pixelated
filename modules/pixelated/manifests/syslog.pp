@@ -6,7 +6,7 @@ class pixelated::syslog {
     mode  => '0644',
   }
 
-  rsyslog::snippet { '05-pixelated.conf':
+  rsyslog::snippet { '05-pixelated':
     content => template('pixelated/05-pixelated.conf.erb'),
   }
 

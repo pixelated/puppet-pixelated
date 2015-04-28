@@ -36,8 +36,8 @@ def step_impl(context):
 @when(u'I login')
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
-    fill_by_xpath(context, '//*[@id="email"]', random_username())
-    fill_by_xpath(context, '//*[@id="password"]', random_password())
+    fill_by_css_selector(context, 'input#email', random_username())
+    fill_by_css_selector(context, 'input#password', random_password())
     context.browser.find_element_by_name("login").click()
 
 @then(u'I see the inbox')
@@ -58,13 +58,14 @@ def step_impl(context):
 
 @then(u'I should see a signup button')
 def step_impl(context):
-    form = context.browser.find_element_by_name('button')
+    context.browser.find_element_by_name('button')
 
 @when(u'I register')
 def step_impl(context):
-    fill_by_xpath(context, '//*[@name="user[login]"]', random_username())
-    fill_by_xpath(context, '//*[@name="user[password]"]',random_password())
-    fill_by_xpath(context, '//*[@name="user[password_confirmation]"]', random_password())
+    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
+    fill_by_css_selector(context, 'input#srp_username', random_username())
+    fill_by_css_selector(context, 'input#srp_password', random_password())
+    fill_by_css_selector(context, 'input#srp_password_confirmation', random_password())
     context.browser.find_element_by_name("button").click()
 
 @then(u'I see the control-panel')

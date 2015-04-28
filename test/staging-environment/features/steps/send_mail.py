@@ -25,8 +25,8 @@ from common import *
 def step_impl(context):
     context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
     wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
-    fill_by_xpath(context, '//*[@id="email"]', 'behave-testuser')
-    fill_by_xpath(context, '//*[@id="password"]', 'Eido6aeg3za9ooNiekiemahm')
+    fill_by_css_selector(context, 'input#email', 'behave-testuser')
+    fill_by_css_selector(context, 'input#password', 'Eido6aeg3za9ooNiekiemahm')
     context.browser.find_element_by_name("login").click()
 
 @given(u'I send an unencrypted email')
@@ -39,11 +39,13 @@ def step_impl(context):
 
 @when(u'I compose a mail')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-mails-trigger'))
-    context.browser.find_element_by_id("compose-mails-trigger").click()
-    fill_by_xpath(context, '//*[@id="subject"]', random_subject())
-    fill_by_xpath(context, '//*[@id="text-box"]', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
-    fill_by_xpath(context, '//input[@class="tt-input"]', 'behave-testuser@staging.pixelated-project.org')
+    wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger'))
+    # import pdb; pdb.set_trace()
+    e = context.browser.find_element_by_id('compose-trigger')
+    e.click()
+    fill_by_css_selector(context, 'input#subject', random_subject())
+    fill_by_css_selector(context, 'textarea#text-box', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
+    fill_by_css_selector(context, 'input[class="tt-input"]', 'behave-testuser@staging.pixelated-project.org')
 
 @when(u'I press the send button')
 def step_impl(context):

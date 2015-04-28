@@ -47,6 +47,7 @@ def random_subject():
         randomsubject='Test Email to '+ random_username()
     return randomsubject
 
+
 def fill_by_xpath(context, xpath, text):
     field = context.browser.find_element_by_xpath(xpath)
     field.send_keys(text)
@@ -60,10 +61,12 @@ def dump_source_to(context, filename):
     with open(filename, 'w') as out:
         out.write(context.browser.page_source.encode('utf8'))
 
+
 def wait_until_element_is_visible_by_locator(context, locator_tuple):
     wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
     wait.until(EC.visibility_of_element_located(locator_tuple))
     return context.browser.find_element(locator_tuple[0], locator_tuple[1])
+
 
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
     MAX_WAIT_IN_S = 180
@@ -90,7 +93,7 @@ def find_element_containing_text(context, text, element_type='*'):
 
 def element_should_have_content(context, css_selector, content):
     e = find_element_by_css_selector(context, css_selector)
-    assert_that(e.text, equal_to(content))
+    assert e.text == content
 
 
 def click_button(context, title, element='button'):

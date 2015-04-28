@@ -16,9 +16,15 @@ It is the objective of the Pixelated Platform to provide a simple to install and
 
 ## Installing the Pixelated Platform
 
+Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform. There are 2 ways of installing the Pixelated Platform:
+
+* Having an installation of a [LEAP provider](https://github.com/pixelated-project/pixelated-platform#installing-a-leap-provider) and adding the Pixelated Platform to it, or
+* Setup your own ["Pixelated Provider"](https://github.com/pixelated-project/pixelated-platform#how-to-setup-your-own-pixelated-platform), which is a LEAP provider with the Pixelated Platform already setup on it
+
+
 ### Installing a LEAP provider
 
-You need a running LEAP provider to use Pixelated. Please refer to <https://leap.se/en/docs/platform/tutorials/single-node-email> for help with setting up a LEAP provider.
+Please refer to <https://leap.se/en/docs/platform/tutorials/single-node-email> for help with setting up a LEAP provider.
 
 For the following we assume that you have the LEAP platform and the configuration for your LEAP node on your local workstation. If you followed the tutorial to the letter you should have the following directories:
 
@@ -28,22 +34,27 @@ For the following we assume that you have the LEAP platform and the configuratio
 Ideally you have run `leap deploy` and `leap test` to set up the node on a server and verify that the installation actually works.
 
 
-### Adding Pixelated to your existing LEAP configuration
+#### Adding Pixelated to your existing LEAP configuration
 
 We have puppet scripts that takes care of (almost) everything. The scripts will install the pixelated-dispatcher and the pixelated-user-agent.
 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 
-If you have put your LEAP configuration under Git control as suggested in the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
+The documentation for the installation of the LEAP Platform suggests that you make the configuration folder (`~/leap/example` is the name they suggest) versioned using Git to make it easier to track and undo ant changes on the configuration. If you followed this suggestion of the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
 
+```bash
     cd ~/leap/example
     git submodule add https://github.com/pixelated-project/pixelated-platform.git files/puppet
+```
 
 If you haven't added version control to your LEAP configuration, you can simply clone the Pixelated platform files into your node configuration.
 
+```bash
     cd ~/leap/example
     git clone https://github.com/pixelated-project/pixelated-platform.git files/puppet
+```
 
+Adding the Pixelated Platform repo to `files/puppet` will add all the necessary configuration to turn your LEAP Provider into a Pixelated Provider.
 
 **Bug Alert:** Currently there is a bug with the setup. You have to manually add the "monitor" service to the services section in `nodes/node1.json`. After the edits the file should look like this:
 
@@ -59,7 +70,7 @@ If you haven't added version control to your LEAP configuration, you can simply 
       "tags": "production"
     }
 
-### Installing Pixelated on the LEAP provider node
+#### Installing Pixelated on the LEAP provider node
 
 With Pixelated added to the configuration simply re-run the LEAP deployment.
 
@@ -74,7 +85,7 @@ When this completes Pixelated should be ready and available on port 8080 on your
     /etc/init.d/pixelated-dispatcher-proxy start
     
     
-### Trouble-shooting
+#### Trouble-shooting
 
 The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
 
@@ -87,15 +98,15 @@ In the last column you can see the user name. It is possible to access the log f
     docker logs <username>
     
     
-## How to setup your own Pixelated Platform
+### How to setup your own Pixelated Platform
 
-All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
+If you don't already have a LEAP Provider that you want to turn into a Pixelated Provider, we provide a script that does all the configuration of the LEAP Platform and the Pixelated Platform. All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
 
 
-### Vagrant/VirtualBox
+#### Vagrant/VirtualBox
 
-One way to run your first provider is with the use of [vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
-After you have installed both tools, execute these commands in a terminal:
+You can try setting up a virtual machine on your computer to try out the Pixelated Platform. For this you'll need [vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
+After you have installed both tools, you need a Vagrantfile with the instructions for Vagrant and VirtualBox to set up a Debian Wheezy box. You can create the Vagrantfile manually:
 
 ```bash
 
@@ -113,7 +124,7 @@ EOF
 $ vagrant up
 ```
 
-Or clone pixelated-platform repository and run in a terminal:
+Or you can clone pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
 
 ```bash
 $ git clone https://github.com/pixelated-project/pixelated-platform.git
@@ -122,15 +133,19 @@ $ cd pixelated-platform
 $ vagrant up
 ```
 
-### Installation
+With this you'll have a virtual machine running the necessary version of Debian to proceed with the installation of the LEAP provider and the Pixelated Platform.
 
-Now ssh into your box and become root. 
+#### Installation
 
-If you are using the vagrant/VirtualBox combination, run:
+To run the installation, you'll need to ssh into the machine and become root.
+
+If you are using the vagrant/VirtualBox combination mentioned above, run:
 ```bash
 vagrant ssh
 sudo bash
 ```
+
+If you set up your Debian box by another method (using a physical machine, a cloud provider, etc), you'll need to ssh into the box using it's ip.
 
 The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
 
@@ -139,12 +154,11 @@ wget https://raw.githubusercontent.com/pixelated-project/pixelated-platform/mast
 ```
 
 *This might take quite a while*
+This script will automate the installation of the LEAP Provider and the Pixelated Platform. During the installation, it'll prompt you the information requested when running the `leap new .` command from [Bootstrap the provider](https://leap.se/en/docs/platform/tutorials/single-node-email#bootstrap-the-provider) section of the LEAP tutorial. Go there for more information about this step.
 
+After the script finishes running, you should have your brand new provider all set up. You can proceed creatting accounts and using them.
 
 To create a mail account on your new provider, open [https://localhost/](https://localhost/) and sign up.
 To use the account, open [https://localhost:8080/](https://localhost:8080) and log into your new account.
 
 Have fun!
-
-    
-

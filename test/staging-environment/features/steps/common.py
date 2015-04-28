@@ -24,27 +24,29 @@ import smtplib
 MAX_WAIT_IN_S = 120
 
 def random_username():
-    try:
-        randomname
-    except:
+    if 'randomname' not in globals():
         global randomname
-        randomname=''.join(random.choice(string.lowercase) for i in range(8))
+        randomname=''.join(random.choice(string.lowercase) for i in range(16))
+    else:
+        return randomname
     return randomname
 
+
 def random_password():
-    try:
-        randompassword
-    except:
+    if 'randompassword' not in globals():
         global randompassword
         randompassword=''.join(random.choice(string.lowercase) for i in range(16))
+    else:
+        return randompassword
     return randompassword
 
+
 def random_subject():
-    try:
-        randomsubject
-    except:
+    if 'randomsubject' not in globals():
         global randomsubject
-        randomsubject='Test Email to '+ random_username()
+        randomsubject=''.join(random.choice(string.lowercase) for i in range(16))
+    else:
+        return randomsubject
     return randomsubject
 
 

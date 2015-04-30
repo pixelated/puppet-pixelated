@@ -106,8 +106,17 @@ If you don't already have a LEAP Provider that you want to turn into a Pixelated
 #### Vagrant/VirtualBox
 
 You can try setting up a virtual machine on your computer to try out the Pixelated Platform. For this you'll need [vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
-After you have installed both tools, you need a Vagrantfile with the instructions for Vagrant and VirtualBox to set up a Debian Wheezy box. You can create the Vagrantfile manually:
 
+After you have installed both tools, you can clone pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
+
+```bash
+$ git clone https://github.com/pixelated-project/pixelated-platform.git
+$ cd pixelated-platform
+
+$ vagrant up
+```
+
+Or, you need a Vagrantfile with the instructions for Vagrant and VirtualBox to set up a Debian Wheezy box. You can create the Vagrantfile manually:
 ```bash
 
 $ mkdir pixelated-platform
@@ -120,15 +129,6 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 443, host:443
 end
 EOF 
-
-$ vagrant up
-```
-
-Or you can clone pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
-
-```bash
-$ git clone https://github.com/pixelated-project/pixelated-platform.git
-$ cd pixelated-platform
 
 $ vagrant up
 ```

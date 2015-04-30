@@ -84,20 +84,6 @@ When this completes Pixelated should be ready and available on port 8080 on your
     leap ssh node1       # log into LEAP node
     /etc/init.d/pixelated-dispatcher-proxy start
     
-    
-#### Trouble-shooting
-
-The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
-
-    root@node1:~# docker ps
-    CONTAINER ID        IMAGE                                   COMMAND                CREATED             STATUS              PORTS                      NAMES
-    070171caaa1d        pixelated/pixelated-user-agent:latest   "/bin/bash -l -c '/u   4 hours ago         Up 3 hours          127.0.0.1:5000->4567/tcp   erik           
-    
-In the last column you can see the user name. It is possible to access the log files for this instance as follows:
-
-    docker logs <username>
-    
-    
 ### How to setup your own Pixelated Platform
 
 If you don't already have a LEAP Provider that you want to turn into a Pixelated Provider, we provide a script that does all the configuration of the LEAP Platform and the Pixelated Platform. All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
@@ -160,5 +146,17 @@ After the script finishes running, you should have your brand new provider all s
 
 To create a mail account on your new provider, open [https://localhost/](https://localhost/) and sign up.
 To use the account, open [https://localhost:8080/](https://localhost:8080) and log into your new account.
+
+#### Trouble-shooting
+
+The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
+
+    root@node1:~# docker ps
+    CONTAINER ID        IMAGE                                   COMMAND                CREATED             STATUS              PORTS                      NAMES
+    070171caaa1d        pixelated/pixelated-user-agent:latest   "/bin/bash -l -c '/u   4 hours ago         Up 3 hours          127.0.0.1:5000->4567/tcp   erik           
+    
+In the last column you can see the user name. It is possible to access the log files for this instance as follows:
+
+    docker logs <username>
 
 Have fun!

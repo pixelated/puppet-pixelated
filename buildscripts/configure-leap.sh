@@ -65,6 +65,11 @@ if [ $? -eq 1 ]; then
   exit 1
 fi
 
+# leap-mx needs to get restarted after the first incoming mail is delivered (#6687)
+# https://github.com/leapcode/leap_mx#060
+[ -d /var/mail/vmail/Maildir/new ] || ( mkdir -p /var/mail/vmail/Maildir/new; chmod 600 /var/mail/vmail/Maildir/new; chown vmail:vmail /var/mail/vmail/Maildir/new )
+/etc/init.d/leap-mx restart
+
 set +e
 git add .
 git commit -m"initialized and deployed provider"

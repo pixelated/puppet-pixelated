@@ -48,9 +48,32 @@ def before_feature(context, feature):
 def after_feature(context, feature):
     context.browser.quit()
 
-def save_source(context):
-    with open('/tmp/source.html', 'w') as out:
-        out.write(context.browser.page_source.encode('utf8'))
+
+def after_step(context, step):
+    screenshot_filename = "{step_name}.png"
+
+    if step.status == "failed":
+        take_screenshot(context, screenshot_filename.format(step_name=step.name))
+        log_browser_console(context, step)
+        save_page_source(context, step)
+
+
+
+def save_page_source(context, step):
+    page_source_filename = "{step_name}.html"
+    with open(page_source_filename.format(step_name=step.name), "w") as page_source:
+        page_source.write(context.browser.page_source)
+
+
+def log_browser_console(context, step):
+    console_log_filename = "{step_name}.log"
+    with open(console_log_filename.format(step_name=step.name), "w") as console_log_file:
+        line = "{time} {level}: {message}\n"
+        console_log_file.writelines(
+            [line.format(time=x['timestamp'], level=x['level'], message=x['message']) for x in context.browser.get_log("browser")]
+        )
+
+
 
 
 

@@ -67,7 +67,7 @@ fi
 
 # leap-mx needs to get restarted after the first incoming mail is delivered (#6687)
 # https://github.com/leapcode/leap_mx#060
-[ -d /var/mail/vmail/Maildir/new ] || ( mkdir -p /var/mail/vmail/Maildir/new; chmod 600 /var/mail/vmail/Maildir/new; chown -R vmail:vmail /var/mail/vmail/Maildir/ )
+[ -d /var/mail/vmail/Maildir/new ] || ( mkdir -p /var/mail/vmail/Maildir/new; chmod 700 /var/mail/vmail/Maildir/new; chown -R vmail:vmail /var/mail/vmail/Maildir/ )
 /etc/init.d/leap-mx restart
 
 set +e

@@ -25,7 +25,7 @@ echo "==============================================="
 mkdir /home/leap
 
 # use released leap_cli gem instead of building from source
-gem install leap_cli
+gem install leap_cli -v 1.6.2
 
 #git clone -b develop https://leap.se/git/leap_cli.git /home/leap/leap_cli
 #cd /home/leap/leap_cli

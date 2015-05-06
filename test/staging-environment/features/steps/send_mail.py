@@ -40,10 +40,9 @@ def step_impl(context):
 @when(u'I compose a mail')
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger'))
-    # import pdb; pdb.set_trace()
     e = context.browser.find_element_by_id('compose-trigger')
     e.click()
-    fill_by_css_selector(context, 'input#subject', random_subject())
+    fill_by_css_selector(context, 'input#subject',  'email to myself %s' % random_subject())
     fill_by_css_selector(context, 'textarea#text-box', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
     fill_by_css_selector(context, 'input[class="tt-input"]', 'behave-testuser@staging.pixelated-project.org')
 
@@ -57,7 +56,7 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
-    open_email(context, random_subject())
+    open_email(context, 'email to myself %s' % random_subject())
 
 @when(u'I open the undecryptable email')
 def step_impl(context):
@@ -69,7 +68,7 @@ def step_impl(context):
 
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
-    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]' % random_subject()
+    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]' % 'email to myself %s' % random_subject()
     wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string))
 
 @then(u'I see a encrypted flag')

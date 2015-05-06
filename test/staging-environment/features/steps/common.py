@@ -119,8 +119,8 @@ def send_external_email(subject, body):
 
 
 def open_email(context, subject):
-    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % subject
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string)).click()
+    locator = 'div:contains(%s)' % subject
+    wait_long_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, locator)).click()
 
 
 def fill_by_css_selector(context, css_selector, text):

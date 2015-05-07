@@ -67,14 +67,17 @@ def dump_source_to(context, filename):
 def wait_until_element_is_visible_by_locator(context, locator_tuple):
     wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
     wait.until(EC.visibility_of_element_located(locator_tuple))
-    return context.browser.find_element(locator_tuple[0], locator_tuple[1])
+    by, value = locator_tuple
+    return context.browser.find_element(by, value)
 
 
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
     MAX_WAIT_IN_S = 180
     wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
     wait.until(EC.visibility_of_element_located(locator_tuple))
-    return context.browser.find_element(locator_tuple[0], locator_tuple[1])
+    by, value = locator_tuple
+    return context.browser.find_element(by, value)
+
 
 
 def find_element_by_xpath(context, xpath):
@@ -119,8 +122,8 @@ def send_external_email(subject, body):
 
 
 def open_email(context, subject):
-    locator = 'div:contains(%s)' % subject
-    wait_long_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, locator)).click()
+    locator = '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % subject
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, locator)).click()
 
 
 def fill_by_css_selector(context, css_selector, text):

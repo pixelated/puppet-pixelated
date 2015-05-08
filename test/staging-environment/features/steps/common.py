@@ -72,7 +72,7 @@ def wait_until_element_is_visible_by_locator(context, locator_tuple):
 
 
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
-    MAX_WAIT_IN_S = 180
+    MAX_WAIT_IN_S = 300
     wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
     wait.until(EC.visibility_of_element_located(locator_tuple))
     by, value = locator_tuple

@@ -14,9 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+@try
 Feature: login and send mail
 
-  @try
+
   Scenario Outline: user logs in, composes and send an email, then deletes it
     Given I login as "<user>" with password "<password>" to an organization install of pixelated
     When I send an email to myself

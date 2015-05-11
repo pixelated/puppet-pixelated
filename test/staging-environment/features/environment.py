@@ -30,12 +30,16 @@ def before_all(context):
     context.browser.set_page_load_timeout(60)  # wait for data
     logging.disable('INFO')
 
-    context.browser.get('https://staging.pixelated-project.org/signup')
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
-    fill_by_css_selector(context, 'input#srp_username', 'behave-testuser')
-    fill_by_css_selector(context, 'input#srp_password','Eido6aeg3za9ooNiekiemahm')
-    fill_by_css_selector(context, 'input#srp_password_confirmation','Eido6aeg3za9ooNiekiemahm')
-    context.browser.find_element_by_name("button").click()
+    try:
+        context.browser.get('https://staging.pixelated-project.org/signup')
+        wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
+        fill_by_css_selector(context, 'input#srp_username', 'behave-testuser')
+        fill_by_css_selector(context, 'input#srp_password','Eido6aeg3za9ooNiekiemahm')
+        fill_by_css_selector(context, 'input#srp_password_confirmation','Eido6aeg3za9ooNiekiemahm')
+        context.browser.find_element_by_name("button").click()
+
+    except Exception, e:
+        take_screenshot(context, 'before_all.png')
 
     context.browser.quit()
 

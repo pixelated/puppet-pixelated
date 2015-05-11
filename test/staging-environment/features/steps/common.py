@@ -136,7 +136,7 @@ def fill_by_xpath(context, xpath, text):
     field.send_keys(text)
 
 def save_debug_files(context, step):
-    screenshot_filename = "{step_name}.png"
+    screenshot_filename = "debug_files/{step_name}.png"
 
     if step.status == "failed":
         take_screenshot(context, screenshot_filename.format(step_name=step.name))
@@ -144,12 +144,12 @@ def save_debug_files(context, step):
         save_page_source(context, step)
 
 def save_page_source(context, step):
-    page_source_filename = "{step_name}.html"
+    page_source_filename = "debug_files/{step_name}.html"
     with open(page_source_filename.format(step_name=step.name), "w") as page_source:
         page_source.write(context.browser.page_source)
 
 def log_browser_console(context, step):
-    console_log_filename = "{step_name}.log"
+    console_log_filename = "debug_files/{step_name}.log"
     with open(console_log_filename.format(step_name=step.name), "w") as console_log_file:
         line = "{time} {level}: {message}\n"
         console_log_file.writelines(

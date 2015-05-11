@@ -39,7 +39,7 @@ def before_all(context):
         context.browser.find_element_by_name("button").click()
 
     except Exception, e:
-        take_screenshot(context, 'before_all.png')
+        take_screenshot(context, 'debug_files/before_all.png')
 
     context.browser.quit()
 

@@ -31,7 +31,7 @@ def before_all(context):
     logging.disable('INFO')
 
     try:
-        context.browser.get('https://staging.pixelated-project.org/signup')
+        context.browser.get('https://%s/signup' % URL)
         wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
         fill_by_css_selector(context, 'input#srp_username', 'behave-testuser')
         fill_by_css_selector(context, 'input#srp_password','Eido6aeg3za9ooNiekiemahm')

@@ -23,11 +23,11 @@ import time
 
 @when(u'I visit the dispatcher')
 def step_impl(context):
-    context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
+    context.browser.get('https://%s:8080/auth/login' % URL)
 
 @given(u'I visit the dispatcher')
 def step_impl(context):
-    context.browser.get('https://staging.pixelated-project.org:8080/')
+    context.browser.get('https://%s:8080/' % URL)
 
 @then(u'I should see a login button')
 def step_impl(context):
@@ -45,16 +45,16 @@ def step_impl(context):
         # phantomjs can not deal with the interstitial. We need to load the
         # website manually after the user-agent has started
         time.sleep(30)
-        context.browser.get('https://staging.pixelated-project.org:8080/')
+        context.browser.get('https://%s:8080/' % URL)
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
 
 @when(u'I logout')
 def step_impl(context):
-    context.browser.get('https://staging.pixelated-project.org:8080/auth/logout')
+    context.browser.get('https://%s:8080/auth/logout' % URL)
 
 @when(u'I visit the signup-page')
 def step_impl(context):
-    context.browser.get('https://staging.pixelated-project.org/signup')
+    context.browser.get('https://%s/signup' % URL)
 
 @then(u'I should see a signup button')
 def step_impl(context):

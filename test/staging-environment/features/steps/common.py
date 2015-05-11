@@ -22,6 +22,8 @@ import random
 import smtplib
 
 MAX_WAIT_IN_S = 120
+#URL = 'staging.pixelated-project.org'
+URL = 'unstable.pixelated-project.org'
 
 def random_username():
     if 'randomname' not in globals():
@@ -113,11 +115,12 @@ def save_source(context):
 def send_external_email(subject, body):
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = 'behave-testuser@staging.pixelated-project.org'
-    msg['To'] = 'behave-testuser@staging.pixelated-project.org'
+    msg['From'] = "behave-testuser@%s" % URL
+    print "FROM:%s" % msg['From']
+    msg['To'] = "behave-testuser@%s" % URL
 
-    s = smtplib.SMTP('staging.pixelated-project.org')
-    s.sendmail('behave-testuser@staging.pixelated-project.org', ['behave-testuser@staging.pixelated-project.org'], msg.as_string())
+    s = smtplib.SMTP(URL)
+    s.sendmail("behave-testuser@%s" % URL, ["behave-testuser@%s" % URL], msg.as_string())
     s.quit()
 
 

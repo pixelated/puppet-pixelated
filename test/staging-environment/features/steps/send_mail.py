@@ -23,11 +23,12 @@ from common import *
 
 @given(u'I login as behave-testuser')
 def step_impl(context):
-    context.browser.get('https://staging.pixelated-project.org:8080/auth/login')
+    context.browser.get('https://%s:8080/auth/login' % URL )
     wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
     fill_by_css_selector(context, 'input#email', 'behave-testuser')
     fill_by_css_selector(context, 'input#password', 'Eido6aeg3za9ooNiekiemahm')
     context.browser.find_element_by_name("login").click()
+
 
 @given(u'I send an unencrypted email')
 def step_impl(context):
@@ -44,7 +45,7 @@ def step_impl(context):
     e.click()
     fill_by_css_selector(context, 'input#subject',  'email to myself %s' % random_subject())
     fill_by_css_selector(context, 'textarea#text-box', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
-    fill_by_css_selector(context, 'input[class="tt-input"]', 'behave-testuser@staging.pixelated-project.org')
+    fill_by_css_selector(context, 'input[class="tt-input"]', 'behave-testuser@%s' % URL)
 
 @when(u'I press the send button')
 def step_impl(context):

@@ -22,7 +22,8 @@ from steps.common import *
 
 
 def before_all(context):
-    # context.browser = webdriver.Firefox()
+    #context.browser = webdriver.Firefox()
+    #context.browser = webdriver.Chrome()
     context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(5)
@@ -37,9 +38,10 @@ def before_all(context):
     context.browser.find_element_by_name("button").click()
 
     context.browser.quit()
-#
+
 def before_feature(context, feature):
     # context.browser = webdriver.Firefox()
+    #context.browser = webdriver.Chrome()
     context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
@@ -50,20 +52,7 @@ def after_feature(context, feature):
 
 
 def after_step(context, step):
-    screenshot_filename = "{step_name}.png"
-
-    if step.status == "failed":
-        take_screenshot(context, screenshot_filename.format(step_name=step.name))
-        log_browser_console(context, step)
-        save_page_source(context, step)
-
-
-
-def save_page_source(context, step):
-    page_source_filename = "{step_name}.html"
-    with open(page_source_filename.format(step_name=step.name), "w") as page_source:
-        page_source.write(context.browser.page_source)
-
+    save_debug_files(context, step)
 
 def log_browser_console(context, step):
     console_log_filename = "{step_name}.log"

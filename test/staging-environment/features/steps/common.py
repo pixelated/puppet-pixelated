@@ -134,3 +134,19 @@ def fill_by_css_selector(context, css_selector, text):
 def fill_by_xpath(context, xpath, text):
     field = context.browser.find_element_by_xpath(xpath)
     field.send_keys(text)
+
+def save_debug_files(context, step):
+    screenshot_filename = "{step_name}.png"
+
+    if step.status == "failed":
+        take_screenshot(context, screenshot_filename.format(step_name=step.name))
+        log_browser_console(context, step)
+        save_page_source(context, step)
+
+def save_page_source(context, step):
+    page_source_filename = "{step_name}.html"
+    with open(page_source_filename.format(step_name=step.name), "w") as page_source:
+        page_source.write(context.browser.page_source)
+
+
+

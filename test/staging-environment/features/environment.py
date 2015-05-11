@@ -53,16 +53,3 @@ def after_feature(context, feature):
 
 def after_step(context, step):
     save_debug_files(context, step)
-
-def log_browser_console(context, step):
-    console_log_filename = "{step_name}.log"
-    with open(console_log_filename.format(step_name=step.name), "w") as console_log_file:
-        line = "{time} {level}: {message}\n"
-        console_log_file.writelines(
-            [line.format(time=x['timestamp'], level=x['level'], message=x['message']) for x in context.browser.get_log("browser")]
-        )
-
-
-
-
-

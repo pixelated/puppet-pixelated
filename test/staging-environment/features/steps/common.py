@@ -17,20 +17,20 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from email.mime.text import MIMEText
+
+import ConfigParser
 import string
 import random
 import smtplib
 
+config = ConfigParser.ConfigParser()
+config.read('config.cfg')
 MAX_WAIT_IN_S = 120
-#URL = 'staging.pixelated-project.org'
-URL = 'unstable.pixelated-project.org'
 
 def random_username():
     if 'randomname' not in globals():
         global randomname
         randomname=''.join(random.choice(string.lowercase) for i in range(16))
-    else:
-        return randomname
     return randomname
 
 
@@ -38,8 +38,6 @@ def random_password():
     if 'randompassword' not in globals():
         global randompassword
         randompassword=''.join(random.choice(string.lowercase) for i in range(16))
-    else:
-        return randompassword
     return randompassword
 
 
@@ -47,8 +45,6 @@ def random_subject():
     if 'randomsubject' not in globals():
         global randomsubject
         randomsubject=''.join(random.choice(string.lowercase) for i in range(16))
-    else:
-        return randomsubject
     return randomsubject
 
 
@@ -74,8 +70,8 @@ def wait_until_element_is_visible_by_locator(context, locator_tuple):
 
 
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
-    MAX_WAIT_IN_S = 300
-    wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
+    wait_emails_for = 300
+    wait = WebDriverWait(context.browser, wait_emails_for)
     wait.until(EC.visibility_of_element_located(locator_tuple))
     by, value = locator_tuple
     return context.browser.find_element(by, value)
@@ -113,14 +109,14 @@ def save_source(context):
 
 
 def send_external_email(subject, body):
+    behave_email = config.get('staging', 'behave_email')
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = "behave-testuser@%s" % URL
-    print "FROM:%s" % msg['From']
-    msg['To'] = "behave-testuser@%s" % URL
+    msg['From'] = behave_email
+    msg['To'] = behave_email
 
-    s = smtplib.SMTP(URL)
-    s.sendmail("behave-testuser@%s" % URL, ["behave-testuser@%s" % URL], msg.as_string())
+    s = smtplib.SMTP('staging.pixelated-project.org')
+    s.sendmail(behave_email, [behave_email], msg.as_string())
     s.quit()
 
 
@@ -138,24 +134,5 @@ def fill_by_xpath(context, xpath, text):
     field = context.browser.find_element_by_xpath(xpath)
     field.send_keys(text)
 
-def save_debug_files(context, step):
-    screenshot_filename = "debug_files/{step_name}.png"
 
-    if step.status == "failed":
-        take_screenshot(context, screenshot_filename.format(step_name=step.name))
-        log_browser_console(context, step)
-        save_page_source(context, step)
-
-def save_page_source(context, step):
-    page_source_filename = "debug_files/{step_name}.html"
-    with open(page_source_filename.format(step_name=step.name), "w") as page_source:
-        page_source.write(context.browser.page_source)
-
-def log_browser_console(context, step):
-    console_log_filename = "debug_files/{step_name}.log"
-    with open(console_log_filename.format(step_name=step.name), "w") as console_log_file:
-        line = "{time} {level}: {message}\n"
-        console_log_file.writelines(
-            [line.format(time=x['timestamp'], level=x['level'], message=x['message']) for x in context.browser.get_log("browser")]
-        )
 

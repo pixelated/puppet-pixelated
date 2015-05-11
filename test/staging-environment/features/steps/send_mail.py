@@ -14,19 +14,24 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-import time
-
-from selenium.webdriver.common.by import By
 
 from behave import *
 from common import *
+import ConfigParser
+
+config = ConfigParser.ConfigParser()
+config.read('config.cfg')
 
 @given(u'I login as behave-testuser')
 def step_impl(context):
-    context.browser.get('https://%s:8080/auth/login' % URL )
+    dispatcher_address = config.get('staging', 'dispatcher_address')
+    behave_user = config.get('staging', 'behave_testuser')
+    behave_password = config.get('staging', 'behave_password')
+
+    context.browser.get('%s:8080/auth/login' % dispatcher_address)
     wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
-    fill_by_css_selector(context, 'input#email', 'behave-testuser')
-    fill_by_css_selector(context, 'input#password', 'Eido6aeg3za9ooNiekiemahm')
+    fill_by_css_selector(context, 'input#email', behave_user)
+    fill_by_css_selector(context, 'input#password', behave_password)
     context.browser.find_element_by_name("login").click()
 
 
@@ -40,12 +45,11 @@ def step_impl(context):
 
 @when(u'I compose a mail')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger'))
-    e = context.browser.find_element_by_id('compose-trigger')
-    e.click()
+    email_to = config.get('staging', 'behave_email')
+    wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger')).click()
     fill_by_css_selector(context, 'input#subject',  'email to myself %s' % random_subject())
     fill_by_css_selector(context, 'textarea#text-box', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
-    fill_by_css_selector(context, 'input[class="tt-input"]', 'behave-testuser@%s' % URL)
+    fill_by_css_selector(context, 'input[class="tt-input"]', email_to)
 
 @when(u'I press the send button')
 def step_impl(context):

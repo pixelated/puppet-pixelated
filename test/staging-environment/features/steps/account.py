@@ -14,24 +14,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-from selenium.webdriver.common.by import By
-
+import ConfigParser
 from behave import *
 from common import *
 
 import time
 
+config = ConfigParser.ConfigParser()
+config.read('config.cfg')
+dispatcher_address = config.get('staging', 'dispatcher_address')
+
 @when(u'I visit the dispatcher')
 def step_impl(context):
-    context.browser.get('https://%s:8080/auth/login' % URL)
+    context.browser.get('%s:8080/auth/login' % dispatcher_address)
 
 @given(u'I visit the dispatcher')
 def step_impl(context):
-    context.browser.get('https://%s:8080/' % URL)
+    context.browser.get('%s:8080/' % dispatcher_address)
 
 @then(u'I should see a login button')
 def step_impl(context):
-    form = context.browser.find_element_by_name('login')
+    context.browser.find_element_by_name('login')
 
 @when(u'I login')
 def step_impl(context):
@@ -45,16 +48,16 @@ def step_impl(context):
         # phantomjs can not deal with the interstitial. We need to load the
         # website manually after the user-agent has started
         time.sleep(30)
-        context.browser.get('https://%s:8080/' % URL)
+        context.browser.get('%s:8080/' % dispatcher_address)
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
 
 @when(u'I logout')
 def step_impl(context):
-    context.browser.get('https://%s:8080/auth/logout' % URL)
+    context.browser.get('%s:8080/auth/logout' % dispatcher_address)
 
 @when(u'I visit the signup-page')
 def step_impl(context):
-    context.browser.get('https://%s/signup' % URL)
+    context.browser.get('%s/signup' % dispatcher_address)
 
 @then(u'I should see a signup button')
 def step_impl(context):
@@ -71,4 +74,3 @@ def step_impl(context):
 @then(u'I see the control-panel')
 def step_impl(context):
     find_element_containing_text(context,'user control panel')
-    context.browser.save_screenshot('/tmp/screenshot.png')

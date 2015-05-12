@@ -19,7 +19,6 @@ from selenium import webdriver
 from steps.common import *
 import os
 
-import pdb;pdb.set_trace()
 config = ConfigParser.ConfigParser()
 current_dir = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(current_dir, 'config.cfg')

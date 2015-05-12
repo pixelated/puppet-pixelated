@@ -14,14 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-import ConfigParser
-import logging
 
 from selenium import webdriver
 from steps.common import *
+import os
 
+import pdb;pdb.set_trace()
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, 'config.cfg')
+config.read(config_path)
 
 
 def before_feature(context, feature):

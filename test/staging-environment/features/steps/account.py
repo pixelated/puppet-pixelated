@@ -18,10 +18,14 @@ import ConfigParser
 from behave import *
 from common import *
 
+import os
 import time
 
+
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '..', 'config.cfg')
+config.read(config_path)
 dispatcher_address = config.get('staging', 'dispatcher_address')
 
 @when(u'I visit the dispatcher')

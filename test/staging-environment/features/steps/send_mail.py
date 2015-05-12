@@ -18,9 +18,12 @@
 from behave import *
 from common import *
 import ConfigParser
+import os
 
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '..', 'config.cfg')
+config.read(config_path)
 
 @given(u'I login as behave-testuser')
 def step_impl(context):
@@ -74,19 +77,19 @@ def step_impl(context):
 @then(u'I see the new mail in the inbox')
 def step_impl(context):
     xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]' % 'email to myself %s' % random_subject()
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH,xpath_string))
+    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, xpath_string))
 
 @then(u'I see a encrypted flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.encrypted.encryption-valid'))
+    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.encrypted.encryption-valid'))
 
 @then(u'I see a unencrypted email flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.not-encrypted'))
+    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.not-encrypted'))
     
 @then(u'I see a undecryptable flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context,(By.CSS_SELECTOR, '.encrypted.encryption-error'))
+    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.encrypted.encryption-error'))
 
 def encrypted_body():
     return """

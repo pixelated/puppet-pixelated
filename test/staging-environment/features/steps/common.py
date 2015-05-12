@@ -19,12 +19,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 from email.mime.text import MIMEText
 
 import ConfigParser
+import os
 import string
 import random
 import smtplib
 
+
 config = ConfigParser.ConfigParser()
-config.read('config.cfg')
+current_dir = os.path.dirname(os.path.abspath(__file__))
+config_path = os.path.join(current_dir, '..', 'config.cfg')
+config.read(config_path)
+
 MAX_WAIT_IN_S = 120
 
 def random_username():

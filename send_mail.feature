@@ -17,6 +17,16 @@
 @staging
 Feature: send_mail
 
+  @mail_to_myself
+  Scenario: user logs in end sends a mail to self
+    Given I login as behave-testuser
+    When I compose a mail
+    And I press the send button
+    And I see that the mail was sent
+    Then I see the new mail in the inbox
+    When I open the email
+    Then I see a encrypted flag
+
   @unencrypted
   Scenario: user receives an unencrypted email
     Given I send an unencrypted email
@@ -31,12 +41,4 @@ Feature: send_mail
     When I open the undecryptable email
     Then I see a undecryptable flag 
 
-  @mail_to_myself
-  Scenario: user logs in end sends a mail to self
-    Given I login as behave-testuser
-    When I compose a mail
-    And I press the send button
-    And I see that the mail was sent
-    Then I see the new mail in the inbox
-    When I open the email
-    Then I see a encrypted flag
+

@@ -53,7 +53,9 @@ def step_impl(context):
         # website manually after the user-agent has started
         time.sleep(30)
         context.browser.get('%s:8080/' % dispatcher_address)
+        # import pdb;pdb.set_trace()
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
+        # pdb.set_trace()
 
 @when(u'I logout')
 def step_impl(context):

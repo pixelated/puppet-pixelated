@@ -49,9 +49,7 @@ class PixelatedPage(object):
         self.tag_list.go_to_trash()
 
     def random_subject(self):
-        try:
-            random_subject_string
-        except:
+        if 'random_subject_string' not in globals():
             global random_subject_string
             random_string = ''.join(random.choice(string.lowercase) for i in range(8))
             random_subject_string = 'Automated test, TBD (To Be Deleted): '+ random_string

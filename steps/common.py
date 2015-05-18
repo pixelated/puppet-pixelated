@@ -75,7 +75,7 @@ def wait_until_element_is_visible_by_locator(context, locator_tuple):
 
 
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
-    wait_emails_for = 300
+    wait_emails_for = 600
     wait = WebDriverWait(context.browser, wait_emails_for)
     wait.until(EC.visibility_of_element_located(locator_tuple))
     by, value = locator_tuple

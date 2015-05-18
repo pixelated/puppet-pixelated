@@ -24,15 +24,17 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 config_path = os.path.join(current_dir, 'config.cfg')
 config.read(config_path)
 
+def before_scenario(context, scenario):
+    feature = scenario.feature
+
+    if 'try' in feature.tags:
+        user_agent_address = config.get('try', 'user_agent_address')
+        context.browser.get(user_agent_address)
 
 def before_feature(context, feature):
     if 'account' == feature.name and 'staging' in feature.tags:
         create_behave_user(context)
     set_browser(context)
-
-    if 'try' in feature.tags:
-        user_agent_address = config.get('try', 'user_agent_address')
-        context.browser.get(config.get(user_agent_address))
 
 
 def after_feature(context, feature):
@@ -63,6 +65,7 @@ def log_browser_console(context, step):
         )
 
 def set_browser(context):
+    # context.browser = webdriver.Firefox()
     context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)

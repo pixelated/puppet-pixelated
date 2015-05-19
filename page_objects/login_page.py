@@ -49,7 +49,7 @@ class LoginPage(BasePageObject):
     def _login_button(self):
         return self._find_element_by_locator(self._locators['login_button'])
 
-    def wait_intersitial_page(self, time=60):
+    def wait_intersitial_page(self, time=180):
         if self._is_intersitial_page_displayed():
             self._wait_element_to_be_removed(self._locators['hive_svg'], time)
 

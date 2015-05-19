@@ -29,7 +29,15 @@ def before_scenario(context, scenario):
 
     if 'try' in feature.tags:
         user_agent_address = config.get('try', 'user_agent_address')
+        set_browser(context)
         context.browser.get(user_agent_address)
+
+
+def after_scenario(context, scenario):
+    feature = scenario.feature
+
+    if 'try' in feature.tags:
+        context.browser.quit()
 
 def before_feature(context, feature):
     if 'account' == feature.name and 'staging' in feature.tags:

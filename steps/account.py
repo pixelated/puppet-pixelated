@@ -32,13 +32,11 @@ dispatcher_address = config.get('staging', 'dispatcher_address')
 def step_impl(context):
     context.browser.get('%s:8080/auth/login' % dispatcher_address)
 
-@given(u'I visit the dispatcher')
-def step_impl(context):
-    context.browser.get('%s:8080/' % dispatcher_address)
 
 @then(u'I should see a login button')
 def step_impl(context):
     context.browser.find_element_by_name('login')
+
 
 @when(u'I login')
 def step_impl(context):
@@ -47,27 +45,29 @@ def step_impl(context):
     fill_by_css_selector(context, 'input#password', random_password())
     context.browser.find_element_by_name("login").click()
 
+
 @then(u'I see the inbox')
 def step_impl(context):
         # phantomjs can not deal with the interstitial. We need to load the
         # website manually after the user-agent has started
         time.sleep(30)
-        context.browser.get('%s:8080/' % dispatcher_address)
-        # import pdb;pdb.set_trace()
         wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
-        # pdb.set_trace()
+
 
 @when(u'I logout')
 def step_impl(context):
     context.browser.get('%s:8080/auth/logout' % dispatcher_address)
 
+
 @when(u'I visit the signup-page')
 def step_impl(context):
     context.browser.get('%s/signup' % dispatcher_address)
 
+
 @then(u'I should see a signup button')
 def step_impl(context):
     context.browser.find_element_by_name('button')
+
 
 @when(u'I register')
 def step_impl(context):
@@ -76,6 +76,7 @@ def step_impl(context):
     fill_by_css_selector(context, 'input#srp_password', random_password())
     fill_by_css_selector(context, 'input#srp_password_confirmation', random_password())
     context.browser.find_element_by_name("button").click()
+
 
 @then(u'I see the control-panel')
 def step_impl(context):

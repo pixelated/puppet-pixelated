@@ -42,11 +42,13 @@ def after_scenario(context, scenario):
 def before_feature(context, feature):
     if 'account' == feature.name and 'staging' in feature.tags:
         create_behave_user(context)
-    set_browser(context)
+    if 'staging' in feature.tags:
+        set_browser(context)
 
 
 def after_feature(context, feature):
-    context.browser.quit()
+    if 'staging' in feature.tags:
+        context.browser.quit()
 
 
 def after_step(context, step):
@@ -56,6 +58,7 @@ def after_step(context, step):
         take_screenshot(context, screenshot_filename.format(step_name=step.name))
         log_browser_console(context, step)
         save_page_source(context, step)
+        context.browser.quit()
 
 
 def save_page_source(context, step):

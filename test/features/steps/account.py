@@ -15,6 +15,8 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 import ConfigParser
+from .page_objects import LoginPage
+
 from behave import *
 from common import *
 
@@ -40,10 +42,9 @@ def step_impl(context):
 
 @when(u'I login')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
-    fill_by_css_selector(context, 'input#email', random_username())
-    fill_by_css_selector(context, 'input#password', random_password())
-    context.browser.find_element_by_name("login").click()
+    login_page = LoginPage(context)
+    login_page.enter_username(random_username()).enter_password(random_password()).login()
+    login_page.wait_interstitial_page()
 
 
 @then(u'I see the inbox')

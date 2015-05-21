@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+from .page_objects import LoginPage
+from .page_objects import ComposeBox
+from .page_objects import MailListActions
 
 from behave import *
 from common import *
@@ -32,10 +35,9 @@ def step_impl(context):
     behave_password = config.get('staging', 'behave_password')
 
     context.browser.get('%s:8080/auth/login' % dispatcher_address)
-    wait_until_element_is_visible_by_locator(context, (By.ID, 'email'))
-    fill_by_css_selector(context, 'input#email', behave_user)
-    fill_by_css_selector(context, 'input#password', behave_password)
-    context.browser.find_element_by_name("login").click()
+    login_page = LoginPage(context)
+    login_page.enter_username(behave_user).enter_password(behave_password).login()
+    login_page.wait_interstitial_page()
 
 
 @given(u'I send an unencrypted email')
@@ -49,14 +51,16 @@ def step_impl(context):
 @when(u'I compose a mail')
 def step_impl(context):
     email_to = config.get('staging', 'behave_email')
-    wait_until_element_is_visible_by_locator(context, (By.ID, 'compose-trigger')).click()
-    fill_by_css_selector(context, 'input#subject',  'email to myself %s' % random_subject())
-    fill_by_css_selector(context, 'textarea#text-box', 'Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
-    fill_by_css_selector(context, 'input[class="tt-input"]', email_to)
+    compose_box = ComposeBox(context)
+    maillist_actions = MailListActions(context)
 
-@when(u'I press the send button')
-def step_impl(context):
-    context.browser.find_element_by_id("send-button").click()
+    maillist_actions.open_compose_box()
+    compose_box.enter_subject('email to myself %s' % random_subject())
+    compose_box.enter_body('Hi, \n this is an email. To find this email, I add this strange string here:\n eisheeneejaih7eiw7heiLah')
+    compose_box.enter_recipient(email_to)
+    compose_box.send_mail()
+
+
 
 @when(u'I see that the mail was sent')
 def step_impl(context):
@@ -74,10 +78,6 @@ def step_impl(context):
 def step_impl(context):
     open_email(context, 'unencrypted email %s' % random_subject())
 
-@then(u'I see the new mail in the inbox')
-def step_impl(context):
-    xpath_string= '//ul[@id="mail-list"]//*[contains(.,"%s")]' % 'email to myself %s' % random_subject()
-    wait_long_until_element_is_visible_by_locator(context, (By.XPATH, xpath_string))
 
 @then(u'I see a encrypted flag')
 def step_impl(context):

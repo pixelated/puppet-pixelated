@@ -49,11 +49,14 @@ class LoginPage(BasePageObject):
     def _login_button(self):
         return self._find_element_by_locator(self._locators['login_button'])
 
-    def wait_intersitial_page(self, time=180):
-        if self._is_intersitial_page_displayed():
-            self._wait_element_to_be_removed(self._locators['hive_svg'], time)
+    def wait_interstitial_page(self, time=180):
+        try:
+            if self._is_interstitial_page_displayed():
+                self._wait_element_to_be_removed(self._locators['hive_svg'], time)
+        except TimeoutException as timeout:
+            import pdb;pdb.set_trace()
 
-    def _is_intersitial_page_displayed(self):
+    def _is_interstitial_page_displayed(self):
         try:
             self._find_element_by_locator(self._locators['hive_svg'], 2)
             return True

@@ -52,7 +52,7 @@ class ComposeBox(BasePageObject):
     def send_mail(self):
         self._send_mail_button().click()
 
-    def wait_compose_box_to_disapear(self):
+    def wait_compose_box_to_disappear(self):
         self._wait_element_to_be_removed(self._locators['compose_box'], 120)
 
     def _subject_field(self):

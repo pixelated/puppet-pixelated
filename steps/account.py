@@ -16,6 +16,7 @@
 
 import ConfigParser
 from .page_objects import LoginPage
+from .page_objects import SignUpPage
 
 from behave import *
 from common import *
@@ -72,11 +73,17 @@ def step_impl(context):
 
 @when(u'I register')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
-    fill_by_css_selector(context, 'input#srp_username', random_username())
-    fill_by_css_selector(context, 'input#srp_password', random_password())
-    fill_by_css_selector(context, 'input#srp_password_confirmation', random_password())
-    context.browser.find_element_by_name("button").click()
+    signup_page = SignUpPage(context)
+    signup_page.enter_username(random_username())
+    signup_page.enter_password(random_password())
+    signup_page.enter_password_confirmation(random_password())
+    signup_page.click_signup_button()
+
+    # # wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
+    # fill_by_css_selector(context, 'input#srp_username', random_username())
+    # fill_by_css_selector(context, 'input#srp_password', random_password())
+    # fill_by_css_selector(context, 'input#srp_password_confirmation', random_password())
+    # context.browser.find_element_by_name("button").click()
 
 
 @then(u'I see the control-panel')

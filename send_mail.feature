@@ -21,9 +21,7 @@ Feature: send_mail
   Scenario: user logs in end sends a mail to self
     Given I login as behave-testuser
     When I compose a mail
-    And I press the send button
     And I see that the mail was sent
-    Then I see the new mail in the inbox
     When I open the email
     Then I see a encrypted flag
 

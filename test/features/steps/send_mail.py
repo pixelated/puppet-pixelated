@@ -17,6 +17,7 @@
 from .page_objects import LoginPage
 from .page_objects import ComposeBox
 from .page_objects import MailListActions
+from .page_objects import MailPage
 
 from behave import *
 from common import *
@@ -61,18 +62,20 @@ def step_impl(context):
     compose_box.send_mail()
 
 
-
 @when(u'I see that the mail was sent')
 def step_impl(context):
     wait_until_element_is_visible_by_locator(context, (By.XPATH, '//*[contains(.,"Your message was sent!")]'))
+
 
 @when(u'I open the email')
 def step_impl(context):
     open_email(context, 'email to myself %s' % random_subject())
 
+
 @when(u'I open the undecryptable email')
 def step_impl(context):
     open_email(context, 'undecryptable email %s' % random_subject())
+
 
 @when(u'I open the unencrypted email')
 def step_impl(context):
@@ -81,15 +84,21 @@ def step_impl(context):
 
 @then(u'I see a encrypted flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.encrypted.encryption-valid'))
+    mail_page = MailPage(context)
+    mail_page.check_mail_flag('encrypted_flag')
+
 
 @then(u'I see a unencrypted email flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.not-encrypted'))
-    
+    mail_page = MailPage(context)
+    mail_page.check_mail_flag('unencrypted_flag')
+
+
 @then(u'I see a undecryptable flag')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, '.encrypted.encryption-error'))
+    mail_page = MailPage(context)
+    mail_page.check_mail_flag('undencrypted_flag')
+
 
 def encrypted_body():
     return """

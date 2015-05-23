@@ -15,8 +15,10 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 import ConfigParser
-from .page_objects import LoginPage
-from .page_objects import SignUpPage
+from page_objects import LoginPage
+from page_objects import SignUpPage
+from page_objects import ControlPanelPage
+from page_objects import TagList
 
 from behave import *
 from common import *
@@ -53,7 +55,9 @@ def step_impl(context):
         # phantomjs can not deal with the interstitial. We need to load the
         # website manually after the user-agent has started
         time.sleep(30)
-        wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
+        taglist = TagList(context)
+        taglist.is_pixelated_loaded()
+        # wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
 
 
 @when(u'I logout')
@@ -79,13 +83,9 @@ def step_impl(context):
     signup_page.enter_password_confirmation(random_password())
     signup_page.click_signup_button()
 
-    # # wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
-    # fill_by_css_selector(context, 'input#srp_username', random_username())
-    # fill_by_css_selector(context, 'input#srp_password', random_password())
-    # fill_by_css_selector(context, 'input#srp_password_confirmation', random_password())
-    # context.browser.find_element_by_name("button").click()
-
 
 @then(u'I see the control-panel')
 def step_impl(context):
-    find_element_containing_text(context,'user control panel')
+    controlpanel_page = ControlPanelPage(context)
+    controlpanel_page.is_control_panel_home()
+    # find_element_containing_text(context,'user control panel')

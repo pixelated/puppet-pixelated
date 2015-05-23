@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-from .page_objects import LoginPage
-from .page_objects import ComposeBox
-from .page_objects import MailListActions
-from .page_objects import MailPage
+from page_objects import LoginPage
+from page_objects import ComposeBox
+from page_objects import MailListActions
+from page_objects import MailList
 
 from behave import *
 from common import *
@@ -69,34 +69,46 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
-    open_email(context, 'email to myself %s' % random_subject())
+    subject = 'email to myself %s' % random_subject()
+    behave_user = config.get('staging', 'behave_testuser')
+
+    maillist = MailList(context)
+    maillist.select_mail(behave_user, subject)
 
 
 @when(u'I open the undecryptable email')
 def step_impl(context):
-    open_email(context, 'undecryptable email %s' % random_subject())
+    subject = 'undecryptable email %s' % random_subject()
+    behave_user = config.get('staging', 'behave_testuser')
+
+    maillist = MailList(context)
+    maillist.select_mail(behave_user, subject)
 
 
 @when(u'I open the unencrypted email')
 def step_impl(context):
-    open_email(context, 'unencrypted email %s' % random_subject())
+    subject =  'unencrypted email %s' % random_subject()
+    behave_user = config.get('staging', 'behave_testuser')
+
+    maillist = MailList(context)
+    maillist.select_mail(behave_user, subject)
 
 
 @then(u'I see a encrypted flag')
 def step_impl(context):
-    mail_page = MailPage(context)
+    mail_page = MailList(context)
     mail_page.check_mail_flag('encrypted_flag')
 
 
 @then(u'I see a unencrypted email flag')
 def step_impl(context):
-    mail_page = MailPage(context)
+    mail_page = MailList(context)
     mail_page.check_mail_flag('unencrypted_flag')
 
 
 @then(u'I see a undecryptable flag')
 def step_impl(context):
-    mail_page = MailPage(context)
+    mail_page = MailList(context)
     mail_page.check_mail_flag('undencrypted_flag')
 
 

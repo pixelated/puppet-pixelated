@@ -52,3 +52,11 @@ class BasePageObject(object):
         wait = WebDriverWait(self.context.browser, timeout or self.timeout)
         wait.until(condition_function)
 
+    def wait_until_element_is_visible_by_locator(self, context, locator):
+        wait = WebDriverWait(context.browser, 60)
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, locator)))
+        return context.browser.find_element_by_css_selector(locator)
+
+
+
+

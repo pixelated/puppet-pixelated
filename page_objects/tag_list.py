@@ -20,6 +20,7 @@ from base_page_object import BasePageObject
 class TagList(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
+            'tag_inbox': 'li#tag-inbox',
             'tag_trash': 'li#tag-trash'
         }
         super(TagList, self).__init__(context, timeout)
@@ -29,3 +30,6 @@ class TagList(BasePageObject):
 
     def _trash_tag(self):
         return self._find_element_by_locator(self._locators['tag_trash'])
+
+    def is_pixelated_loaded(self):
+        self.wait_until_element_is_visible_by_locator(self._locators['tag_inbox'])

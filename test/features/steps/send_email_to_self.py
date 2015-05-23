@@ -15,7 +15,7 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 from behave import when
-from .page_objects import PixelatedPage
+from page_objects import PixelatedPage
 
 
 @when('I send an email to myself')

@@ -15,7 +15,7 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 from behave import then
-from .page_objects import PixelatedPage
+from page_objects import PixelatedPage
 
 
 @then('I delete the email')

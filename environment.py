@@ -82,8 +82,8 @@ def take_screenshot(context, filename):
 
 
 def set_browser(context):
-    context.browser = webdriver.Firefox()
-    # context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    # context.browser = webdriver.Firefox()
+    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(60)

@@ -52,3 +52,14 @@ class SignUpPage(BasePageObject):
 
     def _signup_button(self):
         return self.context.browser.find_element_by_name("button")
+
+
+class ControlPanelPage(BasePageObject):
+    def __init__(self, context, timeout=10):
+        self._locators = {
+            'home': "//h1[contains(.,'user control panel')]"
+        }
+        super(ControlPanelPage, self).__init__(context, timeout)
+
+    def is_control_panel_home(self):
+        self.context.browser.find_element_by_xpath(self._locators['home'])

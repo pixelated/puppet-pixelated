@@ -53,27 +53,6 @@ def random_subject():
     return randomsubject
 
 
-def fill_by_xpath(context, xpath, text):
-    field = context.browser.find_element_by_xpath(xpath)
-    field.send_keys(text)
-
-
-def take_screenshot(context, filename):
-    context.browser.save_screenshot(filename)
-
-
-def dump_source_to(context, filename):
-    with open(filename, 'w') as out:
-        out.write(context.browser.page_source.encode('utf8'))
-
-
-def wait_until_element_is_visible_by_locator(context, locator_tuple):
-    wait = WebDriverWait(context.browser, MAX_WAIT_IN_S)
-    wait.until(EC.visibility_of_element_located(locator_tuple))
-    by, value = locator_tuple
-    return context.browser.find_element(by, value)
-
-
 def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
     wait_emails_for = 600
     wait = WebDriverWait(context.browser, wait_emails_for)
@@ -81,32 +60,6 @@ def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
     by, value = locator_tuple
     return context.browser.find_element(by, value)
 
-
-
-def find_element_by_xpath(context, xpath):
-    return wait_until_element_is_visible_by_locator(context, (By.XPATH, xpath))
-
-
-def find_element_by_id(context, id):
-    return wait_until_element_is_visible_by_locator(context, (By.ID, id))
-
-
-def find_element_by_css_selector(context, css_selector):
-    return wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, css_selector))
-
-
-def find_element_containing_text(context, text, element_type='*'):
-    return find_element_by_xpath(context, "//%s[contains(.,'%s')]" % (element_type, text))
-
-
-def element_should_have_content(context, css_selector, content):
-    e = find_element_by_css_selector(context, css_selector)
-    assert e.text == content
-
-
-def click_button(context, title, element='button'):
-    button = find_element_containing_text(context, title, element_type=element)
-    button.click()
 
 def save_source(context):
     with open('/tmp/source.html', 'w') as out:
@@ -130,14 +83,9 @@ def open_email(context, subject):
     wait_long_until_element_is_visible_by_locator(context, (By.XPATH, locator)).click()
 
 
-def fill_by_css_selector(context, css_selector, text):
-    field = context.browser.find_element_by_css_selector(css_selector)
-    field.send_keys(text)
 
 
-def fill_by_xpath(context, xpath, text):
-    field = context.browser.find_element_by_xpath(xpath)
-    field.send_keys(text)
+
 
 
 

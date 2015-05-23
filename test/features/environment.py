@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+from page_objects import SignUpPage
 
 from selenium import webdriver
 from steps.common import *
@@ -75,9 +76,14 @@ def log_browser_console(context, step):
             [line.format(time=x['timestamp'], level=x['level'], message=x['message']) for x in context.browser.get_log('browser')]
         )
 
+
+def take_screenshot(context, filename):
+    context.browser.save_screenshot(filename)
+
+
 def set_browser(context):
-    # context.browser = webdriver.Firefox()
-    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
+    context.browser = webdriver.Firefox()
+    # context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(60)
@@ -88,9 +94,10 @@ def create_behave_user(context):
     password = config.get('staging', 'behave_password')
 
     context.browser.get('https://staging.pixelated-project.org/signup')
-    wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
-    fill_by_css_selector(context, 'input#srp_username', username)
-    fill_by_css_selector(context, 'input#srp_password', password)
-    fill_by_css_selector(context, 'input#srp_password_confirmation', password)
-    context.browser.find_element_by_name('button').click()
+    signup_page = SignUpPage(context)
+    signup_page.wait_until_element_is_visible_by_locator(context, 'input#srp_username')
+    signup_page.enter_username(username)
+    signup_page.enter_password(password)
+    signup_page.enter_password_confirmation(password)
+    signup_page.click_signup_button()
     context.browser.quit()

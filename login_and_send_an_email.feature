@@ -23,7 +23,6 @@ Feature: login and send mail
     When I send an email to myself
     Then I see the email on the mail list
     Then I delete the email
-    Then I see it in the trash box
     And I delete it permanently
 
     Examples:

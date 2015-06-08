@@ -24,7 +24,8 @@ class ComposeBox(BasePageObject):
             'body': 'textarea#text-box',
             'to': 'input.tt-input',
             'send_button': 'button#send-button',
-            'compose_box': 'div#compose-box'
+            'compose_box': 'div#compose-box',
+            'reply_subject': '#reply-subject'
         }
         super(ComposeBox, self).__init__(context, timeout)
 
@@ -52,17 +53,26 @@ class ComposeBox(BasePageObject):
     def send_mail(self):
         self._send_mail_button().click()
 
+    def save_draft(self):
+        self._find_elements_by_css_locator('button#draft-button').click()
+
+    def choose_from_suggestions(self):
+        self._find_element_by_css_locator('.tt-dropdown-menu div div').click()
+
     def wait_compose_box_to_disappear(self):
         self._wait_element_to_be_removed(self._locators['compose_box'], 120)
 
+    def get_reply_subject(self):
+        return self._find_elements_by_css_locator(self._locators['reply_subject'])
+
     def _subject_field(self):
-        return self._find_element_by_locator(self._locators['subject'])
+        return self._find_element_by_css_locator(self._locators['subject'])
 
     def _body_field(self):
-        return self._find_element_by_locator(self._locators['body'])
+        return self._find_element_by_css_locator(self._locators['body'])
 
     def _to_field(self):
-        return self._find_element_by_locator(self._locators['to'])
+        return self._find_element_by_css_locator(self._locators['to'])
 
     def _send_mail_button(self):
-        return self._find_element_by_locator(self._locators['send_button'])
+        return self._find_element_by_css_locator(self._locators['send_button'])

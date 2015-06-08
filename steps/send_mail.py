@@ -14,10 +14,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-from page_objects import LoginPage
-from page_objects import ComposeBox
-from page_objects import MailListActions
-from page_objects import MailList
+from ..page_objects import LoginPage
+from ..page_objects import ComposeBox
+from ..page_objects import MailListActions
+from ..page_objects import MailList
+from ..page_objects import Notification
 
 from behave import *
 from common import *
@@ -64,7 +65,8 @@ def step_impl(context):
 
 @when(u'I see that the mail was sent')
 def step_impl(context):
-    wait_until_element_is_visible_by_locator(context, (By.XPATH, '//*[contains(.,"Your message was sent!")]'))
+    notification = Notification(context)
+    notification.wait_for_notification("message_sent")
 
 
 @when(u'I open the email')

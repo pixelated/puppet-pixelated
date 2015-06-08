@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015 ThoughtWorks, Inc.
+# Copyright (c) 2014 ThoughtWorks, Inc.
 #
 # Pixelated is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -13,16 +13,24 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+from time import sleep
 
-from behave import when
-from ..page_objects import PixelatedPage
+from selenium.webdriver.common.keys import Keys
+from common import *
+
+from ..page_objects import MailListActions
+from ..page_objects import MailList
 
 
-@when('I send an email to myself')
+@when('I search for a mail with the words "{search_term}"')
+def impl(context, search_term):
+    maillist_action = MailListActions(context)
+    maillist_action.do_search(search_term)
+    sleep(1)
+
+
+@then('I see one or more mails in the search results')
 def impl(context):
-    pixelated_page = PixelatedPage(context)
-    pixelated_page.compose_and_send_email({
-        'subject': pixelated_page.random_subject(),
-        'body': 'This is an automated test of Pixelated. Please do not delete this, it will be deleted automatically.',
-        'recipients': context.pixelated_email
-    })
+    maillist= MailList(context)
+    mails = maillist.is_there_emails()
+    assert len(mails) >= 1

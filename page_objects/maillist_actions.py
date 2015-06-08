@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+from selenium.webdriver.common.keys import Keys
 
 from base_page_object import BasePageObject
 
@@ -22,7 +23,9 @@ class MailListActions(BasePageObject):
         self._locators = {
             'compose_mail_button': 'div#compose-mails-trigger',
             'delete_selected_button': 'input#delete-selected',
-            'delete_successful_message': '//span[contains("Your messages were moved to trash!")]'
+            'delete_successful_message': '//span[contains("Your messages were moved to trash!")]',
+            'search': '#search-trigger input[type="search"]',
+            'select_all_mails': '#toggle-check-all-emails'
         }
         super(MailListActions, self).__init__(context, timeout)
 
@@ -32,14 +35,17 @@ class MailListActions(BasePageObject):
     def delete_selected_mails(self):
         self._delete_selected_button().click()
 
-    def wait_delete_confirmation(self):
-        self._delete_successful_message()
+    def select_all_mails(self):
+        self._find_elements_by_css_locator(self._locators['select_all_mails']).click()
+
+    def do_search(self, search_term):
+        search_box = self._find_elements_by_css_locator(self._locators['search'])
+        search_box.send_keys(search_box).send_keys(Keys.ENTER)
 
     def _compose_mail_button(self):
-        return self._find_element_by_locator(self._locators['compose_mail_button'])
+        return self._find_element_by_css_locator(self._locators['compose_mail_button'])
 
     def _delete_selected_button(self):
-        return self._find_element_by_locator(self._locators['delete_selected_button'])
+        return self._find_element_by_css_locator(self._locators['delete_selected_button'])
 
-    def _delete_successful_message(self):
-        return self._find_elements_by_xpath(self._locators['delete_successful_message'])
+

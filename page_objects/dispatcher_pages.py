@@ -42,13 +42,13 @@ class SignUpPage(BasePageObject):
         return self
 
     def _username_field(self):
-        return self._find_element_by_locator(self._locators['username'])
+        return self._find_element_by_css_locator(self._locators['username'])
 
     def _password_field(self):
-        return self._find_element_by_locator(self._locators['pswd'])
+        return self._find_element_by_css_locator(self._locators['pswd'])
 
     def _password_confirmation_field(self):
-        return self._find_element_by_locator(self._locators['pswd_confirmation'])
+        return self._find_element_by_css_locator(self._locators['pswd_confirmation'])
 
     def _signup_button(self):
         return self.context.browser.find_element_by_name("button")

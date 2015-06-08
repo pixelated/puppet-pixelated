@@ -25,3 +25,4 @@ from dispatcher_pages import SignUpPage
 from dispatcher_pages import ControlPanelPage
 from mail_list import MailList
 from tag_list import TagList
+from notification import Notification

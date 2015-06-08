@@ -41,13 +41,13 @@ class LoginPage(BasePageObject):
         return self
 
     def _username_field(self):
-        return self._find_element_by_locator(self._locators['username'])
+        return self._find_element_by_css_locator(self._locators['username'])
 
     def _password_field(self):
-        return self._find_element_by_locator(self._locators['password'])
+        return self._find_element_by_css_locator(self._locators['password'])
 
     def _login_button(self):
-        return self._find_element_by_locator(self._locators['login_button'])
+        return self._find_element_by_css_locator(self._locators['login_button'])
 
     def wait_interstitial_page(self, time=180):
         if self._is_interstitial_page_displayed():
@@ -55,7 +55,7 @@ class LoginPage(BasePageObject):
 
     def _is_interstitial_page_displayed(self):
         try:
-            self._find_element_by_locator(self._locators['hive_svg'], 2)
+            self._find_element_by_css_locator(self._locators['hive_svg'], 2)
             return True
         except TimeoutException:
             return False

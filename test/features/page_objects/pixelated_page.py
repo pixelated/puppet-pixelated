@@ -33,7 +33,7 @@ class PixelatedPage(object):
         self.maillist_actions.open_compose_box()
         self.compose_box.enter_subject(mail_fields['subject']).enter_body(mail_fields['body']).enter_recipients(mail_fields['recipients'])
         self.compose_box.send_mail()
-        self.compose_box.wait_compose_box_to_disapear()
+        self.compose_box.wait_compose_box_to_disappear()
         return self
 
     def delete_mail(self, sender, subject, timeout=None):

@@ -15,7 +15,7 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 from behave import given
-from page_objects import LoginPage
+from ..page_objects import LoginPage
 
 
 @given('I login as "{user}" with password "{password}" to an organization install of pixelated')

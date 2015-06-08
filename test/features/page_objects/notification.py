@@ -15,17 +15,21 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 from base_page_object import BasePageObject
-
+from selenium.webdriver.common.by import By
 
 class Notification(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'message_sent': '#user-alerts:contains("Your message was sent!")'
+            'message_sent': '#user-alerts:contains("Your message was sent!")',
+            'message_deleted': '#user-alerts:contains("Your message was moved to trash!")'
         }
         super(Notification, self).__init__(context, timeout)
 
-    def wait_for_mail_sent_notification(self):
+    def wait_for_notification(self, notification):
         print "Waiting for message sent notification"
-        self._find_element_by_locator(self._locators['message_sent'])
+        self._find_element_by_css_locator(self._locators[notification])
         print "Notification found"
         return self
+
+    def wait_until_notification_is_gone(self):
+        self.wait_until_element_is_invisible_by_locator(By.ID, 'user-alerts')

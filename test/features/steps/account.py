@@ -14,18 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-import ConfigParser
-from page_objects import LoginPage
-from page_objects import SignUpPage
-from page_objects import ControlPanelPage
-from page_objects import TagList
-
-from behave import *
-from common import *
-
 import os
 import time
 
+from behave import *
+
+from ..page_objects import LoginPage
+from ..page_objects import SignUpPage
+from ..page_objects import ControlPanelPage
+from ..page_objects import TagList
+from common import *
 
 config = ConfigParser.ConfigParser()
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -88,4 +86,3 @@ def step_impl(context):
 def step_impl(context):
     controlpanel_page = ControlPanelPage(context)
     controlpanel_page.is_control_panel_home()
-    # find_element_containing_text(context,'user control panel')

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015 ThoughtWorks, Inc.
+# Copyright (c) 2014 ThoughtWorks, Inc.
 #
 # Pixelated is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,14 +15,27 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
 from behave import when
-from ..page_objects import PixelatedPage
+
+from ..page_objects import ComposeBox
+from ..page_objects import MailListActions
+
+@when("I compose a message to '{recipient}'")
+def impl(context, recipient):
+    compose_box = ComposeBox(context)
+    maillist_actions = MailListActions(context)
+    maillist_actions.open_compose_box()
+
+    compose_box.enter_subject("Pixelated rocks!")
+    compose_box.enter_body("You should definitely use it. Cheers, User.")
+    compose_box.enter_recipients(recipient)
+    compose_box.save_draft()
 
 
-@when('I send an email to myself')
-def impl(context):
-    pixelated_page = PixelatedPage(context)
-    pixelated_page.compose_and_send_email({
-        'subject': pixelated_page.random_subject(),
-        'body': 'This is an automated test of Pixelated. Please do not delete this, it will be deleted automatically.',
-        'recipients': context.pixelated_email
-    })
+@when('I send it')
+def send_impl(context):
+    compose_box = ComposeBox(context)
+    compose_box.send_mail()
+
+
+
+

@@ -21,7 +21,10 @@ from selenium.common.exceptions import TimeoutException
 class MailList(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'mail_items': '//li[contains(., "{sender}") and contains(., "{subject}")]'
+            'mail_items': '//li[contains(., "{sender}") and contains(., "{subject}")]',
+            'mailbox_mails': "#mail-list li span a[href*='{mailbox}']",
+            'all_mails': '#mail-list li',
+            'checkboxes':  '#mail-view #view-more-actions'
         }
         super(MailList, self).__init__(context, timeout)
 
@@ -42,12 +45,24 @@ class MailList(BasePageObject):
         except TimeoutException:
             return False
 
+    def is_there_emails(self):
+        return self.wait_until_elements_are_visible_by_css_locator(self._locators['all_mails'])
+
+    def is_mailbox_loaded(self,context, mailbox):
+        self.wait_until_elements_are_visible_by_css_locator(self._locators['mailbox_mails'].format(mailbox))
+
     def select_mail(self, sender, subject, timeout=None):
         mail = self._find_first_mail(sender, subject, timeout)
-        self._find_element_by_locator('input', dom_context=mail).click()
+        self._find_element_by_css_locator('input', dom_context=mail).click()
 
     def _find_first_mail(self, sender, subject, timeout=None):
         xpath = self._locators['mail_items'].format(
             sender=sender,
             subject=subject)
         return self._find_elements_by_xpath(xpath, timeout)[0]
+
+    def mark_nth_checkbox(self, position):
+        checkboxes = self._find_elements_by_css_locator(self._locators['checkboxes'])
+        checkboxes[position].click()
+
+

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015 ThoughtWorks, Inc.
+# Copyright (c) 2014 ThoughtWorks, Inc.
 #
 # Pixelated is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,15 +14,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-from behave import when
-from ..page_objects import PixelatedPage
 
+@user_agent
+Feature: Checkboxes
+  As a user of Pixelated
+  I want to use checkboxes to manage my emails
+  So I can manage more than one email at once
 
-@when('I send an email to myself')
-def impl(context):
-    pixelated_page = PixelatedPage(context)
-    pixelated_page.compose_and_send_email({
-        'subject': pixelated_page.random_subject(),
-        'body': 'This is an automated test of Pixelated. Please do not delete this, it will be deleted automatically.',
-        'recipients': context.pixelated_email
-    })
+  Scenario: User has a list of emails in each mailboxes that needs to be managed
+    Given I have a mail in my inbox
+    When I mark the first unread email as read
+      And I delete the email
+    When I select the tag 'trash'
+    Then the deleted mail is there
+    When I check all emails
+      And I delete them permanently
+    Then I should not see any email
+

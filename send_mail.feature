@@ -20,8 +20,8 @@ Feature: send_mail
   @mail_to_myself
   Scenario: user logs in end sends a mail to self
     Given I login as behave-testuser
-    When I compose a mail
-    And I see that the mail was sent
+    When I send a mail to myself
+#    And I see that the mail was sent
     When I open the email
     Then I see a encrypted flag
 

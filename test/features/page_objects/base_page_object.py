@@ -72,11 +72,11 @@ class BasePageObject(object):
         wait = WebDriverWait(self.context.browser, 60)
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, locator)))
 
-    def wait_until_element_is_visible_by_locator(self, context, locator):
-        wait = WebDriverWait(context.browser, 60)
+    def wait_until_element_is_visible_by_locator(self, locator):
+        wait = WebDriverWait(self.context.browser, 60)
         by, locator = locator
         wait.until(EC.visibility_of_element_located((by, locator)))
-        return context.browser.find_element(by, locator)
+        return self.context.browser.find_element(by, locator)
 
     def wait_until_element_is_invisible_by_locator(self, locator):
         wait = WebDriverWait(self.context.browser, 60)

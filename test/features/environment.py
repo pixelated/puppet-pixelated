@@ -95,7 +95,7 @@ def create_behave_user(context):
 
     context.browser.get('https://staging.pixelated-project.org/signup')
     signup_page = SignUpPage(context)
-    signup_page.wait_until_element_is_visible_by_locator(context, (By.CSS_SELECTOR, 'input#srp_username'))
+    signup_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
     signup_page.enter_username(username)
     signup_page.enter_password(password)
     signup_page.enter_password_confirmation(password)

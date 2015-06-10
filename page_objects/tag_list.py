@@ -16,6 +16,8 @@
 
 from base_page_object import BasePageObject
 
+from selenium.webdriver.common.by import By
+
 
 class TagList(BasePageObject):
     def __init__(self, context, timeout=10):
@@ -58,4 +60,4 @@ class TagList(BasePageObject):
         return self._find_element_by_css_locator(self._locators['sent'])
 
     def is_pixelated_loaded(self):
-        self.wait_until_element_is_visible_by_locator(self._locators['inbox'])
+        self.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, self._locators['inbox']))

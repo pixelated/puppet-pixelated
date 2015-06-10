@@ -50,7 +50,7 @@ def step_impl(context):
 def step_impl(context):
     send_external_email('undecryptable email %s' %random_subject(), encrypted_body())
 
-@when(u'I compose a mail')
+@when(u'I send a mail to myself')
 def step_impl(context):
     email_to = config.get('staging', 'behave_email')
     compose_box = ComposeBox(context)
@@ -71,6 +71,7 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
+    # import pdb; pdb.set_trace()
     subject = 'email to myself %s' % random_subject()
     behave_user = config.get('staging', 'behave_testuser')
 

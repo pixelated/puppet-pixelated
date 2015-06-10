@@ -51,9 +51,9 @@ class MailList(BasePageObject):
     def is_mailbox_loaded(self,context, mailbox):
         self.wait_until_elements_are_visible_by_css_locator(self._locators['mailbox_mails'].format(mailbox))
 
-    def select_mail(self, sender, subject, timeout=None):
+    def select_mail(self, sender, subject, timeout=600):
         mail = self._find_first_mail(sender, subject, timeout)
-        self._find_element_by_css_locator('input', dom_context=mail).click()
+        self._find_element_by_xpath('input', mail).click()
 
     def _find_first_mail(self, sender, subject, timeout=None):
         xpath = self._locators['mail_items'].format(

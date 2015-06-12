@@ -21,11 +21,7 @@ from ..page_objects import PixelatedPage
 @then('I delete the email')
 def impl(context):
     pixelated_page = PixelatedPage(context)
-    pixelated_page.delete_mail(
-        context.pixelated_email,
-        pixelated_page.random_subject(),
-        240
-    )
+    pixelated_page.delete_mail(context.pixelated_email, pixelated_page.random_subject(), 240)
 
 
 @then('I see it in the trash box')

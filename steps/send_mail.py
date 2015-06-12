@@ -18,6 +18,7 @@ from ..page_objects import LoginPage
 from ..page_objects import ComposeBox
 from ..page_objects import MailListActions
 from ..page_objects import MailList
+from ..page_objects import MailPage
 from ..page_objects import Notification
 
 from behave import *
@@ -71,7 +72,6 @@ def step_impl(context):
 
 @when(u'I open the email')
 def step_impl(context):
-    # import pdb; pdb.set_trace()
     subject = 'email to myself %s' % random_subject()
     behave_user = config.get('staging', 'behave_testuser')
 
@@ -99,20 +99,20 @@ def step_impl(context):
 
 @then(u'I see a encrypted flag')
 def step_impl(context):
-    mail_page = MailList(context)
+    mail_page = MailPage(context)
     mail_page.check_mail_flag('encrypted_flag')
 
 
 @then(u'I see a unencrypted email flag')
 def step_impl(context):
-    mail_page = MailList(context)
+    mail_page = MailPage(context)
     mail_page.check_mail_flag('unencrypted_flag')
 
 
 @then(u'I see a undecryptable flag')
 def step_impl(context):
-    mail_page = MailList(context)
-    mail_page.check_mail_flag('undencrypted_flag')
+    mail_page = MailPage(context)
+    mail_page.check_mail_flag('undercryptable_flag')
 
 
 def encrypted_body():

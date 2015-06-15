@@ -27,9 +27,9 @@ Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you
 If you don't already have a LEAP Provider that you want to turn into a Pixelated Provider, we provide a script that does all the configuration of the LEAP Platform and the Pixelated Platform. All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
 
 
-### 1.1 Vagrant/VirtualBox
+### 1.1 Vagrant
 
-You can try setting up a virtual machine on your computer to try out the Pixelated Platform. For this you'll need [vagrant](https://www.vagrantup.com/) and [VirtualBox](https://www.virtualbox.org/).
+You can try setting up a virtual machine on your computer to try out the Pixelated Platform. For this you'll need [vagrant](https://www.vagrantup.com/) and a [virtualisation provider that works with vagrant](https://docs.vagrantup.com/v2/providers/index.html). Vagrant ships out of the box with support for [VirtualBox](https://www.virtualbox.org/), or you can try to setup [kvm/libvirt](https://leap.se/en/docs/platform/details/development#using-vagrant-with-libvirtkvm).
 
 After you have installed both tools, you can clone pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
 
@@ -46,7 +46,7 @@ With this you'll have a virtual machine running the necessary version of Debian 
 
 To run the installation, you'll need to ssh into the machine and become root.
 
-If you are using the vagrant/VirtualBox combination mentioned above, run:
+If you are using the vagrant setup mentioned above, run:
 ```bash
 vagrant ssh
 sudo bash

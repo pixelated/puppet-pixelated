@@ -22,7 +22,7 @@ class MailList(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
             'mail_items': '//a[contains(., "{sender}") and contains(., "{subject}")]',
-            'mailbox_mails': "#mail-list li span a[href*='{mailbox}']",
+            'mailbox_mails': '#mail-list li a[href*="{mailbox}"]',
             'all_mails': '#mail-list li',
             'checkboxes':  '#mail-view #view-more-actions'
         }
@@ -46,10 +46,13 @@ class MailList(BasePageObject):
             return False
 
     def is_there_emails(self):
-        return self.wait_until_elements_are_visible_by_css_locator(self._locators['all_mails'])
+        return len(self.context.browser.find_elements_by_css_selector(self._locators['all_mails'])) > 0
+
+    def get_all_emails(self):
+        return self.context.browser.find_elements_by_css_selector(self._locators['all_mails'])
 
     def is_mailbox_loaded(self,context, mailbox):
-        self.wait_until_elements_are_visible_by_css_locator(self._locators['mailbox_mails'].format(mailbox))
+        self.wait_until_elements_are_visible_by_css_locator((self._locators['mailbox_mails']).format(mailbox=mailbox))
 
     def select_mail(self, sender, subject, timeout=180):
         xpath = self._locators['mail_items'].format(sender=sender, subject=subject)

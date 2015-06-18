@@ -32,5 +32,4 @@ def impl(context, search_term):
 @then('I see one or more mails in the search results')
 def impl(context):
     maillist= MailList(context)
-    mails = maillist.is_there_emails()
-    assert len(mails) >= 1
+    assert maillist.is_there_emails()

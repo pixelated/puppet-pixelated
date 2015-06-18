@@ -25,7 +25,7 @@ class BasePageObject(object):
         self.timeout = timeout
 
     def _find_element_containing_text(self, text, element_type='*'):
-        return self.find_element_by_xpath("//%s[contains(.,'%s')]" % (element_type, text))
+        return self._find_element_by_xpath("//%s[contains(.,'%s')]" % (element_type, text))
 
     def _find_element_by_css_locator(self, locator, timeout=None, dom_context=None):
         locator_tuple = (By.CSS_SELECTOR, locator)

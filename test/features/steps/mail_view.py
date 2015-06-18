@@ -63,8 +63,8 @@ def impl(context):
     mail_page = MailPage(context)
     mail_page.delete_mail()
 
-    notification = Notification(context)
-    notification.wait_for_notification("message_deleted")
+    # notification = Notification(context)
+    # notification.wait_for_notification("message_deleted")
 
 @when('I choose to forward this mail')
 def impl(context):

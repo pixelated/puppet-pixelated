@@ -23,8 +23,8 @@ Feature: search mail and deletion
   So I can manage them
 
   Scenario: User searches for a mail and deletes it
-    Given I have a mail in my inbox
-    When I search for a mail with the words "the body of this message"
+    Given I login as behave-testuser
+    When I search for a mail with the words "mail"
     When I open the first mail in the mail list
     Then I see one or more mails in the search results
     When I try to delete the first mail

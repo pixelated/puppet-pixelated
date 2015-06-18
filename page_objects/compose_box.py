@@ -54,7 +54,7 @@ class ComposeBox(BasePageObject):
         self._send_mail_button().click()
 
     def save_draft(self):
-        self._find_elements_by_css_locator('button#draft-button').click()
+        self._find_element_by_css_locator('button#draft-button').click()
 
     def choose_from_suggestions(self):
         self._find_element_by_css_locator('.tt-dropdown-menu div div').click()

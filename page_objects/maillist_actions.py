@@ -36,11 +36,11 @@ class MailListActions(BasePageObject):
         self._delete_selected_button().click()
 
     def select_all_mails(self):
-        self._find_elements_by_css_locator(self._locators['select_all_mails']).click()
+        self._find_element_by_css_locator(self._locators['select_all_mails']).click()
 
     def do_search(self, search_term):
-        search_box = self._find_elements_by_css_locator(self._locators['search'])
-        search_box.send_keys(search_box).send_keys(Keys.ENTER)
+        search_box = self._find_element_by_css_locator(self._locators['search'])
+        search_box.send_keys(search_term + Keys.ENTER)
 
     def _compose_mail_button(self):
         return self._find_element_by_css_locator(self._locators['compose_mail_button'])

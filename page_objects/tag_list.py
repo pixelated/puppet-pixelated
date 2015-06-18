@@ -45,6 +45,9 @@ class TagList(BasePageObject):
         self._go_to_mailbox(mailbox).click()
 
     def _go_to_mailbox(self, mailbox):
+        if not self._locators.has_key(mailbox):
+            # user created tag
+            return self._find_element_by_css_locator('#tag-%s' % mailbox)
         return self._find_element_by_css_locator(self._locators[mailbox])
 
     def _trash_tag(self):

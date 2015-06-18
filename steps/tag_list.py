@@ -45,6 +45,6 @@ def impl(context, mailbox):
     tag_list.go_to_mailbox(mailbox)
 
     mail_list = MailList(context)
-    mail_list.is_mailbox_loaded(context,mailbox)
+    mail_list.is_mailbox_loaded(context, mailbox)
 
 

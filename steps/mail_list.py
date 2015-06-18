@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+from selenium.webdriver.common.by import By
 from behave import then
 from ..page_objects import PixelatedPage
 from ..page_objects import MailList
 from ..page_objects import MailListActions
+
+
 
 
 @then('I see the email on the mail list')
@@ -31,7 +34,7 @@ from selenium.common.exceptions import NoSuchElementException
 from time import sleep
 
 def find_current_mail(context):
-    return find_element_by_id(context, '%s' % context.current_mail_id)
+    return context.browser.find_element_by_id(context.current_mail_id)
 
 
 def check_current_mail_is_visible(context):
@@ -58,9 +61,9 @@ def impl(context):
 
 @when('I open the first mail in the mail list')
 def impl(context):
-    first_email = wait_until_elements_are_visible_by_locator(context, (By.CSS_SELECTOR, '#mail-list li span a div#subject-and-tags'))[0]
-    context.current_mail_id = 'mail-' + first_email.text
-    first_email.click()
+    # maillist = MailList(context)
+    context.current_mail_id = context.browser.find_element_by_css_selector("li[id^='mail']").get_attribute("id")
+    context.browser.find_element_by_css_selector("li[id^='mail'] a").click()
     sleep(5)
 
 
@@ -96,26 +99,28 @@ def impl(context):
 @when('I mark the first unread email as read')
 def impl(context):
     mail_list = MailList(context)
-    mails = mail_list.is_there_emails()
+    mails = mail_list.get_all_emails()
 
     for mail in mails:
         if 'status-read' not in mail.get_attribute('class'):
             mail.find_element_by_tag_name('input').click()
-            context.browser.find_element_by_id(context, 'mark-selected-as-read').click()
+            context.browser.find_element_by_id('mark-selected-as-read').click()
             context.current_mail_id = mail.get_attribute('id')
             break
-    sleep(2)
+    sleep(5)
     assert 'status-read' in context.browser.find_element_by_id(context.current_mail_id).get_attribute('class')
 
 
 @when('I delete the email')
 def impl(context):
+    maillist = MailList(context)
     def last_email():
-        return wait_until_elements_are_visible_by_locator(context, (By.CSS_SELECTOR, '#mail-list li'))[0]
+        return maillist.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, '#mail-list li'))
+    import pdb; pdb.set_trace()
     context.current_mail_id = last_email().get_attribute('id')
     last_email().find_element_by_tag_name('input').click()
-    find_element_by_id(context, 'delete-selected').click()
-    assert context.current_mail_id != find_elements_by_css_selector(context, '#mail-list li span a')[0]
+    maillist._find_element_by_id('delete-selected').click()
+    assert context.current_mail_id != maillist._find_elements_by_css_locator('#mail-list li span a')[0]
 
 
 @when('I check all emails')
@@ -128,7 +133,7 @@ def impl(context):
 def impl(context):
     maillist_actions = MailListActions(context)
     maillist_actions.delete_selected_mails()
-    find_element_by_id(context, 'delete-selected').click()
+    maillist_actions._find_element_by_id('delete-selected').click()
 
 
 @then('I should not see any email')

@@ -27,8 +27,8 @@ class MailPage(BasePageObject):
             'subject': '#mail-view .subject',
             'body': '#mail-view .bodyArea',
             'tags': '#mail-view .tagsArea .tag',
-            'add_tag_button': 'new-tag-button',
-            'add_tag_input': 'new-tag-input',
+            'add_tag_button': '#new-tag-button',
+            'add_tag_input': '#new-tag-input',
             'reply_button': 'Reply',
             'forward_button': 'button#forward-button',
             'cc': '.msg-header .cc',
@@ -51,11 +51,12 @@ class MailPage(BasePageObject):
         return self._find_elements_by_css_locator(self._locators['tags'])
 
     def add_tag(self, tag):
-        self._find_elements_by_css_locator(self._locators['add_tag_button']).click()
-        self._find_elements_by_css_locator(self._locators['add_tag_input']).send_keys(tag).send_keys(Keys.ENTER)
+        # import pdb; pdb.set_trace()
+        self._find_element_by_css_locator(self._locators['add_tag_button']).click()
+        self._find_element_by_css_locator(self._locators['add_tag_input']).send_keys(tag + Keys.ENTER)
 
     def press_reply_button(self):
-        self._find_element_containing_text(self._locators['reply_button'], 'button')
+        self._find_element_containing_text(self._locators['reply_button'], 'button').click()
 
     def mail_has_cc_and_bcc(self):
         cc = self._find_element_by_css_locator(self._locators['cc']).text

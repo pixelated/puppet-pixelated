@@ -1,17 +1,17 @@
 Pixelated-Platform
 ==================
 
-**Pixelated is in early development stage! Things may not work to their full extent yet**
+**Pixelated is in an early stage of development! Things may not work to their full extent yet**
 
-It is the objective of the Pixelated Platform to provide a simple to install and maintain mail server based on the LEAP Platform.
+It is the objective of the Pixelated Platform to provide a simple way to install and maintain a mail server based on the LEAP Platform.
 
 * The Pixelated Platform holds the installation scripts for the Pixelated components.
-* In this repository, you also find the Pixelated Threat Model (currently in development)
+* This repository also contains a summary of the Pixelated Threat Model (currently in development)
 
 ### High level Architecture
 #### Pixelated Platform
 
-![Highlevel Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
+![High-level Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
 
 
 ## Installing the Pixelated Platform
@@ -19,10 +19,10 @@ It is the objective of the Pixelated Platform to provide a simple to install and
 Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform. There are 2 ways of installing the Pixelated Platform:
 
 1. Setup your own ["Pixelated Provider"](https://github.com/pixelated-project/pixelated-platform#how-to-setup-your-own-pixelated-platform), which is a LEAP provider with the Pixelated Platform already setup on it (recommended), or
-2. Having an installation of a [LEAP provider](https://github.com/pixelated-project/pixelated-platform#installing-a-leap-provider) and adding the Pixelated Platform to it
+2. Have an existing installation of a [LEAP provider](https://github.com/pixelated-project/pixelated-platform#installing-a-leap-provider) and adding the Pixelated Platform to it
 
 
-## 1. Setup your own Pixelated Platform
+## 1. Set up your own Pixelated Platform
 
 If you don't already have a LEAP Provider that you want to turn into a Pixelated Provider, we provide a script that does all the configuration of the LEAP Platform and the Pixelated Platform. All you need to setup your own Pixelated Platform is root access to a debian wheezy box. 
 
@@ -31,7 +31,7 @@ If you don't already have a LEAP Provider that you want to turn into a Pixelated
 
 You can try setting up a virtual machine on your computer to try out the Pixelated Platform. For this you'll need [vagrant](https://www.vagrantup.com/) and a [virtualisation provider that works with vagrant](https://docs.vagrantup.com/v2/providers/index.html). Vagrant ships out of the box with support for [VirtualBox](https://www.virtualbox.org/), or you can try to setup [kvm/libvirt](https://leap.se/en/docs/platform/details/development#using-vagrant-with-libvirtkvm).
 
-After you have installed both tools, you can clone pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
+After you have installed both tools, you can clone the pixelated-platform repository and use the Vagrantfile provided there by running these commands in a terminal (this is probably the easiest option):
 
 ```bash
 $ git clone https://github.com/pixelated-project/pixelated-platform.git
@@ -52,7 +52,7 @@ vagrant ssh
 sudo bash
 ```
 
-If you set up your Debian box by another method (using a physical machine, a cloud provider, etc), you'll need to ssh into the box using it's ip.
+If you set up your Debian box by another method (using a physical machine, a cloud provider, etc), you'll need to ssh into the box using its IP.
 
 The only thing left is to execute the bootstrap script *convert-to-pixelated.sh*:
 
@@ -62,9 +62,9 @@ wget https://raw.githubusercontent.com/pixelated-project/pixelated-platform/mast
 
 *This might take quite a while!*
 
-This script will automate the installation of the LEAP Provider and the Pixelated Platform. During the installation, it'll prompt you the information requested when running the `leap new .` command from [Bootstrap the provider](https://leap.se/en/docs/platform/tutorials/single-node-email#bootstrap-the-provider) section of the LEAP tutorial. Go there for more information about this step.
+This script will automate the installation of the LEAP Provider and the Pixelated Platform. During the installation, it'll prompt you for the information requested when running the `leap new .` command from [Bootstrap the provider](https://leap.se/en/docs/platform/tutorials/single-node-email#bootstrap-the-provider) section of the LEAP tutorial. Go there for more information about this step.
 
-After the script finishes running, you should have your brand new provider all set up. You can proceed creatting accounts and using them.
+After the script finishes running, you should have your brand new provider all set up. You can begin creating accounts and using them.
 
 To create a mail account on your new provider, open [https://localhost/](https://localhost/) and sign up.
 To use the account, open [https://localhost:8080/](https://localhost:8080) and log into your new account.
@@ -90,7 +90,7 @@ We have puppet scripts that takes care of (almost) everything. The scripts will 
 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 
-The documentation for the installation of the LEAP Platform suggests that you make the configuration folder (`~/leap/example` is the name they suggest) versioned using Git to make it easier to track and undo ant changes on the configuration. If you followed this suggestion of the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
+The documentation for the installation of the LEAP Platform suggests that you make the configuration folder (`~/leap/example` is the name they suggest) versioned using Git to make it easier to track and undo any changes on the configuration. If you followed this suggestion of the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
 
 ```bash
     cd ~/leap/example

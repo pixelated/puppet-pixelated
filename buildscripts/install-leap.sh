@@ -32,7 +32,7 @@ gem install leap_cli
 #rake build
 #rake install
 
-git clone -b develop --recursive https://github.com/pixelated-project/leap_platform.git /home/leap/leap_platform
+git clone --recursive https://github.com/pixelated-project/leap_platform.git /home/leap/leap_platform
 
 echo "==============================================="
 echo "cleaning up"

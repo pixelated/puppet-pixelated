@@ -3,8 +3,9 @@ require 'spec_helper'
 describe 'pixelated::apt' do
   let(:facts) do
       {
-        :operatingsystem  => 'Debian',
-        :lsbdistcodename  => 'wheezy',
+        :operatingsystem => 'Debian',
+        :lsbdistid       => 'Debian',
+        :lsbdistcodename => 'wheezy',
       }
   end
   it { should contain_file('/etc/apt/preferences.d/python-tornado').with_content(/Pin: release o=pixelated/) }

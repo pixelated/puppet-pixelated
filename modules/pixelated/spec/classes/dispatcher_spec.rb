@@ -5,6 +5,7 @@ describe 'pixelated::dispatcher' do
       {
         :operatingsystem  => 'Debian',
         :osfamily         => 'Debian',
+        :lsbdistid        => 'Debian',
         :lsbdistcodename  => 'wheezy',
       }
   end

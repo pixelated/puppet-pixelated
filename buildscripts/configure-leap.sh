@@ -49,7 +49,7 @@ git init
 git add .
 git commit -m"configured provider"
 
-git submodule add https://github.com/pixelated-project/pixelated-platform.git files/puppet
+git submodule add https://github.com/pixelated/pixelated-platform.git files/puppet
 git add files/puppet
 git commit -m 'added pixelated submodule'
 

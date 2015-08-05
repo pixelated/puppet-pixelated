@@ -19,7 +19,7 @@ while getopts "hp" OPT; do
 done
 shift $((OPTIND-1))
 
-LEAP_OPTS='--no-color'
+LEAP_OPTS=''
 
 echo "==============================================="
 echo "configuring leap"

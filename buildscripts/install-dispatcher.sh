@@ -6,10 +6,6 @@ set -e
 # verbose, print cmds
 set -x
 
-# update leap package key
-apt-key adv --keyserver pool.sks-keyservers.net --recv-keys 1E34A1828E207901
-apt-get update
-
 DEBIAN_FRONTEND=noninteractive apt-get -t wheezy -y install python-tornado
 DEBIAN_FRONTEND=noninteractive apt-get -t wheezy-backports -y install pixelated-dispatcher linux-image-amd64 lxc-docker
 

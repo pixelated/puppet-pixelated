@@ -32,11 +32,10 @@ Feature: send_mail
     When I open the unencrypted email
     Then I see a unencrypted email flag
 
+  @wip
   @undecryptable
   Scenario: user receives an email we cannot decrypt
     Given I send an email encrypted to someone else
     And I login as behave-testuser
     When I open the undecryptable email
-    Then I see a undecryptable flag 
-
-
+    Then I see a undecryptable flag

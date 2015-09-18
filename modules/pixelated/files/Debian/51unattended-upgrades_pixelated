@@ -3,5 +3,6 @@
 Unattended-Upgrade::Allowed-Origins {
 	"pixelated:stable";
 	"pixelated:snapshots";
+	"pixelated:oldstable-snapshots";
 }
 

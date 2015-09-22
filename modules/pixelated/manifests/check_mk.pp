@@ -17,4 +17,9 @@ class pixelated::check_mk {
     notify  => Exec['check_mk-refresh'],
     require => Package['check-mk-server'];
   }
+  file { '/etc/check_mk/conf.d/ignored_checktypes.mk':
+    source  => 'puppet:///modules/pixelated/check_mk/ignored_checktypes.mk',
+    notify  => Exec['check_mk-refresh'],
+    require => Package['check-mk-server'];
+  }
 }

@@ -10,4 +10,5 @@ describe 'pixelated::check_mk' do
   end
   it { should contain_file('/etc/check_mk/logwatch.d/user-agent.cfg')}
   it { should contain_file('/etc/check_mk/conf.d/ignore_filesystems.mk')}
+  it { should contain_file('/etc/check_mk/conf.d/ignored_checktypes.mk')}
 end

@@ -8,9 +8,14 @@ class pixelated::apt {
     release  => "${::lsbdistcodename}-backports",
     priority => 999
   }
-  apt::preferences_snippet { 'python-tornado':
-    pin      => 'release o=pixelated',
-    priority => 999,
+  apt::preferences_snippet { ['python-tornado',
+    'soledad-server',
+    'soledad-common',
+    'solead-client',
+    'leap-keymanager',
+    'leap-auth']:
+      pin      => 'release o=pixelated',
+      priority => 999,
   }
 
   apt::sources_list { 'pixelated.list':

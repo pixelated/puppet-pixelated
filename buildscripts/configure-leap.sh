@@ -38,7 +38,7 @@ fi
 echo -e '\n@log = "/var/log/leap/deploy.log"' >> Leapfile
 sudo mkdir -p /var/log/leap
 ssh-keygen -f ~/.ssh/id_rsa -P ""
-sudo sh -e "cat $HOME/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys"
+sudo sh -e -c "cat $HOME/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys"
 mkdir -p $LEAP_CONFIG/files/nodes/pixelated
 sh -c 'cat /etc/ssh/ssh_host_rsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 leap $LEAP_OPTS add-user --self

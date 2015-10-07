@@ -20,22 +20,26 @@ done
 shift $((OPTIND-1))
 
 LEAP_OPTS=''
+LEAP_CONFIG='/home/leap/configuration/'
 
 echo "==============================================="
 echo "configuring leap"
 echo "==============================================="
-mkdir -p /home/leap/configuration
-cd /home/leap/configuration
+sudo mkdir -p $LEAP_CONFIG
+ME=$USER
+sudo chown $ME $LEAP_CONFIG
+cd $LEAP_CONFIG
+
 if [ -n "$USE_PIXELATED_DEFAULTS" ] ; then
 	leap $LEAP_OPTS new --contacts no-reply@try.pixelated-project.org --domain try.pixelated-project.org --name LEAP_Example --platform=/home/leap/leap_platform .
 else
 	leap $LEAP_OPTS new --platform=/home/leap/leap_platform .
 fi
 echo -e '\n@log = "/var/log/leap/deploy.log"' >> Leapfile
-mkdir -p /var/log/leap
-ssh-keygen -f /root/.ssh/id_rsa -P ""
-cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys
-mkdir -p /home/leap/configuration/files/nodes/pixelated
+sudo mkdir -p /var/log/leap
+ssh-keygen -f ~/.ssh/id_rsa -P ""
+sudo sh -e "cat $HOME/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys"
+mkdir -p $LEAP_CONFIG/files/nodes/pixelated
 sh -c 'cat /etc/ssh/ssh_host_rsa_key.pub | cut -d" " -f1,2 >> /home/leap/configuration/files/nodes/pixelated/pixelated_ssh.pub'
 leap $LEAP_OPTS add-user --self
 leap $LEAP_OPTS cert ca
@@ -65,11 +69,6 @@ if [ $? -eq 1 ]; then
   exit 1
 fi
 
-# leap-mx needs to get restarted after the first incoming mail is delivered (#6687)
-# https://github.com/leapcode/leap_mx#060
-[ -d /var/mail/vmail/Maildir/new ] || ( mkdir -p /var/mail/vmail/Maildir/new; chmod 700 /var/mail/vmail/Maildir/new; chown -R vmail:vmail /var/mail/vmail/Maildir/ )
-/etc/init.d/leap-mx restart
-
 set +e
 git add .
 git commit -m"initialized and deployed provider"
@@ -84,10 +83,10 @@ leap $LEAP_OPTS -v 2 test --continue
 echo "==============================================="
 echo "setting node to demo-mode"
 echo "==============================================="
-postconf -e default_transport="error: in demo mode"
+sudo postconf -e default_transport="error: in demo mode"
 
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-/etc/init.d/ssh reload
+sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+sudo /etc/init.d/ssh reload
 
 # add users: testadmin and testuser with passwords "hallo123"
 curl -s -k https://localhost/1/users.json -d "user%5Blogin%5D=testuser&user%5Bpassword_salt%5D=7d4880237a038e0e&user%5Bpassword_verifier%5D=b98dc393afcd16e5a40fb57ce9cddfa6a978b84be326196627c111d426cada898cdaf3a6427e98b27daf4b0ed61d278bc856515aeceb2312e50c8f816659fcaa4460d839a1e2d7ffb867d32ac869962061368141c7571a53443d58dc84ca1fca34776894414c1090a93e296db6cef12c2cc3f7a991b05d49728ed358fd868286"

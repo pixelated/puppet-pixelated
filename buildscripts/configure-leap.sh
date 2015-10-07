@@ -50,6 +50,8 @@ echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
 leap $LEAP_OPTS compile
 
+git config --global user.email "go-ci@pixelated-project.org"
+git config --global user.name "Pixelated CI"
 git init
 git add .
 git commit -m"configured provider"

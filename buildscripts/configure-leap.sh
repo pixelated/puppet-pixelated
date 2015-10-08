@@ -80,7 +80,7 @@ set -e
 echo "==============================================="
 echo "fixing"
 echo "==============================================="
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install leap-keymanager=0.4.0+0~20150608200533.30+wheezy~1.gbp871360
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes install leap-keymanager=0.4.0+0~20150608200533.30+wheezy~1.gbp871360
 
 
 echo "==============================================="

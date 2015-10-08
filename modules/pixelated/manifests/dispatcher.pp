@@ -36,6 +36,12 @@ class pixelated::dispatcher{
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 
+  # make dispatcher accessible at https://hostname/mail
+  file {'/etc/apache2/conf.d/pixelated.conf':
+    source => 'puppet:///modules/pixelated/pixelated-apache.conf',
+    notify => Service['apache']},
+  }
+
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'
   $manager_command ='/bin/echo "PIXELATED_PROVIDER_FINGERPRINT=$(openssl x509 -in /usr/local/share/ca-certificates/leap_commercial_ca.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'
 

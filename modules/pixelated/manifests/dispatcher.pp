@@ -39,7 +39,7 @@ class pixelated::dispatcher{
   # make dispatcher accessible at https://hostname/mail
   file {'/etc/apache2/conf.d/pixelated.conf':
     source => 'puppet:///modules/pixelated/pixelated-apache.conf',
-    notify => Service['apache']},
+    notify => Service['apache'],
   }
 
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'

@@ -78,6 +78,12 @@ git commit -m"initialized and deployed provider"
 set -e
 
 echo "==============================================="
+echo "fixing"
+echo "==============================================="
+sudo apt-get install leap-keymanager=0.4.0+0~20150608200533.30+wheezy~1.gbp871360
+
+
+echo "==============================================="
 echo "testing the platform"
 echo "==============================================="
 

@@ -13,6 +13,7 @@ class pixelated::apt {
     'soledad-common',
     'solead-client',
     'leap-keymanager',
+    'python-leap-common',
     'leap-auth']:
       pin      => 'release o=pixelated',
       priority => 999,

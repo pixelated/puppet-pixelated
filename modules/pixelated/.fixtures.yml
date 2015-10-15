@@ -8,3 +8,6 @@ fixtures:
     rsyslog: "https://leap.se/git/puppet_rsyslog"
     shorewall: "https://leap.se/git/puppet_shorewall"
     concat: "https://leap.se/git/puppet_concat"
+    apache: "https://leap.se/git/puppet_apache"
+    stdlib: "	https://leap.se/git/puppet_stdlib"
+    templatewlv: "https://github.com/duritong/puppet-templatewlv"

@@ -1,0 +1,30 @@
+<VirtualHost *:80>
+  ServerName mail.<%= scope.lookupvar('::domain_hash')  %>
+  RewriteEngine On
+  RewriteRule ^.*$ https://mail.<%= scope.lookupvar('::domain_hash')  %>%{REQUEST_URI} [R=permanent,L]
+  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::domain_hash')  %>.log common
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerName mail.<%= scope.lookupvar('::domain_hash')  %>
+  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::domain_hash')  %>.log common
+
+  SSLCACertificatePath /etc/ssl/certs
+  SSLCertificateChainFile /usr/local/share/ca-certificates/leap_commercial_ca.crt
+  SSLCertificateKeyFile /etc/x509/keys/leap_commercial.key
+  SSLCertificateFile /etc/x509/certs/leap_commercial.crt
+
+  Include include.d/ssl_common.inc
+
+  <IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header always unset X-Runtime
+  </IfModule>
+
+  DocumentRoot /srv/leap/webapp/public
+
+  SSLProxyEngine on
+  ProxyPass / https://localhost:8080/
+  ProxyPassReverse / https://localhost:8080/
+</VirtualHost>
+

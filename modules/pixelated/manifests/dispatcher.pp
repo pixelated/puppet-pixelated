@@ -4,6 +4,7 @@ class pixelated::dispatcher{
   include ::pixelated::check_mk
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
+  $domain_hash = hiera('domain')
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','linux-image-3.16.0-0.bpo.4-amd64/wheezy-backports']:
     ensure => installed,
@@ -36,11 +37,11 @@ class pixelated::dispatcher{
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 
-  # make dispatcher accessible at https://hostname/mail
-  file {'/etc/apache2/conf.d/pixelated.conf':
-    source => 'puppet:///modules/pixelated/pixelated-apache.conf',
-    notify => Service['apache'],
+  # make dispatcher accessible at https://mail.domain/
+  apache::vhost::file { 'dispatcher':
+    content => template('pixelated/pixelated-apache.conf.erb'),
   }
+
 
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'
   $manager_command ='/bin/echo "PIXELATED_PROVIDER_FINGERPRINT=$(openssl x509 -in /usr/local/share/ca-certificates/leap_commercial_ca.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'

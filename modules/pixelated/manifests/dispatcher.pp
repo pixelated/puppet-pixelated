@@ -38,8 +38,9 @@ class pixelated::dispatcher{
   }
 
   # make dispatcher accessible at https://mail.domain/
-  apache::vhost::file { 'dispatcher':
-    content => template('pixelated/pixelated-apache.conf.erb'),
+  apache::vhost { 'dispatcher':
+    content      => template('pixelated/pixelated-apache.conf.erb'),
+    mod_security => false,
   }
 
 

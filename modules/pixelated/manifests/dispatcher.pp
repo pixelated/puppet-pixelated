@@ -12,7 +12,6 @@ class pixelated::dispatcher{
 
   service{'docker':
     ensure    => running,
-    pattern   => '/usr/bin/docker',
     hasstatus => true,
   }
 

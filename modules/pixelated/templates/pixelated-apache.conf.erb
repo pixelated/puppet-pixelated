@@ -1,13 +1,13 @@
 <VirtualHost *:80>
-  ServerName mail.<%= scope.lookupvar('::domain_hash')  %>
+  ServerName mail.<%= scope.lookupvar('::pixelated::dispatcher::domain')  %>
   RewriteEngine On
-  RewriteRule ^.*$ https://mail.<%= scope.lookupvar('::domain_hash')  %>%{REQUEST_URI} [R=permanent,L]
-  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::domain_hash')  %>.log common
+  RewriteRule ^.*$ https://mail.<%= scope.lookupvar('::pixelated::dispatcher::domain')  %>%{REQUEST_URI} [R=permanent,L]
+  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::pixelated::dispatcher::domain')  %>.log common
 </VirtualHost>
 
 <VirtualHost *:443>
-  ServerName mail.<%= scope.lookupvar('::domain_hash')  %>
-  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::domain_hash')  %>.log common
+  ServerName mail.<%= scope.lookupvar('::pixelated::dispatcher::domain')  %>
+  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::pixelated::dispatcher::domain')  %>.log common
 
   SSLCACertificatePath /etc/ssl/certs
   SSLCertificateChainFile /usr/local/share/ca-certificates/leap_commercial_ca.crt

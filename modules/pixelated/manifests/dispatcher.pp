@@ -5,6 +5,7 @@ class pixelated::dispatcher{
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   $domain_hash = hiera('domain')
+  $domain              = $domain_hash['full']
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','linux-image-3.16.0-0.bpo.4-amd64/wheezy-backports']:
     ensure => installed,

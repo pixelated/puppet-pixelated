@@ -9,6 +9,7 @@ describe 'pixelated::dispatcher' do
         :lsbdistcodename  => 'wheezy',
       }
   end
+  let(:domain_hash) { 'pixelated.example.com' }
 
   it { should contain_class('pixelated::syslog') }
   # testing if shorewall::masq generates the files
@@ -19,5 +20,5 @@ describe 'pixelated::dispatcher' do
   it { should contain_concat__fragment('rules-201-dkr2fw-https').with_content(/HTTPS\(ACCEPT\) dkr \$FW/)}
   it { should contain_concat__fragment('rules-202-dkr2fw-leap-api').with_content(/leap_webapp_api\(ACCEPT\) dkr \$FW/)}
   it { should contain_concat__fragment('rules-203-dkr2fw-leap-mx').with_content(/leap_mx\(ACCEPT\) dkr \$FW/)}
-  it { should contain_apache__vhost__file('dispatcher')}
+  it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
 end

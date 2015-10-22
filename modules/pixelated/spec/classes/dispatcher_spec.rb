@@ -20,5 +20,8 @@ describe 'pixelated::dispatcher' do
   it { should contain_concat__fragment('rules-201-dkr2fw-https').with_content(/HTTPS\(ACCEPT\) dkr \$FW/)}
   it { should contain_concat__fragment('rules-202-dkr2fw-leap-api').with_content(/leap_webapp_api\(ACCEPT\) dkr \$FW/)}
   it { should contain_concat__fragment('rules-203-dkr2fw-leap-mx').with_content(/leap_mx\(ACCEPT\) dkr \$FW/)}
+
   it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
+
+  it { should contain_exec('configure_docker').with_refreshonly('true')}
 end

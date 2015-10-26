@@ -27,6 +27,14 @@ class pixelated::dispatcher{
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 
+  file{ '/srv/leap/webapp/config/customization':
+    ensure  => directory,
+    recurse => true,
+    source  => 'puppet:///modules/pixelated/webapp',
+    owner   => 'leap-webapp',
+    group   => 'leap-webapp',
+  }
+
   # make dispatcher accessible at https://mail.domain/
   apache::vhost::file { 'dispatcher':
     content      => template('pixelated/pixelated-apache.conf.erb'),

@@ -23,4 +23,6 @@ describe 'pixelated::dispatcher' do
   it { should contain_concat__fragment('rules-203-dkr2fw-leap-mx').with_content(/leap_mx\(ACCEPT\) dkr \$FW/)}
 
   it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
+
+  it { should contain_file('/srv/leap/webapp/config/customization').with_recurse('true')}
 end

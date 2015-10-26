@@ -12,6 +12,7 @@ describe 'pixelated::dispatcher' do
   let(:domain_hash) { 'pixelated.example.com' }
 
   it { should contain_class('pixelated::syslog') }
+  it { should contain_class('pixelated::docker') }
   # testing if shorewall::masq generates the files
   it { should contain_concat__fragment('masq-100-docker_masq').with_content(/eth0 172\.17\.0\.0\/16/)}
   it { should contain_concat__fragment('zones-100-dkr').with_content(/dkr ipv4/)}
@@ -22,9 +23,4 @@ describe 'pixelated::dispatcher' do
   it { should contain_concat__fragment('rules-203-dkr2fw-leap-mx').with_content(/leap_mx\(ACCEPT\) dkr \$FW/)}
 
   it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
-
-  it { should contain_exec('configure_docker').with_refreshonly('true')}
-
-  it { should contain_file('/usr/local/bin/renew-docker-images.sh')}
-  it { should contain_cron('renew-docker').with_command("/usr/local/bin/renew-docker-images.sh")}
 end

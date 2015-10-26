@@ -4,16 +4,12 @@ class pixelated::dispatcher{
   include ::pixelated::check_mk
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
+  include ::pixelated::docker
   $domain_hash = hiera('domain')
   $domain              = $domain_hash['full']
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','linux-image-3.16.0-0.bpo.4-amd64/wheezy-backports']:
     ensure => installed,
-  }
-
-  service{'docker':
-    ensure    => running,
-    hasstatus => true,
   }
 
   service{'pixelated-dispatcher-manager':
@@ -24,13 +20,6 @@ class pixelated::dispatcher{
     ensure  => running,
     require => Package['pixelated-dispatcher-proxy'],
   }
-  exec{'configure_docker':
-    command     => "/bin/sed -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
-    refreshonly => true,
-    notify      => Service['docker'],
-    require     => Package['pixelated-dispatcher'],
-  }
-
   # logging for user agents
   file { '/etc/rsyslog.d/udp.conf':
     ensure  => file,
@@ -42,20 +31,6 @@ class pixelated::dispatcher{
   apache::vhost::file { 'dispatcher':
     content      => template('pixelated/pixelated-apache.conf.erb'),
     mod_security => false,
-  }
-
-  file{'/usr/local/bin/renew-docker-images.sh':
-    source => 'puppet:///modules/pixelated/renew-docker-images.sh',
-    owner  => root,
-    group  => root,
-    mode   => '0755',
-  }
-
-  cron { renew-docker:
-    command => "/usr/local/bin/renew-docker-images.sh",
-    user    => root,
-    hour    => 6,
-    minute  => 0
   }
 
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'

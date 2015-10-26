@@ -45,7 +45,8 @@ sh -c 'cat /etc/ssh/ssh_host_rsa_key.pub | cut -d" " -f1,2 >> /home/leap/configu
 leap $LEAP_OPTS add-user --self
 leap $LEAP_OPTS cert ca
 leap $LEAP_OPTS cert csr
-leap $LEAP_OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor tags:production
+leap $LEAP_OPTS node add pixelated ip_address:"$(facter ipaddress)"  services:webapp,mx,couchdb,soledad,monitor couch.master:true couch.pwhash_alg:pbkdf2 tags:production
+
 echo '{ "webapp": { "admins": ["testadmin"] } }' > services/webapp.json
 
 leap $LEAP_OPTS compile

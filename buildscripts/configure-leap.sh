@@ -82,7 +82,7 @@ echo "==============================================="
 echo "testing the platform"
 echo "==============================================="
 
-# leap $LEAP_OPTS -v 2 test --continue
+leap $LEAP_OPTS -v 2 test --continue
 
 echo "==============================================="
 echo "setting node to demo-mode"

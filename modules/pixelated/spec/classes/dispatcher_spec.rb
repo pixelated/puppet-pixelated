@@ -24,4 +24,7 @@ describe 'pixelated::dispatcher' do
   it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
 
   it { should contain_exec('configure_docker').with_refreshonly('true')}
+
+  it { should contain_file('/usr/local/bin/renew-docker-images.sh')}
+  it { should contain_cron('renew-docker').with_command("/usr/local/bin/renew-docker-images.sh")}
 end

@@ -44,6 +44,19 @@ class pixelated::dispatcher{
     mod_security => false,
   }
 
+  file{'/usr/local/bin/renew-docker-images.sh':
+    source => 'puppet:///modules/pixelated/renew-docker-images.sh',
+    owner  => root,
+    group  => root,
+    mode   => '0755',
+  }
+
+  cron { renew-docker:
+    command => "/usr/local/bin/renew-docker-images.sh",
+    user    => root,
+    hour    => 6,
+    minute  => 0
+  }
 
   $proxy_command ='/bin/echo "PIXELATED_MANAGER_FINGERPRINT=$(openssl x509 -in /etc/ssl/certs/ssl-cert-snakeoil.pem -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-proxy'
   $manager_command ='/bin/echo "PIXELATED_PROVIDER_FINGERPRINT=$(openssl x509 -in /usr/local/share/ca-certificates/leap_commercial_ca.crt -noout -fingerprint -sha1 | cut -d"=" -f 2)" >> /etc/default/pixelated-dispatcher-manager'

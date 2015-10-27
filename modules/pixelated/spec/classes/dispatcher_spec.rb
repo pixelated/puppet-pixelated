@@ -1,5 +1,4 @@
 require 'spec_helper'
-
 describe 'pixelated::dispatcher' do
   let(:facts) do
       {
@@ -25,4 +24,10 @@ describe 'pixelated::dispatcher' do
   it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
 
   it { should contain_file('/srv/leap/webapp/config/customization').with_recurse('true')}
+  it "should require leap webapp" do
+    should contain_file('/srv/leap/webapp/config/customization').with(
+      'require' => 'Vcsrepo[/srv/leap/webapp]',
+    )
+  end
+
 end

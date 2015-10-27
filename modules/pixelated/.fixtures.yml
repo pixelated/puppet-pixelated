@@ -11,3 +11,4 @@ fixtures:
     apache: "https://leap.se/git/puppet_apache"
     stdlib: "	https://leap.se/git/puppet_stdlib"
     templatewlv: "https://github.com/duritong/puppet-templatewlv"
+    vcsrepo: "https://leap.se/git/puppet_vcsrepo"

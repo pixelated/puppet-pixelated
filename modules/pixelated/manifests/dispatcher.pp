@@ -33,6 +33,7 @@ class pixelated::dispatcher{
     source  => 'puppet:///modules/pixelated/webapp',
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
+    require => Vcsrepo['/srv/leap/webapp'],
   }
 
   # make dispatcher accessible at https://mail.domain/

@@ -5,8 +5,10 @@ class pixelated::dispatcher{
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   include ::pixelated::docker
+
   $domain_hash = hiera('domain')
-  $domain              = $domain_hash['full']
+  $domain      = $domain_hash['full']
+  $services    = hiera('services')
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','initramfs-tools/wheezy-backports']:
     ensure => installed,
@@ -103,11 +105,13 @@ class pixelated::dispatcher{
         action      => 'leap_webapp_api(ACCEPT)',
         order       => 202;
   }
-  shorewall::rule {
-      'dkr2fw-leap-mx':
-        source      => 'dkr',
-        destination => '$FW',
-        action      => 'leap_mx(ACCEPT)',
-        order       => 203;
+  if member ( $services, 'mx') {
+    shorewall::rule {
+        'dkr2fw-leap-mx':
+          source      => 'dkr',
+          destination => '$FW',
+          action      => 'leap_mx(ACCEPT)',
+          order       => 203;
+    }
   }
 }

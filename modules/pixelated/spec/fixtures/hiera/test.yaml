@@ -5,3 +5,5 @@ domain:
     internal: pixelated.example.i
     internal_suffix: example.i
     name: pixelated.example.com
+services: ["mx","pixelated"]
+

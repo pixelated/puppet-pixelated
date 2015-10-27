@@ -8,7 +8,7 @@ class pixelated::dispatcher{
   $domain_hash = hiera('domain')
   $domain              = $domain_hash['full']
 
-  package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','linux-image-3.16.0-0.bpo.4-amd64/wheezy-backports']:
+  package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','initramfs-tools/wheezy-backports']:
     ensure => installed,
   }
 

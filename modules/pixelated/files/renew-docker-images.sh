@@ -8,7 +8,7 @@ DOCKER=/usr/bin/docker
 IMAGE='pixelated/pixelated-user-agent:latest'
 COMMAND='/usr/bin/pixelated-user-agent'
 
-# $DOCKER pull $IMAGE
+$DOCKER pull $IMAGE
 
 #kill running user-agents
 KILLLIST=$($DOCKER ps --no-trunc | grep $COMMAND | cut -d' ' -f 1)

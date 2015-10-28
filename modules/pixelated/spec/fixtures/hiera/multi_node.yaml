@@ -1,0 +1,9 @@
+---
+domain: 
+    full: pixelated.example.com
+    full_suffix: example.com
+    internal: pixelated.example.i
+    internal_suffix: example.i
+    name: pixelated.example.com
+services: ["pixelated"]
+

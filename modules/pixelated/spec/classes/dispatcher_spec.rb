@@ -39,7 +39,7 @@ require 'spec_helper'
   end
 
   context 'multi node' do
-   let(:facts) do
+    let(:facts) do
       {
         :operatingsystem  => 'Debian',
         :osfamily         => 'Debian',
@@ -47,9 +47,7 @@ require 'spec_helper'
         :lsbdistcodename  => 'wheezy',
         :testscenario     => 'multi_node',
       }
-  end
-   it do
-      should_not contain_concat__fragment('rules-203-dkr2fw-leap-mx')
     end
+    it { should_not contain_concat__fragment('rules-203-dkr2fw-leap-mx')}
   end
 end

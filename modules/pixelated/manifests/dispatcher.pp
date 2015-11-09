@@ -7,7 +7,7 @@ class pixelated::dispatcher{
   include ::pixelated::docker
 
   $domain_hash = hiera('domain')
-  $domain      = $domain_hash['full']
+  $domain      = $domain_hash['full_suffix']
   $services    = hiera('services')
 
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','initramfs-tools/wheezy-backports']:

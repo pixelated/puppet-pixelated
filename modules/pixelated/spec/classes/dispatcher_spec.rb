@@ -27,7 +27,7 @@ require 'spec_helper'
     it { should contain_concat__fragment('rules-202-dkr2fw-leap-api').with_content(/leap_webapp_api\(ACCEPT\) dkr \$FW/)}
     it { should contain_concat__fragment('rules-203-dkr2fw-leap-mx').with_content(/leap_mx\(ACCEPT\) dkr \$FW/)}
 
-    it { should contain_apache__vhost__file('dispatcher').with_content(/pixelated.example.com/)}
+    it { should contain_apache__vhost__file('dispatcher').with_content(/mail.example.com/)}
 
     it { should contain_file('/srv/leap/webapp/config/customization').with_recurse('true')}
 

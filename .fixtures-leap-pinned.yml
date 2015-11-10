@@ -1,0 +1,18 @@
+fixtures:
+  symlinks:
+    pixelated: "#{source_dir}"
+    apt: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/apt"
+    lsb: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/lsb"
+    common: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/common"
+    rsyslog: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/rsyslog"
+    shorewall: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/shorewall"
+    concat: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/concat"
+    apache: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/apache"
+    stdlib: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/stdlib"
+    templatewlv: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/templatewlv"
+    vcsrepo: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/vcsrepo"
+  repositories:
+    leap_platform:
+      repo: "https://github.com/pixelated/leap_platform.git"
+      flags: "--recursive"
+

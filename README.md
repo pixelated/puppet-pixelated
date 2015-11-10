@@ -1,12 +1,11 @@
-Pixelated Dispatcher
-====================
+puppet-pixelated
+================
 
 **Pixelated is in an early stage of development! Things may not work to their full extent yet**
 
-This puppet module provides a simple way to install and maintain an encrypted mail server based on the [LEAP Platform](https://leap.se/en/docs/platform).
-
+This puppet module provides a simple way to add Pixelated to a running [LEAP Platform](https://leap.se/en/docs/platform).
 It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dispatcher), a multi-user instance of the
-[Pixelated Useragent](https://github.com/pixelated/pixelated-user-agent).
+[Pixelated User-Agent](https://github.com/pixelated/pixelated-user-agent).
 
 ### High level Architecture
 #### Pixelated Platform
@@ -14,7 +13,7 @@ It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dis
 ![High-level Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
 
 
-## Installing the Pixelated Dispatcher
+## 1 Creating a LEAP Provider
 
 Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform.
 
@@ -75,13 +74,7 @@ When this completes Pixelated should be ready and available on port 8080 on your
     /etc/init.d/pixelated-dispatcher-proxy start
 
 
-### Access the dispatcher
-
-To create a mail account on your new provider, open [https://localhost/](https://localhost/) and sign up.
-To use the account, open [https://localhost:8080/](https://localhost:8080) and log into your new account.
-
-
-# Troubleshooting
+# 3 Troubleshooting
 
 The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
 

@@ -1,0 +1,20 @@
+{
+  "name": "puppet-pixelated",
+  "version": "1.0",
+  "author": "Pixelated",
+  "summary": "This module sets up the Pixelated Dispatcher, a multi-user instance of the Pixelated Useragent.",
+  "license": "GNU AFFERO GENERAL PUBLIC LICENSE",
+  "source": "https://github.com/pixelated/puppet-pixelated",
+  "project_page": "https://pixelated-project.org/",
+  "issues_url": "https://github.com/pixelated/puppet-pixelated/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7",
+        "8"
+      ]
+    }
+  ],
+  "description": "Pixelated Dispachter for the LEAP Platform"
+}

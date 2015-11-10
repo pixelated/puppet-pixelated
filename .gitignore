@@ -1,6 +1,0 @@
-.vagrant/
-*.pyc
-ghostdriver.log
-.idea
-*.DS_Store
-

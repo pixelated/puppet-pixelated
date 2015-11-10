@@ -18,9 +18,8 @@ It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dis
 
 Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform.
 
-Please refer to <https://leap.se/en/docs/platform/tutorials/single-node-email> for help with setting up a LEAP provider.
-
-For the following we assume that you have the LEAP platform and the configuration for your LEAP node on your local workstation. If you followed the tutorial to the letter you should have the following directories:
+In this example, we use a single node setup. Please refer to <https://leap.se/en/docs/platform/tutorials/single-node-email> for help with setting up a LEAP provider.
+We assume that you have the LEAP platform and the configuration for your LEAP node on your local workstation. If you followed the tutorial you should have the following directories:
 
 * `~/leap/leap_plaform`: the LEAP platform itself
 * `~/leap/example`: the configuration for your LEAP provider node
@@ -34,36 +33,32 @@ We have puppet scripts that takes care of (almost) everything. The scripts will 
 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 
+```bash
+    cd ~/leap/example
+    mkdir -p files/puppet/modules
+```
+
+
 The documentation for the installation of the LEAP Platform suggests that you make the configuration folder (`~/leap/example` is the name they suggest) versioned using Git to make it easier to track and undo any changes on the configuration. If you followed this suggestion of the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
 
 ```bash
-    cd ~/leap/example
-    git submodule add https://github.com/pixelated-project/pixelated-platform.git files/puppet
+    git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
+    git submodule update --init
 ```
 
 If you haven't added version control to your LEAP configuration, you can simply clone the Pixelated platform files into your node configuration.
 
 ```bash
-    cd ~/leap/example
-    git clone https://github.com/pixelated-project/pixelated-platform.git files/puppet
+    git clone https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
 ```
 
-Adding the Pixelated Platform repo to `files/puppet` will add all the necessary configuration to turn your LEAP Provider into a Pixelated Provider.
+Include the `::pixelated::dispatcher` class in the `custom` class, which gets automatically applied by the leap_platform.
 
-**Bug Alert:** Currently there is a bug with the setup. You have to manually add the "monitor" service to the services section in `nodes/node1.json`. After the edits the file should look like this:
+```bash
+   mkdir -p files/puppet/modules/custom/manifests
+   echo 'class custom { include ::pixelated::dispatcher }' > files/puppet/modules/custom/manifests/init.pp
+```
 
-
-    {
-      "ip_address": "XXX.XXX.XXX.XXX",
-      "services": [
-        "couchdb",
-        "mx",
-        "soledad",
-        "webapp",
-        "monitor"
-      ],
-      "tags": "production"
-    }
 
 ### 2.2 Installing Pixelated on the LEAP provider node
 

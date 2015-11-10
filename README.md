@@ -1,6 +1,8 @@
 puppet-pixelated
 ================
 
+[![Build Status](https://snap-ci.com/pixelated/pixelated-user-agent/branch/master/build_image)](https://snap-ci.com/pixelated/pixelated-user-agent/branch/master)
+
 **Pixelated is in an early stage of development! Things may not work to their full extent yet**
 
 This puppet module provides a simple way to add Pixelated to a running [LEAP Platform](https://leap.se/en/docs/platform).

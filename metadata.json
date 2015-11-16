@@ -1,0 +1,22 @@
+{
+  "name": "pupppet-pixelated",
+  "version": "0.0.1",
+  "author": "Pixelated Team",
+  "license": "AGPL-3.0",
+  "summary": "A module for installing pixelated on a LEAP Platform",
+  "source": "https://github.com/pixelated/puppet-pixelated",
+  "project_page": "https://pixelated-project.org",
+  "issues_url": "https://github.com/pixelated/puppet-pixelated/issues",
+  "operatingsystem_support": 
+    {
+    "operatingsystem":"Debian",
+    "operatingsystemrelease": "7.0."
+    },
+   "dependencies": [
+          { "name": "puppet_shorewall" },
+          { "name": "puppetlabs/concat" },
+          { "name": "puppetlabs/stdlib" },
+          { "name": "saz/rsyslog" },
+          { "name": "puppetlabs/apt" }
+   ]
+}

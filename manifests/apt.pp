@@ -11,10 +11,10 @@ class pixelated::apt {
   apt::preferences_snippet { ['python-tornado',
     'soledad-server',
     'soledad-common',
-    'solead-client',
+    'soledad-client',
     'leap-keymanager',
     'python-leap-common',
-    'leap-mx'
+    'leap-mx',
     'leap-auth']:
       pin      => 'release o=pixelated',
       priority => 999,

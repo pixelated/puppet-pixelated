@@ -24,7 +24,7 @@ class pixelated::docker {
     mode   => '0755',
   }
   cron {'renew-docker':
-    command => '/usr/local/bin/renew-docker-images.sh',
+    command => '/usr/local/bin/renew-docker-images.sh 1>&2 >> /var/log/pixelated/docker-renew.log',
     user    => root,
     hour    => 6,
     minute  => 0

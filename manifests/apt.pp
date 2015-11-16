@@ -4,7 +4,7 @@ class pixelated::apt {
 
   include apt
   include lsb
-  apt::preferences_snippet { ['python-urllib3', 'python-requests','python-six','linux-image-amd64','leap-mx']:
+  apt::preferences_snippet { ['python-urllib3', 'python-requests','python-six','linux-image-amd64']:
     release  => "${::lsbdistcodename}-backports",
     priority => 999
   }
@@ -14,6 +14,7 @@ class pixelated::apt {
     'solead-client',
     'leap-keymanager',
     'python-leap-common',
+    'leap-mx'
     'leap-auth']:
       pin      => 'release o=pixelated',
       priority => 999,

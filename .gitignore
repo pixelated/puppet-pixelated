@@ -1,2 +1,3 @@
 # ignore rake spec module checkouts
 **/spec/fixtures/modules/
+**/spec/fixtures/manifests/

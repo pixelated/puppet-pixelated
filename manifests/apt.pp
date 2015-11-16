@@ -4,7 +4,7 @@ class pixelated::apt {
 
   include apt
   include lsb
-  apt::preferences_snippet { ['python-urllib3', 'python-requests','python-six','linux-image-amd64']:
+  apt::preferences_snippet { ['python-urllib3', 'python-requests','python-six','linux-image-amd64','leap-mx']:
     release  => "${::lsbdistcodename}-backports",
     priority => 999
   }

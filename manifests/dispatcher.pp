@@ -30,7 +30,7 @@ class pixelated::dispatcher{
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 
-  file{ ['/srv/leap/webapp/config/customization/views','/srv/leap/webapp/config/customization/views/common']:
+  file{ ['/srv/leap/webapp/config/customization/views','/srv/leap/webapp/config/customization/views/common','/srv/leap/webapp/config/customization/views/users']:
     ensure  => directory,
     owner   => 'leap-webapp',
     group   => 'leap-webapp',

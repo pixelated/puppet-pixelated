@@ -30,23 +30,29 @@ class pixelated::dispatcher{
     content => "\$ModLoad imudp\n\$UDPServerRun 514\n"
   }
 
+  file{ ['/srv/leap/webapp/config/customization/views','/srv/leap/webapp/config/customization/views/common']:
+    ensure  => directory,
+    owner   => 'leap-webapp',
+    group   => 'leap-webapp',
+    require => Vcsrepo['/srv/leap/webapp'],
+  }
   file{ '/srv/leap/webapp/config/customization/views/common/_download_button.html.haml':
     source  => 'puppet:///modules/pixelated/webapp/views/common/_download_button.html.haml',
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    require => Vcsrepo['/srv/leap/webapp'],
+    require => File['/srv/leap/webapp/config/customization/views/common'],
   }
   file{ '/srv/leap/webapp/config/customization/locales/en.yml':
     source  => 'puppet:///modules/pixelated/webapp/locales/en.yml',
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    require => Vcsrepo['/srv/leap/webapp'],
+    require => File['/srv/leap/webapp/config/customization/views/common'],
   }
   file{ '/srv/leap/webapp/config/customization/views/users/show.html.haml':
     content => template('pixelated/webapp/show.html.haml.erb'),
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    require => Vcsrepo['/srv/leap/webapp'],
+    require => File['/srv/leap/webapp/config/customization/views/common'],
   }
 
   # make dispatcher accessible at https://mail.domain/

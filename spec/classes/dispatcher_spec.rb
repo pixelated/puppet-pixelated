@@ -29,12 +29,14 @@ require 'spec_helper'
 
     it { should contain_apache__vhost__file('dispatcher').with_content(/mail.example.com/)}
 
-    it { should contain_file('/srv/leap/webapp/config/customization').with_recurse('true')}
-
     it "should require leap webapp" do
-      should contain_file('/srv/leap/webapp/config/customization').with(
+      should contain_file('/srv/leap/webapp/config/customization/locales/en.yml').with(
         'require' => 'Vcsrepo[/srv/leap/webapp]',
       )
+      should contain_file('/srv/leap/webapp/config/customization/views/common/_download_button.html.haml').with(
+        'require' => 'Vcsrepo[/srv/leap/webapp]',
+      )
+      should contain_file('/srv/leap/webapp/config/customization/views/users/show.html.haml').with_content(/mail.example.com/)
     end
   end
 

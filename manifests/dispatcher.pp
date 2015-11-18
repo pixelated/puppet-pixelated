@@ -1,6 +1,7 @@
 # configure and install the pixelated dispatcher
 class pixelated::dispatcher{
   include ::pixelated::apt
+  include ::pixelated::apt::preferences
   include ::pixelated::check_mk
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog

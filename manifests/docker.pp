@@ -23,6 +23,13 @@ class pixelated::docker {
     group  => root,
     mode   => '0755',
   }
+  file{'/usr/lib/check_mk_agent/local/check_docker.sh':
+    source => 'puppet:///modules/pixelated/check_mk/check_docker.sh',
+    owner  => root,
+    group  => root,
+    mode   => '0755',
+  }
+
   cron {'renew-docker':
     command => '/usr/local/bin/renew-docker-images.sh 1>&2 >> /var/log/pixelated/docker-renew.log',
     user    => root,

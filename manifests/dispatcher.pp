@@ -11,8 +11,17 @@ class pixelated::dispatcher{
   $domain      = $domain_hash['full_suffix']
   $services    = hiera('services')
 
-  package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy','linux-image-amd64/wheezy-backports','initramfs-tools/wheezy-backports']:
+  package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy']:
     ensure => installed,
+  }
+
+  # on wheezy, docker needs a newer kernel from backports
+  if $::lsbdistcodename == 'wheezy' {
+    package{ [
+      'linux-image-amd64/wheezy-backports',
+      'initramfs-tools/wheezy-backports' ]:
+        ensure => installed,
+    }
   }
 
   service{'pixelated-dispatcher-manager':

@@ -22,4 +22,6 @@ class pixelated::check_mk {
     notify  => Exec['check_mk-refresh'],
     require => Package['check-mk-server'];
   }
+
+  check_mk_files{['check_dispatcher_manager.sh','check_dispatcher_proxy.sh','check_docker.sh']:}
 }

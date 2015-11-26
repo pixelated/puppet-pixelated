@@ -1,5 +1,3 @@
-[![Build Status](https://snap-ci.com/pixelated/puppet-pixelated/branch/master/build_image)](https://snap-ci.com/pixelated/puppet-pixelated/branch/master)
-
 puppet-pixelated
 ================
 

@@ -10,7 +10,6 @@ class pixelated::apt::preferences {
     'soledad-common',
     'soledad-client',
     'leap-keymanager',
-    'python-leap-common',
     'leap-mx',
     'leap-auth']:
       pin      => 'release o=pixelated',

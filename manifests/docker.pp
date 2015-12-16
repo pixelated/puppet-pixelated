@@ -1,5 +1,6 @@
 # configuring docker to host our user-agents
 class pixelated::docker {
+  $services    = hiera('services')
   file{'/etc/init.d/docker':
     source => 'puppet:///modules/pixelated/docker.init',
     owner  => 'root',
@@ -29,5 +30,59 @@ class pixelated::docker {
     hour    => 6,
     minute  => 0
   }
+
+  shorewall::masq{'docker_masq':
+        interface => 'eth0',
+        source    => '172.17.0.0/16',
+  }
+  # allow docker traffic
+  shorewall::zone {'dkr': type => 'ipv4'; }
+  shorewall::interface { 'docker0':
+    zone      => 'dkr',
+    options   => 'tcpflags,blacklist,nosmurfs';
+  }
+  shorewall::policy {
+    'dkr-to-all':
+      sourcezone      => 'dkr',
+      destinationzone => 'all',
+      policy          => 'ACCEPT',
+      order           => 1;
+  }
+  shorewall::rule {
+      'dkr2fw-https':
+        source      => 'dkr',
+          destination => '$FW',
+        action      => 'HTTPS(ACCEPT)',
+        order       => 201;
+  }
+  shorewall::rule {
+      'dkr2fw-leap-api':
+        source      => 'dkr',
+        destination => '$FW',
+        action      => 'leap_webapp_api(ACCEPT)',
+        order       => 202;
+  }
+
+  if member ( $services, 'mx') {
+    shorewall::rule {
+        'dkr2fw-leap-mx':
+          source      => 'dkr',
+          destination => '$FW',
+          action      => 'leap_mx(ACCEPT)',
+          order       => 203;
+    }
+  }
+
+
+  # on wheezy, docker needs a newer kernel from backports
+  if $::lsbdistcodename == 'wheezy' {
+    package{ [
+      'linux-image-amd64/wheezy-backports',
+      'initramfs-tools/wheezy-backports' ]:
+        ensure => installed,
+    }
+  }
+
+
 }
 

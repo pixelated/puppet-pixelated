@@ -9,7 +9,7 @@ class pixelated::apt {
     notify  => Exec[refresh_apt],
   }
   apt::sources_list { 'docker.list':
-    content => "deb deb http://apt.dockerproject.org/repo debian-${::lsbdistcodename} main\n",
+    content => "deb http://apt.dockerproject.org/repo debian-${::lsbdistcodename} main\n",
     require => Exec[add_docker_key],
     notify  => Exec[refresh_apt],
   }

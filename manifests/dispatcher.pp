@@ -2,7 +2,6 @@
 class pixelated::dispatcher{
   include ::pixelated::apt
   include ::pixelated::apt::preferences
-  include ::pixelated::check_mk
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   include ::pixelated::docker
@@ -11,17 +10,11 @@ class pixelated::dispatcher{
   $domain      = $domain_hash['full_suffix']
   $services    = hiera('services')
 
+  if member ( $services, 'monitoring') {
+    include ::pixelated::check_mk
+  }
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy']:
     ensure => installed,
-  }
-
-  # on wheezy, docker needs a newer kernel from backports
-  if $::lsbdistcodename == 'wheezy' {
-    package{ [
-      'linux-image-amd64/wheezy-backports',
-      'initramfs-tools/wheezy-backports' ]:
-        ensure => installed,
-    }
   }
 
   service{'pixelated-dispatcher-manager':
@@ -92,52 +85,11 @@ class pixelated::dispatcher{
     require => Package['shorewall']
   }
 
-  shorewall::masq{'docker_masq':
-        interface => 'eth0',
-        source    => '172.17.0.0/16',
-  }
-
   shorewall::rule {
       'net2fw-pixelated-dispatcher':
         source      => 'net',
         destination => '$FW',
         action      => 'pixelated_dispatcher(ACCEPT)',
         order       => 200;
-  }
-  # allow docker traffic
-  shorewall::zone {'dkr': type => 'ipv4'; }
-  shorewall::interface { 'docker0':
-    zone      => 'dkr',
-    options   => 'tcpflags,blacklist,nosmurfs';
-  }
-  shorewall::policy {
-    'dkr-to-all':
-      sourcezone      => 'dkr',
-      destinationzone => 'all',
-      policy          => 'ACCEPT',
-      order           => 1;
-  }
-  shorewall::rule {
-      'dkr2fw-https':
-        source      => 'dkr',
-        destination => '$FW',
-        action      => 'HTTPS(ACCEPT)',
-        order       => 201;
-  }
-  shorewall::rule {
-      'dkr2fw-leap-api':
-        source      => 'dkr',
-        destination => '$FW',
-        action      => 'leap_webapp_api(ACCEPT)',
-        order       => 202;
-  }
-  if member ( $services, 'mx') {
-    shorewall::rule {
-        'dkr2fw-leap-mx':
-          source      => 'dkr',
-          destination => '$FW',
-          action      => 'leap_mx(ACCEPT)',
-          order       => 203;
-    }
   }
 }

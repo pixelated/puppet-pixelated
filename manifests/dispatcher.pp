@@ -10,7 +10,7 @@ class pixelated::dispatcher{
   $domain      = $domain_hash['full_suffix']
   $services    = hiera('services')
 
-  if member ( $services, 'monitoring') {
+  if member ( $services, 'monitor') {
     include ::pixelated::check_mk
   }
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy']:

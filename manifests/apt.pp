@@ -15,7 +15,7 @@ class pixelated::apt {
   }
 
   file { '/srv/leap/0x58118E89F3A9128_docker_release.asc':
-    source => 'puppet:///modules/pixelated/0x287A1542472DC0E3_packages@pixelated-project.org.asc',
+    source => 'puppet:///modules/pixelated/0x58118E89F3A9128_docker_release.asc',
     notify => Exec['add_docker_key']
   }
   file { '/srv/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc':

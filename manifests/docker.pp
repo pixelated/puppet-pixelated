@@ -2,14 +2,19 @@
 class pixelated::docker {
   $services    = hiera('services')
   file{'/etc/init.d/docker':
-    source => 'puppet:///modules/pixelated/docker.init',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    source  => 'puppet:///modules/pixelated/docker.init',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    require => Package['docker-engine'],
   }
   service{'docker':
     ensure    => running,
     hasstatus => true,
+    require   => Package['docker-engine'],
+  }
+  package{'docker-engine':
+    ensure  => installed,
   }
   exec{'configure_docker':
     command     => "/bin/sed -E -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",

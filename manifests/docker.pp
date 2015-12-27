@@ -13,8 +13,8 @@ class pixelated::docker {
     hasstatus => true,
     require   => Package['docker-engine'],
   }
-  package{'docker-engine':
-    ensure  => installed,
+  package{ ['docker-engine', 'python-docker']:
+    ensure  => latest,
   }
   exec{'configure_docker':
     command     => "/bin/sed -E -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",

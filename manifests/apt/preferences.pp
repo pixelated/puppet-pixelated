@@ -17,7 +17,7 @@ class pixelated::apt::preferences {
       # the only version working with both the dispatcher
       # and dockerhub
       apt::preferences_snippet { ['docker-engine']:
-        pin      => '1.6.2-0~wheezy',
+        pin      => 'version 1.6.2-0~wheezy',
         priority => 999
       }
     }

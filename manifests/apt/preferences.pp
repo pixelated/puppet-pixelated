@@ -13,6 +13,13 @@ class pixelated::apt::preferences {
         release  => "${::lsbdistcodename}-backports",
         priority => 999
       }
+      # pin docker to 1.6.2, because it's currently
+      # the only version working with both the dispatcher
+      # and dockerhub
+      apt::preferences_snippet { ['docker-engine']:
+        pin      => '1.6.2-0~wheezy',
+        priority => 999
+      }
     }
 
     'jessie': {

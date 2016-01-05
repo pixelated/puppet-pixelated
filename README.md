@@ -44,7 +44,6 @@ The documentation for the installation of the LEAP Platform suggests that you ma
 
 ```bash
     git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
-    git submodule update --init
 ```
 
 If you haven't added version control to your LEAP configuration, you can simply clone the Pixelated platform files into your node configuration.

@@ -5,6 +5,8 @@ class pixelated::dispatcher{
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   include ::pixelated::docker
+  # remove leftovers from previous installations
+  include ::pixelated::remove
 
   $domain_hash = hiera('domain')
   $domain      = $domain_hash['full_suffix']

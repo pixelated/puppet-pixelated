@@ -12,6 +12,7 @@ describe 'pixelated::docker' do
   end
   it { should contain_service('docker').that_requires('Package[docker-engine]')}
   it { should contain_file('/etc/init.d/docker').that_comes_before('Package[docker-engine]')}
+  it { should contain_exec('insserv_docker')}
   it { should contain_exec('configure_docker').with_refreshonly('true')}
   it { should contain_exec('configure_docker')}
   it { should contain_file('/usr/local/bin/renew-docker-images.sh')}

@@ -86,6 +86,11 @@ class pixelated::docker {
       group   => 'root',
       mode    => '0755',
       before  => Package['docker-engine'],
+      notify  => Exec['insserv_docker'],
+    }
+    exec{'insserv_docker':
+      command     => '/sbin/insserv docker',
+      refreshonly => true,
     }
   }
 

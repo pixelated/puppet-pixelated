@@ -1,13 +1,7 @@
 # configuring docker to host our user-agents
 class pixelated::docker {
   $services    = hiera('services')
-  file{'/etc/init.d/docker':
-    source  => 'puppet:///modules/pixelated/docker.init',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    require => Package['docker-engine'],
-  }
+
   service{'docker':
     ensure    => running,
     hasstatus => true,
@@ -85,6 +79,13 @@ class pixelated::docker {
       'linux-image-amd64/wheezy-backports',
       'initramfs-tools/wheezy-backports' ]:
         ensure => installed,
+    }
+    file{'/etc/init.d/docker':
+      source  => 'puppet:///modules/pixelated/docker.init',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      before  => Package['docker-engine'],
     }
   }
 

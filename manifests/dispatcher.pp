@@ -22,11 +22,11 @@ class pixelated::dispatcher{
 
   service{'pixelated-dispatcher-manager':
     ensure  => running,
-    require => Package['pixelated-dispatcher-manager'],
+    require => [Package['pixelated-dispatcher-manager'],Service['apache']],
   }
   service{'pixelated-dispatcher-proxy':
     ensure  => running,
-    require => Package['pixelated-dispatcher-proxy'],
+    require => [Package['pixelated-dispatcher-proxy'], Service['pixelated-dispatcher-manager']],
   }
   # logging for user agents
   file { '/etc/rsyslog.d/udp.conf':
@@ -73,12 +73,14 @@ class pixelated::dispatcher{
     command     => $proxy_command,
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
+    notify      => Service['pixelated-dispatcher-proxy'],
   }
   exec{'set_fingerprint_for_manager':
     command     => $manager_command,
     refreshonly => true,
     subscribe   => Package['pixelated-dispatcher'],
-    require     => File['/usr/local/share/ca-certificates/leap_commercial_ca.crt'],
+    require     => File['/etc/x509/certs/leap_commercial.crt'],
+    notify      => Service['pixelated-dispatcher-manager'],
   }
 
   # Allow traffic from outside to dispatcher

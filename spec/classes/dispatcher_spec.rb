@@ -19,6 +19,13 @@ require 'spec_helper'
     it { should contain_class('pixelated::syslog') }
     it { should contain_class('pixelated::docker') }
     it { should contain_class('pixelated::tests') }
+    it { should contain_exec('set_fingerprint_for_manager').with('require' => 'File[/etc/x509/certs/leap_commercial.crt]')}
+    it { should contain_exec('set_fingerprint_for_manager').with('notify' => 'Service[pixelated-dispatcher-manager]')}
+    it { should contain_exec('set_fingerprint_for_proxy').with('notify' => 'Service[pixelated-dispatcher-proxy]')}
+
+    it { should contain_service('pixelated-dispatcher-manager')}
+    it { should contain_service('pixelated-dispatcher-proxy')}
+
     it { should_not contain_class('pixelated::check_mk') }
     # testing if shorewall::masq generates the files
     it { should contain_concat__fragment('masq-100-docker_masq').with_content(/eth0 172\.17\.0\.0\/16/)}

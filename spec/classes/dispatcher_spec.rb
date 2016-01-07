@@ -18,6 +18,7 @@ require 'spec_helper'
     end
     it { should contain_class('pixelated::syslog') }
     it { should contain_class('pixelated::docker') }
+    it { should contain_class('pixelated::tests') }
     it { should_not contain_class('pixelated::check_mk') }
     # testing if shorewall::masq generates the files
     it { should contain_concat__fragment('masq-100-docker_masq').with_content(/eth0 172\.17\.0\.0\/16/)}

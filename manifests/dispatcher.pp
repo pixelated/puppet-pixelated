@@ -5,6 +5,7 @@ class pixelated::dispatcher{
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   include ::pixelated::docker
+  include ::pixelated::tests
   # remove leftovers from previous installations
   include ::pixelated::remove
 

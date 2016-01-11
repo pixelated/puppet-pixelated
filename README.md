@@ -56,6 +56,7 @@ Include the `::pixelated::dispatcher` class in the `custom` class, which gets au
 
 ```bash
    mkdir -p files/puppet/modules/custom/manifests
+   echo '{} > services/pixelated.json'
    echo 'class custom { include ::pixelated::dispatcher }' > files/puppet/modules/custom/manifests/init.pp
 ```
 

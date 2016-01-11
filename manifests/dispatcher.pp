@@ -19,6 +19,10 @@ class pixelated::dispatcher{
   package{ ['python-tornado','pixelated-dispatcher','pixelated-dispatcher-manager','pixelated-dispatcher-proxy']:
     ensure => installed,
   }
+  package{ ['python-urllib3', 'python-requests','python-six']:
+    ensure => latest,
+    before => [Service['pixelated-dispatcher-manager'], Service['pixelated-dispatcher-proxy']],
+  }
 
   service{'pixelated-dispatcher-manager':
     ensure  => running,

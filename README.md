@@ -30,7 +30,10 @@ Ideally you have run `leap deploy` and `leap test` to set up the node on a serve
 
 ### 2.1 Adding Pixelated to your existing LEAP configuration
 
-We have puppet scripts that takes care of (almost) everything. The scripts will install the pixelated-dispatcher and the pixelated-user-agent.
+This puppet module take care of (almost) everything. It will install the pixelated-dispatcher and the pixelated-user-agent.
+
+Please note that currently, you need proper DNS entries for your provider domain and all of its subdomains (`hostname1.DOMAIN`, `DOMAIN`, `api.DOMAIN` and `nicknym.DOMAIN`).
+You can access your LEAP provider with only local DNS overrides, but you cannot do this for the pixelated dispatcher.
 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function vagrant_ssh {
+vagrant_ssh (){
   vagrant ssh -c "cd /home/vagrant/leap/configuration/; $1"
 }
 

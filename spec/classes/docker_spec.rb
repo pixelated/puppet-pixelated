@@ -13,7 +13,7 @@ describe 'pixelated::docker' do
   it { should contain_service('docker').that_requires('Package[docker]')}
   it { should contain_file('/etc/init.d/docker').that_comes_before('Package[docker]')}
   it { should contain_exec('insserv_docker')}
-  it { should contain_exec('configure_docker').with_refreshonly('true')}
+  it { should contain_exec('configure_docker').with_unless('/bin/grep -q iptables /etc/default/docker')}
   it { should contain_exec('configure_docker')}
   it { should contain_file('/usr/local/bin/renew-docker-images.sh')}
   it { should contain_package('docker')}

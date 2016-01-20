@@ -38,7 +38,7 @@ class pixelated::docker {
 
   package{ 'docker':
     ensure => latest,
-    name   => $docker_packagename
+    name   => $docker_packagename,
   }
 
   package{ 'python-docker':
@@ -47,9 +47,9 @@ class pixelated::docker {
 
   exec{'configure_docker':
     command     => "/bin/sed -E -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
-    refreshonly => true,
+    unless      => '/bin/grep -q iptables /etc/default/docker',
     notify      => Service['docker'],
-    require     => Package['pixelated-dispatcher'],
+    require     => Package['docker','pixelated-dispatcher'],
   }
 
   file{'/usr/local/bin/renew-docker-images.sh':

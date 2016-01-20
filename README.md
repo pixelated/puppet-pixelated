@@ -15,6 +15,20 @@ It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dis
 ![High-level Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
 
 
+testing pixelated
+=================
+
+If you want to have a look at pixelated, the easiest way ist to run everything inside vagrant. The following command
+installs a working platform, the pixelated-dispatcher and the pixelated-user-agent on one machine. You can create accounts
+by visiting https://localhost:4443/signup and see pixelated in action at https://localhost:8080/
+
+```bash
+ curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh | /bin/bash
+```
+  
+manual installation
+===================
+
 ## 1 Creating a LEAP Provider
 
 Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform.

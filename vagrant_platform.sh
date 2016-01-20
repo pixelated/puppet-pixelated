@@ -1,4 +1,5 @@
 #!/bin/bash
+hash vagrant 2>/dev/null || { echo >&2 "Vagrant is not installed.  Aborting."; exit 1; }
 
 vagrant_ssh (){
   vagrant ssh -c "cd /home/vagrant/leap/configuration/; $1"

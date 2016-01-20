@@ -23,7 +23,7 @@ installs a working platform, the pixelated-dispatcher and the pixelated-user-age
 by visiting <https://localhost:4443/signup> and see pixelated in action at <https://localhost:8080/>
 
 ```bash
- curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh | /bin/bash
+ curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh > vagrant_platform.sh; /bin/sh ./vagrant_platform.sh
 ```
   
 manual installation

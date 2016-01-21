@@ -4,7 +4,8 @@ vagrant_ssh (){
   vagrant ssh -c "cd /home/vagrant/leap/configuration/; $1"
 }
 
-git clone --branch develop --recursive https://github.com/leapcode/leap_platform.git
+#homebrew git does not work
+/usr/bin/git clone --branch develop --recursive https://github.com/leapcode/leap_platform.git
 cd leap_platform
 vagrant up
 vagrant_ssh 'mkdir -p files/puppet/modules'

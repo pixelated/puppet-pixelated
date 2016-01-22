@@ -2,3 +2,5 @@
 **/spec/fixtures/modules/
 **/spec/fixtures/manifests/
 /Gemfile.lock
+# deployed by vagrant_platform.sh
+/leap_platform

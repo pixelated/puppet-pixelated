@@ -46,7 +46,7 @@ class pixelated::docker {
   }
 
   exec{'configure_docker':
-    command     => "/bin/sed -E -i 's/^.\\?DOCKER_OPTS.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
+    command     => "/bin/sed -E  's/^.*DOCKER_OPTS=.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
     unless      => '/bin/grep -q iptables /etc/default/docker',
     notify      => Service['docker'],
     require     => Package['docker','pixelated-dispatcher'],

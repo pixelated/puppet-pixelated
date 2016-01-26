@@ -15,18 +15,19 @@ It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dis
 ![High-level Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
 
 
-testing pixelated
+Testing Pixelated
 =================
 
-If you want to have a look at pixelated, the easiest way ist to run everything inside vagrant. The following command
-installs a working platform, the pixelated-dispatcher and the pixelated-user-agent on one machine. You can create accounts
-by visiting <https://localhost:4443/signup> and see pixelated in action at <https://localhost:8080/>
+If you want to have a look at pixelated, the easiest way ist to run everything inside [vagrant](https://www.vagrantup.com/). The following command
+installs a working LEAP Platform, the pixelated-dispatcher and the pixelated-user-agent on one machine. You can create accounts
+by visiting the LEAP Webapp at <https://localhost:4443/signup> and see Pixelated in action at <https://localhost:8080/>.
+Be aware that you will not be able to send mails outside, but you can test sending mails internally from one user to another.
 
 ```bash
  curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh > vagrant_platform.sh; /bin/sh ./vagrant_platform.sh
 ```
-  
-manual installation
+
+Manual installation
 ===================
 
 ## 1 Creating a LEAP Provider
@@ -42,7 +43,7 @@ We assume that you have the LEAP platform and the configuration for your LEAP no
 Ideally you have run `leap deploy` and `leap test` to set up the node on a server and verify that the installation actually works.
 
 
-### 2.1 Adding Pixelated to your existing LEAP configuration
+### 2 Adding Pixelated to your existing LEAP configuration
 
 This puppet module take care of (almost) everything. It will install the pixelated-dispatcher and the pixelated-user-agent.
 
@@ -78,7 +79,7 @@ Include the `::pixelated::dispatcher` class in the `custom` class, which gets au
 ```
 
 
-### 2.2 Installing Pixelated on the LEAP provider node
+### 3 Installing Pixelated on the LEAP provider node
 
 With Pixelated added to the configuration simply re-run the LEAP deployment.
 
@@ -93,7 +94,7 @@ When this completes Pixelated should be ready and available on port 8080 on your
     /etc/init.d/pixelated-dispatcher-proxy start
 
 
-# 3 Troubleshooting
+# 4 Troubleshooting
 
 The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
 

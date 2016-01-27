@@ -24,7 +24,7 @@ by visiting the LEAP Webapp at <https://localhost:4443/signup> and see Pixelated
 Be aware that you will not be able to send mails outside, but you can test sending mails internally from one user to another.
 
 ```bash
- curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh > vagrant_platform.sh; /bin/sh ./vagrant_platform.sh
+ curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh | sh
 ```
 
 Manual installation

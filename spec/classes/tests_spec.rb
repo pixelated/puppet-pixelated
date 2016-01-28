@@ -12,6 +12,7 @@ describe 'pixelated::tests' do
   it { should contain_file('/var/local/phantomjs.sha256sum')}
   it { should contain_package('python-pip')}
   it { should contain_package('behave')}
+  it { should contain_package('selenium')}
 
   it do 
     should contain_exec('install_phantomjs').with(

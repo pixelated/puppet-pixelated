@@ -20,7 +20,7 @@ class pixelated::tests {
   package{'python-pip':
     ensure => installed,
   }
-  package{'behave':
+  package{['behave','selenium']:
     ensure   => installed,
     provider => 'pip',
     require  => Package['python-pip'],

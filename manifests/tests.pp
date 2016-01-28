@@ -1,5 +1,6 @@
 #
 class pixelated::tests {
+  include stdlib
   File {
     owner => root,
     group => root,
@@ -17,9 +18,8 @@ class pixelated::tests {
     mode   => '0755',
   }
 
-  package{'python-pip':
-    ensure => installed,
-  }
+  ensure_packages(['python-pip', 'curl'])
+
   package{['behave','selenium']:
     ensure   => installed,
     provider => 'pip',

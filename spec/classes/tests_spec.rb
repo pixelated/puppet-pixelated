@@ -11,6 +11,7 @@ describe 'pixelated::tests' do
   it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
   it { should contain_file('/var/local/phantomjs.sha256sum')}
   it { should contain_package('python-pip')}
+  it { should contain_package('curl')}
   it { should contain_package('behave')}
   it { should contain_package('selenium')}
 

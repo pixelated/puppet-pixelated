@@ -1,12 +1,20 @@
 require 'spec_helper'
 
 describe 'pixelated::tests' do
-  it do 
+  it do
     should contain_file('/srv/leap/tests_custom').with(
       'ensure' => 'directory',
       'mode'   => '0755',
     )
-  end 
+  end
 
   it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
+  it { should contain_package('python-pip')}
+  it { should contain_package('behave')}
+
+  it do 
+    should contain_exec('install_phantomjs').with(
+      'creates' => '/usr/local/bin/phantomjs'
+    )
+  end
 end

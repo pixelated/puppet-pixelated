@@ -11,8 +11,10 @@ class pixelated::tests {
     mode   => '0755',
   }
   file { '/srv/leap/tests_custom/pixelated.rb':
-    ensure => directory,
     source => 'puppet:///modules/pixelated/leap_test.rb',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0755',
   }
 
   package{'python-pip':

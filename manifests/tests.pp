@@ -21,6 +21,7 @@ class pixelated::tests {
   package{'behave':
     ensure   => installed,
     provider => 'pip',
+    require  => Package['python-pip'],
   }
 
   exec{'install_phantomjs':

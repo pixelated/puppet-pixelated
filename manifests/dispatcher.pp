@@ -26,7 +26,7 @@ class pixelated::dispatcher{
 
   service{'pixelated-dispatcher-manager':
     ensure  => running,
-    require => [Package['pixelated-dispatcher-manager'],Service['apache']],
+    require => [Package['pixelated-dispatcher-manager'],Service['apache'],Service['docker']],
   }
   service{'pixelated-dispatcher-proxy':
     ensure  => running,

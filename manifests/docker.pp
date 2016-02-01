@@ -33,7 +33,7 @@ class pixelated::docker {
   service{'docker':
     ensure    => running,
     hasstatus => true,
-    require   => Package['docker'],
+    require   => [Service['shorewall'],Package['docker']],
   }
 
   package{ 'docker':

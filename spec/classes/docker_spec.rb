@@ -16,7 +16,8 @@ describe 'pixelated::docker' do
   it { should contain_exec('configure_docker').with_unless('/bin/grep -q iptables /etc/default/docker')}
   it { should contain_exec('configure_docker')}
   it { should contain_file('/usr/local/bin/renew-docker-images.sh')}
-  it { should contain_package('docker')}
+  it { should contain_package('docker').that_requires('Package[python-docker]')}
+  it { should contain_package('python-docker')}
   it { should contain_cron('renew-docker').with_command("/usr/local/bin/renew-docker-images.sh 1>&2 >> /var/log/pixelated/docker-renew.log")}
   it { should contain_concat__fragment('zones-100-dkr').with_content(/dkr ipv4/)}
   it { should contain_concat__fragment('policy-1-dkr-to-all').with_content(/dkr all ACCEPT/)}

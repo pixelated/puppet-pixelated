@@ -37,8 +37,9 @@ class pixelated::docker {
   }
 
   package{ 'docker':
-    ensure => latest,
-    name   => $docker_packagename,
+    ensure  => latest,
+    name    => $docker_packagename,
+    require => Package['python-docker'],
   }
 
   package{ 'python-docker':

@@ -29,6 +29,7 @@ class pixelated::tests {
   exec{'install_phantomjs':
     command => '/usr/bin/curl -L https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 | tar xvj --strip-components=2 -C /usr/local/bin/ phantomjs-2.1.1-linux-x86_64/bin/phantomjs',
     creates => '/usr/local/bin/phantomjs',
+    require => Package['curl'],
     notify  => Exec['check_phantomjs_sha'],
   }
   exec{'check_phantomjs_sha':

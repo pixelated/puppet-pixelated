@@ -42,4 +42,10 @@ class pixelated::tests {
     group  => 'root',
     mode   => '0755',
   }
+  file{'/srv/leap/tests_custom/functional-tests':
+    ensure  => directory,
+    recurse => true,
+    purge   => true,
+    source => 'puppet:///modules/pixelated/functional-tests',
+  }
 }

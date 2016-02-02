@@ -7,6 +7,14 @@ describe 'pixelated::tests' do
       'mode'   => '0755',
     )
   end
+  it do
+    should contain_file('/srv/leap/tests_custom/functional-tests').with(
+      'ensure'   => 'directory',
+      'recurse' => 'true',
+    )
+  end
+
+
 
   it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
   it { should contain_file('/var/local/phantomjs.sha256sum')}

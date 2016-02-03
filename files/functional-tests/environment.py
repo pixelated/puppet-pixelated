@@ -18,20 +18,7 @@ from page_objects import SignUpPage
 
 from selenium import webdriver
 from steps.common import *
-import os
-
-config = ConfigParser.ConfigParser()
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, 'config.cfg')
-config.read(config_path)
-
-def before_scenario(context, scenario):
-    feature = scenario.feature
-
-    if 'try' in feature.tags:
-        user_agent_address = config.get('try', 'user_agent_address')
-        set_browser(context)
-        context.browser.get(user_agent_address)
+from steps import behave_testuser, behave_password
 
 
 def before_feature(context, feature):
@@ -84,8 +71,8 @@ def set_browser(context):
     context.browser.set_page_load_timeout(60)
 
 def create_behave_user(context):
-    username = config.get('staging', 'behave_testuser')
-    password = config.get('staging', 'behave_password')
+    username = behave_testuser()
+    password = behave_password()
 
     context.browser.get('https://staging.pixelated-project.org/signup')
     signup_page = SignUpPage(context)

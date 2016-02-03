@@ -23,23 +23,14 @@ from ..page_objects import Notification
 
 from behave import *
 from common import *
-import ConfigParser
-import os
+from steps import behave_email, behave_password, behave_testuser, login_url
 
-config = ConfigParser.ConfigParser()
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, '..', 'config.cfg')
-config.read(config_path)
 
 @given(u'I login as behave-testuser')
 def step_impl(context):
-    dispatcher_address = config.get('staging', 'dispatcher_address')
-    behave_user = config.get('staging', 'behave_testuser')
-    behave_password = config.get('staging', 'behave_password')
-
-    context.browser.get('%s:8080/auth/login' % dispatcher_address)
+    context.browser.get(login_url())
     login_page = LoginPage(context)
-    login_page.enter_username(behave_user).enter_password(behave_password).login()
+    login_page.enter_username(behave_testuser()).enter_password(behave_password()).login()
     login_page.wait_interstitial_page()
 
 
@@ -53,7 +44,7 @@ def step_impl(context):
 
 @when(u'I send a mail to myself')
 def step_impl(context):
-    email_to = config.get('staging', 'behave_email')
+    email_to = behave_email()
     compose_box = ComposeBox(context)
     maillist_actions = MailListActions(context)
 
@@ -73,7 +64,7 @@ def step_impl(context):
 @when(u'I open the email')
 def step_impl(context):
     subject = 'email to myself %s' % random_subject()
-    behave_user = config.get('staging', 'behave_testuser')
+    behave_user = behave_testuser()
 
     maillist = MailList(context)
     maillist.select_mail(behave_user, subject)
@@ -82,7 +73,7 @@ def step_impl(context):
 @when(u'I open the undecryptable email')
 def step_impl(context):
     subject = 'undecryptable email %s' % random_subject()
-    behave_user = config.get('staging', 'behave_testuser')
+    behave_user = behave_testuser()
 
     maillist = MailList(context)
     maillist.select_mail(behave_user, subject)
@@ -91,7 +82,7 @@ def step_impl(context):
 @when(u'I open the unencrypted email')
 def step_impl(context):
     subject =  'unencrypted email %s' % random_subject()
-    behave_user = config.get('staging', 'behave_testuser')
+    behave_user = behave_testuser()
 
     maillist = MailList(context)
     maillist.select_mail(behave_user, subject)

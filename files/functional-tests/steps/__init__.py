@@ -49,3 +49,10 @@ def signup_url():
 def behave_email():
     return config.get('staging', 'behave_email')
 
+
+def behave_password():
+    return config.get('staging', 'behave_password')
+
+def behave_testuser():
+    return config.get('staging', 'behave_testuser')
+

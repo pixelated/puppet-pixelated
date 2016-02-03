@@ -25,12 +25,5 @@ class Pixelated < LeapTest
     assert_run('/usr/bin/docker ps')
     pass
   end
-  def test_05_run_functional_tests?
-    exitstatus = system('cd /srv/leap/tests_custom/functional-tests; behave --tags @staging --tags ~@wip --no-capture -k')
-    if exitstatus != true
-       fail "Error running functional tests" 
-    end
-    pass
-  end
 end
 

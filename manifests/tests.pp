@@ -1,4 +1,5 @@
-#
+# Install functional test for Pixelated based on bahave and phantomjs
+# The tetst are integrated in 'leap test'
 class pixelated::tests {
   include stdlib
   File {
@@ -33,9 +34,11 @@ class pixelated::tests {
     notify  => Exec['check_phantomjs_sha'],
   }
   exec{'check_phantomjs_sha':
-    command => '/usr/bin/sha256sum -c /var/local/phantomjs.sha256sum',
-    require => File['/var/local/phantomjs.sha256sum'],
+    refreshonly => true,
+    command     => '/usr/bin/sha256sum -c /var/local/phantomjs.sha256sum',
+    require     => File['/var/local/phantomjs.sha256sum'],
   }
+
   file{'/var/local/phantomjs.sha256sum':
     source => 'puppet:///modules/pixelated/phantomjs.sha256',
     owner  => 'root',
@@ -46,6 +49,6 @@ class pixelated::tests {
     ensure  => directory,
     recurse => true,
     purge   => true,
-    source => 'puppet:///modules/pixelated/functional-tests',
+    source  => 'puppet:///modules/pixelated/functional-tests',
   }
 }

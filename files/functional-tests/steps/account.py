@@ -24,16 +24,12 @@ from ..page_objects import SignUpPage
 from ..page_objects import ControlPanelPage
 from ..page_objects import TagList
 from common import *
+from steps import login_url, logout_url, signup_url
 
-config = ConfigParser.ConfigParser()
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, '..', 'config.cfg')
-config.read(config_path)
-dispatcher_address = config.get('staging', 'dispatcher_address')
 
 @when(u'I visit the dispatcher')
 def step_impl(context):
-    context.browser.get('%s:8080/auth/login' % dispatcher_address)
+    context.browser.get(login_url())
 
 
 @then(u'I should see a login button')
@@ -55,17 +51,16 @@ def step_impl(context):
         time.sleep(30)
         taglist = TagList(context)
         taglist.is_pixelated_loaded()
-        # wait_until_element_is_visible_by_locator(context, (By.ID, 'tag-inbox'))
 
 
 @when(u'I logout')
 def step_impl(context):
-    context.browser.get('%s:8080/auth/logout' % dispatcher_address)
+    context.browser.get(logout_url())
 
 
 @when(u'I visit the signup-page')
 def step_impl(context):
-    context.browser.get('%s/signup' % dispatcher_address)
+    context.browser.get(signup_url())
 
 
 @then(u'I should see a signup button')

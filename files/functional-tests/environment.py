@@ -35,10 +35,12 @@ def before_scenario(context, scenario):
 
 
 def before_feature(context, feature):
+    set_browser(context)
+
     if 'account' == feature.name and 'staging' in feature.tags:
         create_behave_user(context)
-    if 'staging' in feature.tags:
-        set_browser(context)
+    # if 'staging' in feature.tags:
+    #     set_browser(context)
 
 
 def after_step(context, step):
@@ -48,18 +50,11 @@ def after_step(context, step):
         take_screenshot(context, screenshot_filename.format(step_name=step.name))
         log_browser_console(context, step)
         save_page_source(context, step)
-        # context.browser.quit()
-
-
-def after_scenario(context, scenario):
-    feature = scenario.feature
-    if 'try' in feature.tags:
-        context.browser.quit()
 
 
 def after_feature(context, feature):
-    if 'staging' in feature.tags:
-        context.browser.quit()
+    # if 'staging' in feature.tags:
+    context.browser.quit()
 
 
 def save_page_source(context, step):
@@ -89,7 +84,6 @@ def set_browser(context):
     context.browser.set_page_load_timeout(60)
 
 def create_behave_user(context):
-    set_browser(context)
     username = config.get('staging', 'behave_testuser')
     password = config.get('staging', 'behave_password')
 
@@ -100,4 +94,4 @@ def create_behave_user(context):
     signup_page.enter_password(password)
     signup_page.enter_password_confirmation(password)
     signup_page.click_signup_button()
-    context.browser.quit()
+    # context.browser.quit()

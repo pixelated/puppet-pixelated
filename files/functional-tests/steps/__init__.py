@@ -44,3 +44,8 @@ def logout_url():
 
 def signup_url():
     return url_home() + '/signup'
+
+
+def behave_email():
+    return config.get('staging', 'behave_email')
+

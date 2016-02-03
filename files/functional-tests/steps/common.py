@@ -17,18 +17,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from email.mime.text import MIMEText
+from steps import behave_email
 
-import ConfigParser
-import os
 import string
 import random
 import smtplib
 
-
-config = ConfigParser.ConfigParser()
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, '..', 'config.cfg')
-config.read(config_path)
 
 MAX_WAIT_IN_S = 120
 
@@ -67,14 +61,13 @@ def save_source(context):
 
 
 def send_external_email(subject, body):
-    behave_email = config.get('staging', 'behave_email')
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = behave_email
-    msg['To'] = behave_email
+    msg['From'] = behave_email()
+    msg['To'] = behave_email()
 
     s = smtplib.SMTP('staging.pixelated-project.org')
-    s.sendmail(behave_email, [behave_email], msg.as_string())
+    s.sendmail(behave_email(), [behave_email()], msg.as_string())
     s.quit()
 
 

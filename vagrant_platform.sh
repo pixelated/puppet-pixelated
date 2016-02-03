@@ -15,7 +15,7 @@ then
   /usr/bin/git pull
   /usr/bin/git submodule update --init
 else
-  /usr/bin/git clone --branch develop --recursive https://github.com/leapcode/leap_platform.git
+  /usr/bin/git clone --branch develop --recursive https://leap.se/git/leap_platform.git
   cd leap_platform
 fi
 

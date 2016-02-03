@@ -13,21 +13,21 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
-import ConfigParser
 import os
+import subprocess
 
-config = ConfigParser.ConfigParser()
-current_dir = os.path.dirname(os.path.abspath(__file__))
-config_path = os.path.join(current_dir, '..', 'config.cfg')
-config.read(config_path)
-dispatcher_address = config.get('staging', 'dispatcher_address')
+def detect_hostname():
+    if os.environ.get('TESTHOST') is not None:
+        return os.environ.get('TESTHOST')
+    else:
+        return subprocess.check_output(['hostname', '-d']).strip()
+
+hostname = detect_hostname()
+
+dispatcher_address = 'https://%s' % hostname
 
 
 def url_home(port=None):
-    # if port is not None:
-    #     return 'https://localhost:%d' % port
-    # else:
-    #     return 'https://localhost'
     if port is not None:
         return '%s:%d' % (dispatcher_address, port)
     else:
@@ -47,12 +47,13 @@ def signup_url():
 
 
 def behave_email():
-    return config.get('staging', 'behave_email')
+    return '%s@%s' % (behave_testuser(), hostname)
 
 
 def behave_password():
-    return config.get('staging', 'behave_password')
+    return 'Eido6aeg3za9ooNiekiemahm'
+
 
 def behave_testuser():
-    return config.get('staging', 'behave_testuser')
+    return 'behave-testuser'
 

@@ -11,7 +11,7 @@ class Pixelated < LeapTest
     assert_running '/usr/bin/pixelated-user-agent'
     pass
   end
-  def test_02_can_connect_to_user-agent?
+  def test_02_can_connect_to_useragent?
     assert_tcp_socket('localhost', '8080')
     pass
   end

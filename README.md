@@ -6,8 +6,7 @@ puppet-pixelated
 **Pixelated is in an early stage of development! Things may not work to their full extent yet**
 
 This puppet module provides a simple way to add Pixelated to a running [LEAP Platform](https://leap.se/en/docs/platform).
-It sets up the [Pixelated Dispatcher](https://github.com/pixelated/pixelated-dispatcher), a multi-user instance of the
-[Pixelated User-Agent](https://github.com/pixelated/pixelated-user-agent).
+It sets up the [Pixelated User-Agent](https://github.com/pixelated/pixelated-user-agent).
 
 ### High level Architecture
 #### Pixelated Platform
@@ -19,7 +18,7 @@ Testing Pixelated
 =================
 
 If you want to have a look at pixelated, the easiest way ist to run everything inside [vagrant](https://www.vagrantup.com/). The following command
-installs a working LEAP Platform, the pixelated-dispatcher and the pixelated-user-agent on one machine. You can create accounts
+installs a working LEAP Platform, the pixelated-user-agent. You can create accounts
 by visiting the LEAP Webapp at <https://localhost:4443/signup> and see Pixelated in action at <https://localhost:8080/>.
 Be aware that you will not be able to send mails outside, but you can test sending mails internally from one user to another.
 
@@ -45,10 +44,10 @@ Ideally you have run `leap deploy` and `leap test` to set up the node on a serve
 
 ### 2 Adding Pixelated to your existing LEAP configuration
 
-This puppet module take care of (almost) everything. It will install the pixelated-dispatcher and the pixelated-user-agent.
+This puppet module take care of (almost) everything. It will install the pixelated-user-agent.
 
 Please note that currently, you need proper DNS entries for your provider domain and all of its subdomains (`hostname1.DOMAIN`, `DOMAIN`, `api.DOMAIN` and `nicknym.DOMAIN`).
-You can access your LEAP provider with only local DNS overrides, but you cannot do this for the pixelated dispatcher.
+You can access your LEAP provider with only local DNS overrides, but you cannot do this for the pixelated user agent.
 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 
@@ -70,12 +69,12 @@ If you haven't added version control to your LEAP configuration, you can simply 
     git clone https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
 ```
 
-Include the `::pixelated::dispatcher` class in the `custom` class, which gets automatically applied by the leap_platform.
+Include the `::pixelated` class in the `custom` class, which gets automatically applied by the leap_platform.
 
 ```bash
    mkdir -p files/puppet/modules/custom/manifests
    echo '{}' > services/pixelated.json
-   echo 'class custom { include ::pixelated::dispatcher }' > files/puppet/modules/custom/manifests/init.pp
+   echo 'class custom { include ::pixelated}' > files/puppet/modules/custom/manifests/init.pp
 ```
 
 
@@ -87,23 +86,5 @@ With Pixelated added to the configuration simply re-run the LEAP deployment.
     leap test
 
 When this completes Pixelated should be ready and available on port 8080 on your LEAP provider.
-
-**Bug Alert:** Sometimes the dispatcher does not start automatically. If you get a "connection refused" when trying to access Pixelated, please start the dispatcher manually.
-
-    leap ssh node1       # log into LEAP node
-    /etc/init.d/pixelated-dispatcher-proxy start
-
-
-# 4 Troubleshooting
-
-The dispatcher uses Docker to run the user agents for the individual users, i.e. the user agent is not directly visible in the process list because it runs inside a docker container. To view the currently running instances log into the Pixelated provider, using `leap ssh node1` for example, and use the Docker commandline
-
-    root@node1:~# docker ps
-    CONTAINER ID        IMAGE                                   COMMAND                CREATED             STATUS              PORTS                      NAMES
-    070171caaa1d        pixelated/pixelated-user-agent:latest   "/bin/bash -l -c '/u   4 hours ago         Up 3 hours          127.0.0.1:5000->4567/tcp   erik
-
-In the last column you can see the user name. It is possible to access the log files for this instance as follows:
-
-    docker logs <username>
 
 Have fun!

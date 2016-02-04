@@ -24,19 +24,8 @@ vagrant_ssh 'mkdir -p files/puppet/modules'
 vagrant_ssh 'git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated'
 vagrant_ssh 'mkdir -p files/puppet/modules/custom/manifests'
 vagrant_ssh 'echo '{}' > services/pixelated.json'
-vagrant_ssh "echo 'class custom { include ::pixelated::dispatcher }' > files/puppet/modules/custom/manifests/init.pp"
+vagrant_ssh "echo 'class custom { include ::pixelated}' > files/puppet/modules/custom/manifests/init.pp"
 vagrant_ssh 'leap deploy'
-
-# shorewall doesn't restart on vagrant reliable,
-# see https://leap.se/code/issues/7115
-vagrant_ssh 'sudo systemctl restart shorewall'
-
-
-# docker stalls sometimes for unknown reasons,
-# restart it (and dependend services) to make sure everything works
-
-vagrant_ssh 'sudo systemctl stop docker; sleep 3; sudo systemctl start docker'
-vagrant_ssh 'sudo systemctl restart pixelated-dispatcher-manager.service; sudo systemctl restart pixelated-dispatcher-proxy.service'
 
 # at last, check if everything is working
 vagrant_ssh 'leap test'

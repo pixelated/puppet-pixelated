@@ -21,7 +21,7 @@ class pixelated::agent {
   }
 
   exec{'configure_pixelated_server':
-    command => "/bin/sed -i -E 's/^.*LEAP_PROVIDER=.*/LEAP_PROVIDER=${domain}' ${default_file}",
+    command => "/bin/sed -i -E 's/^.*LEAP_PROVIDER=.*/LEAP_PROVIDER=${domain}/' ${default_file}",
     unless  => "/bin/grep -q ${domain} ${default_file}",
     notify  => Service['pixelated-server'],
     require => Package['pixelated-server'],

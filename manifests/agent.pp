@@ -39,7 +39,7 @@ class pixelated::agent {
   file { '/etc/shorewall/macro.pixelated_user_agent':
     content => 'PARAM   -       -       tcp    8080',
     notify  => Service['shorewall'],
-    require => Package['shorewall']
+    require => Package['shorewall'],
     owner   => 'root',
     group   => 'root',
     mode    => '0644',

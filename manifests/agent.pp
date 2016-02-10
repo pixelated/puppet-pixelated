@@ -39,10 +39,7 @@ class pixelated::agent {
   file { '/etc/shorewall/macro.pixelated_user_agent':
     content => 'PARAM   -       -       tcp    8080',
     notify  => Service['shorewall'],
-    require => Package['shorewall'],
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
+    require => Package['shorewall']
   }
 
   shorewall::rule {
@@ -65,21 +62,18 @@ class pixelated::agent {
     source  => 'puppet:///modules/pixelated/webapp/views/common/_download_button.html.haml',
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    mode    => '0644',
     require => File['/srv/leap/webapp/config/customization/views/common'],
   }
   file{ '/srv/leap/webapp/config/customization/locales/en.yml':
     source  => 'puppet:///modules/pixelated/webapp/locales/en.yml',
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    mode    => '0644',
     require => File['/srv/leap/webapp/config/customization/views/common'],
   }
   file{ '/srv/leap/webapp/config/customization/views/users/show.html.haml':
     content => template('pixelated/webapp/show.html.haml.erb'),
     owner   => 'leap-webapp',
     group   => 'leap-webapp',
-    mode    => '0644',
     require => File['/srv/leap/webapp/config/customization/views/common'],
   }
 

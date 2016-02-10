@@ -1,5 +1,5 @@
 # setup pixelated
 class pixelated {
-  include ::pixelated::agent
+  include pixelated::agent
 }
 

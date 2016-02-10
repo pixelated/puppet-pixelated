@@ -11,9 +11,7 @@ class pixelated::syslog {
   }
 
   file { '/etc/logrotate.d/pixelated':
-    owner  => root,
-    group  => root,
-    mode   => '0644',
+    ensure => present,
     source => 'puppet:///modules/pixelated/syslog/pixelated',
   }
 

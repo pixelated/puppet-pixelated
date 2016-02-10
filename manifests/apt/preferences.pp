@@ -3,7 +3,7 @@ class pixelated::apt::preferences {
 
   apt::preferences_snippet { ['python-urllib3', 'python-requests','python-six']:
     release  => "${::lsbdistcodename}-backports",
-    priority => 999,
+    priority => 999
   }
 
   case $::lsbdistcodename {
@@ -11,14 +11,14 @@ class pixelated::apt::preferences {
       # docker needs a newer kernel on wheezy
       apt::preferences_snippet { ['linux-image-amd64']:
         release  => "${::lsbdistcodename}-backports",
-        priority => 999,
+        priority => 999
       }
       # pin docker to 1.6.2, because it's currently
       # the only version working with both the dispatcher
       # and dockerhub
       apt::preferences_snippet { ['docker-engine']:
         pin      => 'version 1.6.2-0~wheezy',
-        priority => 999,
+        priority => 999
       }
     }
 
@@ -26,7 +26,7 @@ class pixelated::apt::preferences {
       # install python-docker from backports on jessie
       apt::preferences_snippet { ['python-docker']:
         release  => "${::lsbdistcodename}-backports",
-        priority => 999,
+        priority => 999
       }
     }
 

@@ -9,27 +9,18 @@ class pixelated::check_mk {
   file { '/etc/check_mk/conf.d/ignore_filesystems.mk':
     source  => 'puppet:///modules/pixelated/check_mk/ignore_filesystems.mk',
     notify  => Exec['check_mk-refresh'],
-    require => Package['check-mk-server'],
-    owner   => root,
-    group   => root,
-    mode    => '0644',
+    require => Package['check-mk-server'];
   }
 
   file { '/etc/check_mk/logwatch.d/user-agent.cfg':
     source  => 'puppet:///modules/pixelated/check_mk/user-agent.cfg',
     notify  => Exec['check_mk-refresh'],
-    require => Package['check-mk-server'],
-    owner   => root,
-    group   => root,
-    mode    => '0644',
+    require => Package['check-mk-server'];
   }
   file { '/etc/check_mk/conf.d/ignored_checktypes.mk':
     source  => 'puppet:///modules/pixelated/check_mk/ignored_checktypes.mk',
     notify  => Exec['check_mk-refresh'],
-    require => Package['check-mk-server'],
-    owner   => root,
-    group   => root,
-    mode    => '0644',
+    require => Package['check-mk-server'];
   }
 
   check_mk_files{['check_dispatcher_manager.sh','check_dispatcher_proxy.sh','check_docker.sh']:}

@@ -1,7 +1,7 @@
 # add the docker sources and the signing key
 class pixelated::apt::docker {
 
-  include apt
+  include ::apt
 
   apt::sources_list { 'docker.list':
     content => "deb http://apt.dockerproject.org/repo debian-${::lsbdistcodename} main\n",
@@ -11,7 +11,10 @@ class pixelated::apt::docker {
 
   file { '/srv/leap/0x58118E89F3A9128_docker_release.asc':
     source => 'puppet:///modules/pixelated/0x58118E89F3A9128_docker_release.asc',
-    notify => Exec['add_docker_key']
+    notify => Exec['add_docker_key'],
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644',
   }
 
   exec{'add_docker_key':

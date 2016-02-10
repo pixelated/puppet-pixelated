@@ -47,10 +47,10 @@ class pixelated::docker {
   }
 
   exec{'configure_docker':
-    command     => "/bin/sed -i -E  's/^.*DOCKER_OPTS=.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
-    unless      => '/bin/grep -q iptables /etc/default/docker',
-    notify      => Service['docker'],
-    require     => Package['docker','pixelated-dispatcher'],
+    command => "/bin/sed -i -E  's/^.*DOCKER_OPTS=.*/DOCKER_OPTS=--iptables=false/' /etc/default/docker",
+    unless  => '/bin/grep -q iptables /etc/default/docker',
+    notify  => Service['docker'],
+    require => Package['docker','pixelated-dispatcher'],
   }
 
   file{'/usr/local/bin/renew-docker-images.sh':
@@ -63,7 +63,7 @@ class pixelated::docker {
     command => '/usr/local/bin/renew-docker-images.sh 1>&2 >> /var/log/pixelated/docker-renew.log',
     user    => root,
     hour    => 6,
-    minute  => 0
+    minute  => 0,
   }
 
   shorewall::masq{'docker_masq':

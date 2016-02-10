@@ -1,7 +1,7 @@
 # Install functional test for Pixelated based on bahave and phantomjs
 # The tetst are integrated in 'leap test'
 class pixelated::tests {
-  include stdlib
+  include ::stdlib
   File {
     owner => root,
     group => root,
@@ -49,13 +49,16 @@ class pixelated::tests {
     ensure  => directory,
     recurse => true,
     purge   => true,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     source  => 'puppet:///modules/pixelated/functional-tests',
   }
   cron {'run_functional_tests':
     command => '/usr/bin/mk-job pixelated-functional-tests behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/',
     user    => root,
     hour    => 5,
-    minute  => 0
+    minute  => 0,
   }
 
 

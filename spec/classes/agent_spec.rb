@@ -12,7 +12,7 @@ require 'spec_helper'
           :operatingsystem  => 'Debian',
           :osfamily         => 'Debian',
           :lsbdistid        => 'Debian',
-          :lsbdistcodename  => 'wheezy',
+          :lsbdistcodename  => 'jessie',
           :testscenario     => 'single_node',
         }
     end

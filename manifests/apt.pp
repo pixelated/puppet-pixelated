@@ -18,9 +18,4 @@ class pixelated::apt {
     refreshonly => true,
     require     => File['/srv/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc'],
   }
-
-  if $::lsbdistcodename == 'wheezy' {
-    include ::pixelated::apt::docker
-  }
-
 }

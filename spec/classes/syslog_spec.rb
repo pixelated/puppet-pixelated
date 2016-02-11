@@ -5,7 +5,7 @@ describe 'pixelated::syslog' do
       {
         :operatingsystem  => 'Debian',
         :osfamily         => 'Debian',
-        :lsbdistcodename  => 'wheezy',
+        :lsbdistcodename  => 'jessie',
       }
   end
   it { should contain_rsyslog__snippet('05-pixelated')}

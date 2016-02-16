@@ -28,3 +28,32 @@
   ProxyPassReverse / https://localhost:8080/
 </VirtualHost>
 
+
+Listen 8083
+<VirtualHost *:8083>
+  ServerName mail.<%= scope.lookupvar('::pixelated::agent::domain')  %>
+  CustomLog ${APACHE_LOG_DIR}/mail.<%= scope.lookupvar('::pixelated::agent::domain')  %>.log common
+
+  SSLCACertificatePath /etc/ssl/certs
+  SSLCertificateChainFile /usr/local/share/ca-certificates/leap_commercial_ca.crt
+  SSLCertificateKeyFile /etc/x509/keys/leap_commercial.key
+  SSLCertificateFile /etc/x509/certs/leap_commercial.crt
+
+  Include include.d/ssl_common.inc
+
+  <IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header always unset X-Runtime
+  </IfModule>
+
+  DocumentRoot /srv/leap/webapp/public
+
+  SSLProxyEngine on
+  ProxyPass / https://localhost:8080/
+  ProxyPassReverse / https://localhost:8080/
+  Header unset Content-Security-Policy
+  Header unset X-Content-Security-Policy
+  Header unset X-Webkit-Csp
+
+</VirtualHost>
+

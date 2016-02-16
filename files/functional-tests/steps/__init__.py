@@ -35,11 +35,11 @@ def url_home(port=None):
 
 
 def login_url():
-    return url_home(port=8080) + '/auth/login'
+    return url_home(port=8083) + '/login'
 
 
 def logout_url():
-    return url_home(port=8080) + '/auth/logout'
+    return url_home(port=8083) + '/logout'
 
 
 def signup_url():

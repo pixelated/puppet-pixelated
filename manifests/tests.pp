@@ -52,7 +52,7 @@ class pixelated::tests {
     source  => 'puppet:///modules/pixelated/functional-tests',
   }
   cron {'run_functional_tests':
-    command => '/usr/bin/mk-job pixelated-functional-tests behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/',
+    command => '/usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/',
     user    => root,
     hour    => 5,
     minute  => 0

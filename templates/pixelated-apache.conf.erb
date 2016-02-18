@@ -24,8 +24,8 @@
   DocumentRoot /srv/leap/webapp/public
 
   SSLProxyEngine on
-  ProxyPass / https://localhost:8080/
-  ProxyPassReverse / https://localhost:8080/
+  ProxyPass / https://<%= scope.lookupvar('::pixelated::agent::domain')  %>:8080/
+  ProxyPassReverse / https://<%= scope.lookupvar('::pixelated::agent::domain')  %>:8080/
 </VirtualHost>
 
 
@@ -49,8 +49,8 @@ Listen 8083
   DocumentRoot /srv/leap/webapp/public
 
   SSLProxyEngine on
-  ProxyPass / https://localhost:8080/
-  ProxyPassReverse / https://localhost:8080/
+  ProxyPass / https://<%= scope.lookupvar('::pixelated::agent::domain')  %>:8080/
+  ProxyPassReverse / https://<%= scope.lookupvar('::pixelated::agent::domain')  %>:8080/
   Header unset Content-Security-Policy
   Header unset X-Content-Security-Policy
   Header unset X-Webkit-Csp

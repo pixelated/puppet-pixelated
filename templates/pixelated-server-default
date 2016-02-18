@@ -5,3 +5,4 @@ LEAP_PROVIDER=<%= @domain %>
 SSL_KEY=/etc/x509/keys/leap_commercial.key
 SSL_CERT=/etc/x509/certs/leap_commercial.crt
 LEAP_CA=/etc/ssl/certs/ca-certificates.crt
+EXTRA_OPTS=

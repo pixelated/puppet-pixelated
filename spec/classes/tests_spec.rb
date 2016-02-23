@@ -29,4 +29,5 @@ describe 'pixelated::tests' do
       'require' => 'Package[curl]'
     )
   end
+  it { should contain_exec('dummy_register_job') }
 end

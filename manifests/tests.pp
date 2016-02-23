@@ -55,8 +55,11 @@ class pixelated::tests {
     command => '/usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/',
     user    => root,
     hour    => 5,
-    minute  => 0
+    minute  => 0,
+    notify  => Exec['dummy_register_job'],
   }
-
-
+  exec {'dummy_register_job':
+    command     => '/usr/bin/mk-job pixelated-functional-tests /bin/true',
+    refreshonly => true,
+  }
 }

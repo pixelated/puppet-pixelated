@@ -29,5 +29,9 @@ describe 'pixelated::tests' do
       'require' => 'Package[curl]'
     )
   end
-  it { should contain_exec('dummy_register_job') }
+  it do
+    should contain_exec('dummy_register_job').with(
+      "require" => "Package[check-mk-agent]"
+    )
+  end
 end

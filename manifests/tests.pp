@@ -19,7 +19,7 @@ class pixelated::tests {
     mode   => '0755',
   }
 
-  ensure_packages(['python-pip', 'curl','check-mk-agent'])
+  ensure_packages(['python-pip', 'curl'])
 
   package{['behave','selenium']:
     ensure   => installed,
@@ -60,7 +60,7 @@ class pixelated::tests {
   }
   exec {'dummy_register_job':
     command     => '/usr/bin/mk-job pixelated-functional-tests /bin/true',
-    require     => Package['check-mk-agent'],
+    require     => Class['::check-mk::agent'],
     refreshonly => true,
   }
 }

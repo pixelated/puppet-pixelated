@@ -60,7 +60,7 @@ class pixelated::tests {
   }
   exec {'dummy_register_job':
     command     => '/usr/bin/mk-job pixelated-functional-tests /bin/true',
-    require     => Class['::check-mk::agent'],
+    require     => Class['::check_mk::agent'],
     refreshonly => true,
   }
 }

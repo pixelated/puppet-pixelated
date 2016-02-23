@@ -31,7 +31,7 @@ describe 'pixelated::tests' do
   end
   it do
     should contain_exec('dummy_register_job').with(
-      "require" => "Class[::Check-mk::Agent]"
+      "require" => "Class[::Check_mk::Agent]"
     )
   end
 end

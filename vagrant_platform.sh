@@ -19,7 +19,8 @@ else
   cd leap_platform
 fi
 
-vagrant up
+vagrant up --no-provision
+vagrant provision
 vagrant_ssh 'mkdir -p files/puppet/modules'
 vagrant_ssh 'git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated'
 vagrant_ssh 'mkdir -p files/puppet/modules/custom/manifests'

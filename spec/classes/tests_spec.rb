@@ -26,7 +26,7 @@ describe 'pixelated::tests' do
   it do 
     should contain_exec('install_phantomjs').with(
       'creates' => '/usr/local/bin/phantomjs',
-      'require' => 'Package[curl]'
+      'require' => '[Package[curl]{:name=>"curl"}, Package[bzip2]{:name=>"bzip2"}]'
     )
   end
   it do

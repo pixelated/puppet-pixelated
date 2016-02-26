@@ -11,7 +11,7 @@ It sets up the [Pixelated User-Agent](https://github.com/pixelated/pixelated-use
 ### High level Architecture
 #### Pixelated Platform
 
-![High-level Architecture](https://pixelated-project.org/assets/images/pixelated-platform.png)
+![High-level Architecture](https://raw.githubusercontent.com/pixelated/website/master/assets/images/pixelated-user-agent.png)
 
 
 Testing Pixelated

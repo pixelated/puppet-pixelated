@@ -29,13 +29,13 @@ class pixelated::agent {
     require => Package['pixelated-server'],
   }
 
-  # make dispatcher accessible at https://mail.domain/
+  # make pixelated accessible at https://mail.domain/
   apache::vhost::file { 'pixelated':
     content      => template('pixelated/pixelated-apache.conf.erb'),
     mod_security => false,
   }
 
-  # Allow traffic from outside to dispatcher
+  # Allow traffic from outside to pixelated
   file { '/etc/shorewall/macro.pixelated_user_agent':
     content => 'PARAM   -       -       tcp    8080',
     notify  => Service['shorewall'],

@@ -24,14 +24,14 @@ def detect_hostname():
 
 hostname = detect_hostname()
 
-dispatcher_address = 'https://%s' % hostname
+user_agent_address = 'https://%s' % hostname
 
 
 def url_home(port=None):
     if port is not None:
-        return '%s:%d' % (dispatcher_address, port)
+        return '%s:%d' % (user_agent_address, port)
     else:
-        return dispatcher_address
+        return user_agent_address
 
 
 def login_url():

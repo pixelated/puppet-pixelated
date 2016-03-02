@@ -27,7 +27,7 @@ from common import *
 from steps import login_url, logout_url, signup_url
 
 
-@when(u'I visit the dispatcher')
+@when(u'I visit the user-agent')
 def step_impl(context):
     context.browser.get(login_url())
 

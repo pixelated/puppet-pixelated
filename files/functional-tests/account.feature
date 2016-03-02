@@ -28,13 +28,13 @@ Feature: account
     Then I see the control-panel
 
   @login 
-  Scenario: user goes to dispatcher
-    When I visit the dispatcher
+  Scenario: user goes to user-agent
+    When I visit the user-agent
     Then I should see a login button
 
   @login
-  Scenario: user goes to dispatcher and enters credentials
-    When I visit the dispatcher
+  Scenario: user goes to user-agent and enters credentials
+    When I visit the user-agent
     And  I login
     Then I see the inbox
 

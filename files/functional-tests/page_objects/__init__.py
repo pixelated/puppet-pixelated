@@ -21,8 +21,8 @@ from base_page_object import BasePageObject
 from maillist_actions import MailListActions
 from pixelated_page import PixelatedPage
 from mail_page import MailPage
-from dispatcher_pages import SignUpPage
-from dispatcher_pages import ControlPanelPage
+from user_agent_pages import SignUpPage
+from user_agent_pages import ControlPanelPage
 from mail_list import MailList
 from tag_list import TagList
 from notification import Notification

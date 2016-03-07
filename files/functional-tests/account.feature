@@ -27,7 +27,7 @@ Feature: account
     And  I register
     Then I see the control-panel
 
-  @login 
+  @login
   Scenario: user goes to user-agent
     When I visit the user-agent
     Then I should see a login button
@@ -38,7 +38,10 @@ Feature: account
     And  I login
     Then I see the inbox
 
-  @login
+  @logout
   Scenario: user logs out
-    When  I logout
+    When I visit the user-agent
+    And I login
+    When I logout
+    And I visit the user-agent
     Then I should see a login button

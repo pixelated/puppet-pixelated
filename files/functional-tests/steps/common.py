@@ -55,8 +55,8 @@ def wait_long_until_element_is_visible_by_locator(context, locator_tuple):
     return context.browser.find_element(by, value)
 
 
-def save_source(context):
-    with open('/tmp/source.html', 'w') as out:
+def save_source(context, filename='/tmp/source.html'):
+    with open(filename, 'w') as out:
         out.write(context.browser.page_source.encode('utf8'))
 
 

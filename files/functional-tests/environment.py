@@ -39,6 +39,10 @@ def after_step(context, step):
         save_page_source(context, step)
 
 
+def after_scenario(context, scenario):
+    context.browser.delete_all_cookies()
+
+
 def after_feature(context, feature):
     # if 'staging' in feature.tags:
     context.browser.quit()

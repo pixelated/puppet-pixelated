@@ -4,3 +4,6 @@
 /Gemfile.lock
 # deployed by vagrant_platform.sh
 /leap_platform
+# ignore files created by functional test
+/files/functional-tests/ghostdriver.log
+*.pyc

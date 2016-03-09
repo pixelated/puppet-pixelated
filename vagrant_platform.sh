@@ -15,5 +15,5 @@ else
   cd leap_platform
 fi
 
-vagrant up pixelated --no-provision
+vagrant up pixelated --no-provision  || vagrant reload
 vagrant provision

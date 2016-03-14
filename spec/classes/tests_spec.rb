@@ -22,6 +22,7 @@ describe 'pixelated::tests' do
   it { should contain_package('curl')}
   it { should contain_package('behave')}
   it { should contain_package('selenium')}
+  it { should contain_package('python-enum')}
 
   it do 
     should contain_exec('install_phantomjs').with(

@@ -19,7 +19,7 @@ class pixelated::tests {
     mode   => '0755',
   }
 
-  ensure_packages(['python-pip', 'curl', 'bzip2'])
+  ensure_packages(['python-pip', 'curl', 'bzip2', 'python-enum'])
 
   package{['behave','selenium']:
     ensure   => installed,

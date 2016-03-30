@@ -21,9 +21,9 @@ from compose_box import ComposeBox
 class MailPage(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'encrypted_flag': '.encrypted.encryption-valid',
-            'unencrypted_flag': '.not-encrypted',
-            'undercryptable_flag': '.encrypted.encryption-error',
+            'encrypted_flag': '.security-status__label--encrypted',
+            'unencrypted_flag': '.security-status__label--not-encrypted',
+            'undercryptable_flag': '.security-status__label--encryption-error',
             'subject': '#mail-view .subject',
             'body': '#mail-view .bodyArea',
             'tags': '#mail-view .tagsArea .tag',

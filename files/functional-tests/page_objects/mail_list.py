@@ -21,10 +21,10 @@ from time import sleep
 class MailList(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'mail_items': '//a[contains(., "{sender}") and contains(., "{subject}")]',
-            'mailbox_mails': '#mail-list li a[href*="{mailbox}"]',
-            'all_mails': '#mail-list li',
-            'checkboxes':  '#mail-view #view-more-actions'
+            'mail_items': '.mail-list-entry__item[contains(., "{sender}") and contains(., "{subject}")]',
+            'mailbox_mails': '.mail-list-entry__item[href*="{mailbox}"]',
+            'all_mails': '.mail-list-entry',
+            'checkboxes':  '.mail-list-entry__checkbox input[type="checkbox"]'
         }
         super(MailList, self).__init__(context, timeout)
 

@@ -21,7 +21,7 @@ from time import sleep
 class MailList(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'mail_items': '.mail-list-entry__item[contains(., "{sender}") and contains(., "{subject}")]',
+            'mail_items': '//a[contains(@class, "mail-list-entry__item") and contains(., "{sender}") and contains(., "{subject}")]',
             'mailbox_mails': '.mail-list-entry__item[href*="{mailbox}"]',
             'all_mails': '.mail-list-entry',
             'checkboxes':  '.mail-list-entry__checkbox input[type="checkbox"]'
@@ -56,7 +56,7 @@ class MailList(BasePageObject):
 
     def select_mail(self, sender, subject, timeout=180):
         xpath = self._locators['mail_items'].format(sender=sender, subject=subject)
-        self._find_element_by_xpath( xpath, timeout=timeout).click()
+        self._find_element_by_xpath(xpath, timeout=timeout).click()
 
     def mark_nth_checkbox(self, position):
         checkboxes = self._find_elements_by_css_locator(self._locators['checkboxes'])

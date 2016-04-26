@@ -88,3 +88,27 @@ With Pixelated added to the configuration simply re-run the LEAP deployment.
 When this completes Pixelated should be ready and available on port 8080 on your LEAP provider.
 
 Have fun!
+
+
+### Running Funcional Tests (local)
+
+From: 
+```$cd /puppet-pixelated/files/functional-tests/```
+
+Install python dependencies:
+```$pip install -r test_requirements.txt```
+
+Install phantomjs:
+```$npm install phantomjs -g```
+
+Setting staging host as pixelated-platform on the TESTHOST environment variable: 
+```$export TESTHOST=staging.pixelated-project.org```
+
+And to run:
+$behave
+
+To run a feature:
+```$behave -t @mail_to_myself```
+
+To run a set of tests:
+```$behave -t @staging```

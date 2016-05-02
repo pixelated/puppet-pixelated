@@ -19,6 +19,7 @@
   <IfModule mod_headers.c>
     Header always unset X-Powered-By
     Header always unset X-Runtime
+    Header set X-Frame-Options SAMEORIGIN
   </IfModule>
 
   DocumentRoot /srv/leap/webapp/public

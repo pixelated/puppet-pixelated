@@ -38,9 +38,11 @@ def step_impl(context):
 def step_impl(context):
     send_external_email('unencrypted email %s' %random_subject(), 'some body')
 
+
 @given(u'I send an email encrypted to someone else')
 def step_impl(context):
     send_external_email('undecryptable email %s' %random_subject(), encrypted_body())
+
 
 @when(u'I send a mail to myself')
 def step_impl(context):

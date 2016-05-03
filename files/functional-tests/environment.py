@@ -19,11 +19,11 @@ from page_objects import SignUpPage
 from selenium import webdriver
 from steps.common import *
 from steps import behave_testuser, behave_password
+from steps import signup_url
 
 
 def before_feature(context, feature):
     set_browser(context)
-
     if 'account' == feature.name and 'staging' in feature.tags:
         create_behave_user(context)
     # if 'staging' in feature.tags:
@@ -69,20 +69,23 @@ def take_screenshot(context, filename):
 
 def set_browser(context):
     # context.browser = webdriver.Firefox()
+    # context.browser = webdriver.Chrome()
     context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(60)
 
+
 def create_behave_user(context):
     username = behave_testuser()
     password = behave_password()
 
-    context.browser.get('https://staging.pixelated-project.org/signup')
+    context.browser.get(signup_url())
     signup_page = SignUpPage(context)
     signup_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
     signup_page.enter_username(username)
     signup_page.enter_password(password)
     signup_page.enter_password_confirmation(password)
+    signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
     # context.browser.quit()

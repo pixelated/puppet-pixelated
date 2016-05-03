@@ -14,17 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
-import os
 import time
 
 from behave import *
+from steps import login_url, logout_url, signup_url
 
+from common import *
+from ..page_objects import ControlPanelPage
 from ..page_objects import LoginPage
 from ..page_objects import SignUpPage
-from ..page_objects import ControlPanelPage
 from ..page_objects import TagList
-from common import *
-from steps import login_url, logout_url, signup_url
 
 
 @when(u'I visit the user-agent')
@@ -74,6 +73,7 @@ def step_impl(context):
     signup_page.enter_username(random_username())
     signup_page.enter_password(random_password())
     signup_page.enter_password_confirmation(random_password())
+    signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
 
 

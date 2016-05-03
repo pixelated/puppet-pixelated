@@ -13,6 +13,9 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+import os
+import subprocess
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -26,6 +29,7 @@ import smtplib
 
 MAX_WAIT_IN_S = 120
 
+
 def random_username():
     if 'randomname' not in globals():
         global randomname
@@ -38,6 +42,12 @@ def random_password():
         global randompassword
         randompassword=''.join(random.choice(string.lowercase) for i in range(16))
     return randompassword
+
+
+def get_invite_code():
+    if os.environ.get('INVITE_CODE_ENABLED') == 'true':
+        os.environ['RAILS_ENV'] = 'production'
+        return subprocess.check_output('bundle exec rake generate_invites[1]'.split(), cwd='/srv/leap/webapp').strip()
 
 
 def random_subject():

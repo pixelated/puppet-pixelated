@@ -16,6 +16,7 @@
 import os
 import subprocess
 
+
 def detect_hostname():
     if os.environ.get('TESTHOST') is not None:
         return os.environ.get('TESTHOST')

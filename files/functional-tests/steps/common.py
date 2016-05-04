@@ -20,7 +20,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from email.mime.text import MIMEText
-from steps import behave_email
+from steps import behave_email, hostname
 
 import string
 import random
@@ -76,7 +76,7 @@ def send_external_email(subject, body):
     msg['From'] = behave_email()
     msg['To'] = behave_email()
 
-    s = smtplib.SMTP('staging.pixelated-project.org')
+    s = smtplib.SMTP(hostname)
     s.sendmail(behave_email(), [behave_email()], msg.as_string())
     s.quit()
 

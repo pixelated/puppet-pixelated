@@ -2,6 +2,8 @@
 # The tetst are integrated in 'leap test'
 class pixelated::tests {
   include stdlib
+  $webapp = hiera('webapp')
+  $invite = $webapp['invite_required']
   File {
     owner => root,
     group => root,
@@ -52,7 +54,7 @@ class pixelated::tests {
     source  => 'puppet:///modules/pixelated/functional-tests',
   }
   cron {'run_functional_tests':
-    command     => '(date; /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1',
+    command     => "(date; INVITE_CODE_ENABLED=$invite /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1",
     environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     user        => 'root',
     minute      => 27,

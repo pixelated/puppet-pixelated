@@ -7,3 +7,5 @@ domain:
     name: pixelated.example.com
 services: ["mx","pixelated"]
 
+webapp:
+    invite_required: true

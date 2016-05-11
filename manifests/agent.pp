@@ -4,7 +4,6 @@ class pixelated::agent {
   include ::pixelated::apt::preferences
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
-  include ::pixelated::check_mk
   include ::pixelated::tests
 
   $domain_hash = hiera('domain')

@@ -47,7 +47,7 @@ def random_password():
 def get_invite_code():
     if os.environ.get('INVITE_CODE_ENABLED') == 'true':
         os.environ['RAILS_ENV'] = 'production'
-        return subprocess.check_output('bundle exec rake generate_invites[1]'.split(), cwd='/srv/leap/webapp').strip()
+        return subprocess.check_output('/usr/bin/bundle exec rake generate_invites[1]'.split(), cwd='/srv/leap/webapp').strip()
 
 
 def random_subject():

@@ -54,7 +54,8 @@ def step_impl(context):
 
 @when(u'I logout')
 def step_impl(context):
-    context.browser.get(logout_url())
+    logout_button = context.browser.find_element_by_css_selector('ul#logout')
+    logout_button.click()
 
 
 @when(u'I visit the signup-page')

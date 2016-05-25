@@ -14,13 +14,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 
+import pycurl
+import json
+import shutil
+from io import BytesIO
+
 from page_objects import SignUpPage
+from page_objects import LeapLoginPage
 
 from selenium import webdriver
 from steps.common import *
 from steps import behave_testuser, behave_password
 from steps import signup_url
+from steps import leap_login_url
 
+LEAP_HOME_FOLDER='/var/lib/pixelated/.leap/'
 
 def before_feature(context, feature):
     set_browser(context)
@@ -47,6 +55,47 @@ def after_feature(context, feature):
     # if 'staging' in feature.tags:
     context.browser.quit()
 
+def after_all(context):
+    set_browser(context)
+    _delete_user(context, behave_testuser(), behave_password())
+    context.browser.quit()
+
+
+def _delete_user(context, username, password):
+    context.browser.get(leap_login_url())
+    leap_login_page = LeapLoginPage(context)
+    leap_login_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
+    leap_login_page.enter_username(username).enter_password(password).login()
+    leap_login_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'a[href="/logout"]'))
+    user_id = context.browser.current_url.split("/")[-1]
+    leap_login_page.destroy_account(user_id)
+    try:
+      shutil.rmtree(LEAP_HOME_FOLDER + user_id)
+    except OSError:
+      print('OS  said directory can not be deleted')
+
+    buffer = BytesIO()
+    c = pycurl.Curl()
+    c.setopt(c.WRITEDATA, buffer)
+    c.setopt(c.URL, '127.0.0.1:5984/identities/_all_docs?include_docs=true')
+    c.setopt(c.NETRC,1)
+    c.setopt(c.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
+    c.perform()
+    c.close()
+    for row in json.loads(buffer.getvalue())['rows']:
+        address=row.get('doc').get('address')
+        if (address=='behave-testuser@unstable.pixelated-project.org'):
+            id=row.get('id')
+            rev=row.get('doc').get('_rev')
+            url='http://127.0.0.1:5984/identities/%s?rev=%s' % (id,rev)
+            c = pycurl.Curl()
+            c.setopt(c.WRITEDATA, buffer)
+            c.setopt(c.URL, url)
+            c.setopt(c.CUSTOMREQUEST, 'DELETE')
+            c.setopt(c.NETRC,1)
+            c.setopt(c.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
+            c.perform()
+            c.close()
 
 def save_page_source(context, step):
     page_source_filename = '{step_name}.html'

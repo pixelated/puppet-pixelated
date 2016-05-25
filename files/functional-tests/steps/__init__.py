@@ -47,6 +47,10 @@ def signup_url():
     return url_home() + '/signup'
 
 
+def leap_login_url():
+    return url_home() + '/login'
+
+
 def behave_email():
     return '%s@%s' % (behave_testuser(), hostname)
 

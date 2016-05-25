@@ -28,19 +28,13 @@ describe 'pixelated::tests' do
 
 
     it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
-    it { should contain_file('/var/local/phantomjs.sha256sum')}
+    it { should contain_file('/usr/local/bin/phantomjs')}
     it { should contain_package('python-pip')}
     it { should contain_package('curl')}
     it { should contain_package('behave')}
     it { should contain_package('selenium')}
     it { should contain_package('python-enum')}
 
-    it do 
-      should contain_exec('install_phantomjs').with(
-        'creates' => '/usr/local/bin/phantomjs',
-        'require' => '[Package[curl]{:name=>"curl"}, Package[bzip2]{:name=>"bzip2"}]'
-      )
-    end
     it do
       should contain_exec('dummy_register_job').with(
         "require" => "Class[::Check_mk::Agent::Install]"

@@ -34,6 +34,7 @@ describe 'pixelated::tests' do
     it { should contain_package('behave')}
     it { should contain_package('selenium')}
     it { should contain_package('python-enum')}
+    it { should contain_package('python-pycurl')}
 
     it do
       should contain_exec('dummy_register_job').with(

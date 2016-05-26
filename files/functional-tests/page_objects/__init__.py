@@ -26,4 +26,3 @@ from user_agent_pages import ControlPanelPage
 from mail_list import MailList
 from tag_list import TagList
 from notification import Notification
-from leap_login_page import LeapLoginPage

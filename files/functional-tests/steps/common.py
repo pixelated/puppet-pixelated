@@ -35,7 +35,6 @@ def random_username():
     if 'randomname' not in globals():
         global randomname
         randomname=RANDOM_USERNAME
-    print(randomname)
     return randomname
 
 
@@ -43,7 +42,6 @@ def random_password():
     if 'randompassword' not in globals():
         global randompassword
         randompassword=RANDOM_PASSWORD
-    print(randompassword)
     return randompassword
 
 

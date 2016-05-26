@@ -26,7 +26,6 @@ from selenium import webdriver
 from steps.common import *
 from steps import behave_testuser, behave_password
 from steps import signup_url
-from steps import leap_login_url
 
 LEAP_HOME_FOLDER='/var/lib/pixelated/.leap/'
 
@@ -62,18 +61,6 @@ def after_all(context):
 
 
 def _delete_user(context, username, password):
-    context.browser.get(leap_login_url())
-    leap_login_page = LeapLoginPage(context)
-    leap_login_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
-    leap_login_page.enter_username(username).enter_password(password).login()
-    leap_login_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'a[href="/logout"]'))
-    user_id = context.browser.current_url.split("/")[-1]
-    leap_login_page.destroy_account(user_id)
-    try:
-      shutil.rmtree(LEAP_HOME_FOLDER + user_id)
-    except OSError:
-      print('OS  said directory can not be deleted')
-
     buffer = BytesIO()
     c = pycurl.Curl()
     c.setopt(c.WRITEDATA, buffer)
@@ -86,8 +73,7 @@ def _delete_user(context, username, password):
         address=row.get('doc').get('address')
         if (address=='behave-testuser@unstable.pixelated-project.org'):
             id=row.get('id')
-            rev=row.get('doc').get('_rev')
-            url='http://127.0.0.1:5984/identities/%s?rev=%s' % (id,rev)
+            url='http://127.0.0.1:5984/user-%s' % id
             c = pycurl.Curl()
             c.setopt(c.WRITEDATA, buffer)
             c.setopt(c.URL, url)

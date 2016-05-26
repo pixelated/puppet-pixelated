@@ -40,9 +40,3 @@ Feature: send_mail
     When I open the undecryptable email
     Then I see a undecryptable flag
 
-  @logout
-  Scenario: behave-testuser logs out
-    Given I login as behave-testuser
-    When I logout
-    And I visit the user-agent
-    Then I should see a login button

@@ -20,7 +20,6 @@ import shutil
 from io import BytesIO
 
 from page_objects import SignUpPage
-from page_objects import LeapLoginPage
 
 from selenium import webdriver
 from steps.common import *

@@ -17,7 +17,10 @@ require 'spec_helper'
           :testscenario     => 'single_node',
         }
     end
+    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
     let(:pre_condition) { [
+      "class stdlib {}",
+      "define rsyslog::snippet($content) {}",
       "define shorewall::rule($source,$destination,$action,$order) {}",
       "define apache::vhost::file($content,$mod_security) {}",
       "define apt::sources_list($content='deb url') {}",

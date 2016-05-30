@@ -12,6 +12,12 @@ describe 'pixelated::tests' do
           }
       end
  
+    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
+    let(:pre_condition) { [
+      "class stdlib {}",
+    ] }
+
+
     it do
       should contain_file('/srv/leap/tests_custom').with(
         'ensure' => 'directory',
@@ -29,13 +35,7 @@ describe 'pixelated::tests' do
 
     it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
     it { should contain_file('/usr/local/bin/phantomjs')}
-    it { should contain_package('python-pip')}
-    it { should contain_package('curl')}
-    it { should contain_package('behave')}
-    it { should contain_package('selenium')}
-    it { should contain_package('python-enum')}
-    it { should contain_package('python-pycurl')}
-
+    
     it do
       should contain_exec('dummy_register_job').with(
         "require" => "Class[::Check_mk::Agent::Install]"

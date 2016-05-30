@@ -6,7 +6,6 @@ fixtures:
     rsyslog: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/rsyslog"
     concat: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/concat"
     apache: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/apache"
-    stdlib: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/stdlib"
     templatewlv: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/templatewlv"
   repositories:
     leap_platform:

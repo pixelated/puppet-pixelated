@@ -9,6 +9,8 @@ describe 'pixelated::syslog' do
       }
   end
   let(:pre_condition) { [
+      "class stdlib {}",
+      "define rsyslog::snippet($content) {}",
       "define shorewall::rule($source,$destination,$action,$order) {}",
       "define apache::vhost::file($content,$mod_security) {}",
       "define apt::sources_list($content='deb url') {}",

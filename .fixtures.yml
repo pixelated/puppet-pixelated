@@ -6,4 +6,3 @@ fixtures:
     common: "https://leap.se/git/puppet_common"
     rsyslog: "https://leap.se/git/puppet_rsyslog"
     concat: "https://leap.se/git/puppet_concat"
-    stdlib: "	https://leap.se/git/puppet_stdlib"

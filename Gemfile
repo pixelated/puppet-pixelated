@@ -8,4 +8,5 @@ group :test do
   gem "puppetlabs_spec_helper"
   gem "metadata-json-lint"
   gem "rspec-puppet-facts"
+  gem "rspec-puppet-utils"
 end

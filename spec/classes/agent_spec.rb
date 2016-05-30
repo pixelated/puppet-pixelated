@@ -6,6 +6,7 @@ require 'spec_helper'
     end
 
 
+
   context 'single node' do
     let(:facts) do
         {
@@ -16,13 +17,22 @@ require 'spec_helper'
           :testscenario     => 'single_node',
         }
     end
+    let(:pre_condition) { [
+      "define shorewall::rule($source,$destination,$action,$order) {}",
+      "define apache::vhost::file($content,$mod_security) {}",
+      "define apt::sources_list($content='deb url') {}",
+      "define apt::apt_conf($source='file url',$refresh_apt='true') {}",
+      "define apt::preferences_snippet($release='stable',$priority='999',$pin='release o=Debian') {}",
+    ] }
+
     it { should contain_class('pixelated::syslog') }
     it { should contain_class('pixelated::tests') }
 
     it { should contain_service('pixelated-server')}
 
     # testing if shorewall::masq generates the files
-    it { should contain_concat__fragment('rules-200-net2fw-pixelated-user-agent').with_content(/pixelated_user_agent\(ACCEPT\) net \$FW/)}
+    it { should contain_shorewall__rule('net2fw-pixelated-user-agent').with_source('net') }
+
     it { should contain_apache__vhost__file('pixelated').with_content(/mail.example.com/)}
 
     it "should configure leap webapp" do

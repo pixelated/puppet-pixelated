@@ -8,7 +8,13 @@ describe 'pixelated::apt' do
         :lsbdistcodename => 'jessie',
       }
   end
-  it { should contain_file('/etc/apt/sources.list.d/pixelated.list') }
+
+  let(:pre_condition) { [
+    "class apt {}",
+    "define apt::sources_list($content='deb url') {}",
+  ] }
+
+  it { should contain_apt__sources_list('pixelated.list') }
   it { should contain_file('/srv/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc') }
   it { should contain_exec('add_pixelated_key') }
 

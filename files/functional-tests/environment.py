@@ -71,7 +71,7 @@ def _delete_user(context, username, password):
     for row in json.loads(buffer.getvalue())['rows']:
         address=row.get('doc').get('address')
         if (address=='behave-testuser@unstable.pixelated-project.org'):
-            id=row.get('id')
+            id=row.get('user_id')
             url='http://127.0.0.1:5984/user-%s' % id
             c = pycurl.Curl()
             c.setopt(c.WRITEDATA, buffer)

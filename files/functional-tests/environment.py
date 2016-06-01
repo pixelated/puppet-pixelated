@@ -60,27 +60,29 @@ def after_all(context):
 
 
 def _delete_user(context, username, password):
-    buffer = BytesIO()
+    username_buffer = BytesIO()
     c = pycurl.Curl()
-    c.setopt(c.WRITEDATA, buffer)
-    c.setopt(c.URL, '127.0.0.1:5984/identities/_all_docs?include_docs=true')
-    c.setopt(c.NETRC,1)
-    c.setopt(c.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
+    c.setopt(pycurl.WRITEDATA, username_buffer)
+    c.setopt(pycurl.URL, '127.0.0.1:5984/identities/_all_docs?include_docs=true')
+    c.setopt(pycurl.NETRC,1)
+    c.setopt(pycurl.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
     c.perform()
     c.close()
-    for row in json.loads(buffer.getvalue())['rows']:
+    for row in json.loads(username_buffer.getvalue())['rows']:
         address=row.get('doc').get('address')
-        if (address=='behave-testuser@unstable.pixelated-project.org'):
-            id=row.get('user_id')
+        if (isinstance(address, basestring) and address.startswith('behave-testuser')):
+            id=row.get('doc').get('user_id')
             url='http://127.0.0.1:5984/user-%s' % id
-            c = pycurl.Curl()
-            c.setopt(c.WRITEDATA, buffer)
-            c.setopt(c.URL, url)
-            c.setopt(c.CUSTOMREQUEST, 'DELETE')
-            c.setopt(c.NETRC,1)
-            c.setopt(c.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
-            c.perform()
-            c.close()
+	    userdb_buffer = BytesIO()
+            d = pycurl.Curl()
+            d.setopt(pycurl.WRITEDATA, userdb_buffer)
+            d.setopt(pycurl.URL, url)
+            d.setopt(pycurl.POST,1)
+            d.setopt(pycurl.CUSTOMREQUEST, 'DELETE')
+            d.setopt(pycurl.NETRC,1)
+            d.setopt(pycurl.NETRC_FILE,'/etc/couchdb/couchdb.netrc')
+            d.perform()
+            d.close()
 
 def save_page_source(context, step):
     page_source_filename = '{step_name}.html'

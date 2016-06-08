@@ -57,9 +57,7 @@ def after_feature(context, feature):
 
 
 def after_all(context):
-    set_browser(context)
     _delete_user(context, behave_testuser(), behave_password())
-    context.browser.quit()
 
 
 def _delete_user(context, username, password):

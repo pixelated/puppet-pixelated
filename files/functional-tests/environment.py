@@ -29,12 +29,13 @@ from steps import signup_url
 LEAP_HOME_FOLDER = '/var/lib/pixelated/.leap/'
 
 
-def before_feature(context, feature):
+def before_all(context):
     set_browser(context)
+
+
+def before_feature(context, feature):
     if 'account' == feature.name and 'staging' in feature.tags:
         create_behave_user(context)
-    # if 'staging' in feature.tags:
-    #     set_browser(context)
 
 
 def after_step(context, step):
@@ -51,12 +52,9 @@ def after_scenario(context, scenario):
     context.browser.delete_all_cookies()
 
 
-def after_feature(context, feature):
-    # if 'staging' in feature.tags:
-    context.browser.quit()
-
-
 def after_all(context):
+    if hasattr(context, 'browser'):
+        context.browser.quit()
     _delete_user(context, behave_testuser(), behave_password())
 
 

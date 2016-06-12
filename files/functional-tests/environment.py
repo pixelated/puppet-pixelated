@@ -13,29 +13,16 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
-
-import pycurl
-import json
-import shutil
-from io import BytesIO
-
-from page_objects import SignUpPage
-
+from page_objects import SignUpPage, LeapLoginPage
 from selenium import webdriver
 from steps.common import *
-from steps import behave_testuser, behave_password
+from steps import behave_testuser, behave_password, delete_soledad_server_db, delete_soledad_client_db
 from steps import signup_url
-
-LEAP_HOME_FOLDER = '/var/lib/pixelated/.leap/'
 
 
 def before_all(context):
     set_browser(context)
-
-
-def before_feature(context, feature):
-    if 'account' == feature.name and 'staging' in feature.tags:
-        create_behave_user(context)
+    create_behave_user(context)
 
 
 def after_step(context, step):
@@ -53,37 +40,15 @@ def after_scenario(context, scenario):
 
 
 def after_all(context):
+    _delete_user(context, behave_testuser(), behave_password())
     if hasattr(context, 'browser'):
         context.browser.quit()
-    _delete_user(context, behave_testuser(), behave_password())
 
 
 def _delete_user(context, username, password):
-    username_buffer = BytesIO()
-    c = pycurl.Curl()
-    c.setopt(pycurl.WRITEDATA, username_buffer)
-    c.setopt(pycurl.URL,
-             '127.0.0.1:5984/identities/_all_docs?include_docs=true')
-    c.setopt(pycurl.NETRC, 1)
-    c.setopt(pycurl.NETRC_FILE, '/etc/couchdb/couchdb.netrc')
-    c.perform()
-    c.close()
-    for row in json.loads(username_buffer.getvalue())['rows']:
-        address = row.get('doc').get('address')
-        if (isinstance(address, basestring) and
-                address.startswith('behave-testuser')):
-            id = row.get('doc').get('user_id')
-            url = 'http://127.0.0.1:5984/user-%s' % id
-            userdb_buffer = BytesIO()
-            d = pycurl.Curl()
-            d.setopt(pycurl.WRITEDATA, userdb_buffer)
-            d.setopt(pycurl.URL, url)
-            d.setopt(pycurl.POST, 1)
-            d.setopt(pycurl.CUSTOMREQUEST, 'DELETE')
-            d.setopt(pycurl.NETRC, 1)
-            d.setopt(pycurl.NETRC_FILE, '/etc/couchdb/couchdb.netrc')
-            d.perform()
-            d.close()
+    user_id = LeapLoginPage(context).destroy_account(username, password)
+    delete_soledad_server_db(user_id, username)
+    delete_soledad_client_db(user_id)
 
 
 def save_page_source(context, step):
@@ -110,9 +75,8 @@ def take_screenshot(context, filename):
 
 def set_browser(context):
     # context.browser = webdriver.Firefox()
-    # context.browser = webdriver.Chrome()
-    context.browser = webdriver.PhantomJS(
-        service_args=['--ignore-ssl-errors=yes'])
+    #context.browser = webdriver.Chrome()
+    context.browser = webdriver.PhantomJS(service_args=['--ignore-ssl-errors=yes'])
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(60)
@@ -121,11 +85,9 @@ def set_browser(context):
 def create_behave_user(context):
     username = behave_testuser()
     password = behave_password()
-
     context.browser.get(signup_url())
     signup_page = SignUpPage(context)
-    signup_page.wait_until_element_is_visible_by_locator(
-        (By.CSS_SELECTOR, 'input#srp_username'))
+    signup_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
     signup_page.enter_username(username)
     signup_page.enter_password(password)
     signup_page.enter_password_confirmation(password)

@@ -28,21 +28,11 @@ import smtplib
 
 
 MAX_WAIT_IN_S = 120
-RANDOM_USERNAME = ''.join(random.choice(string.lowercase) for i in range(16))
-RANDOM_PASSWORD = ''.join(random.choice(string.lowercase) for i in range(16))
-
-def random_username():
-    if 'randomname' not in globals():
-        global randomname
-        randomname=RANDOM_USERNAME
-    return randomname
 
 
-def random_password():
-    if 'randompassword' not in globals():
-        global randompassword
-        randompassword=RANDOM_PASSWORD
-    return randompassword
+class RandomUser(object):
+    username = ''.join(random.choice(string.lowercase) for i in range(16))
+    password = ''.join(random.choice(string.lowercase) for i in range(16))
 
 
 def get_invite_code():

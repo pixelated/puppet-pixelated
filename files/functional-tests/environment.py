@@ -15,14 +15,15 @@
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 from page_objects import SignUpPage, LeapLoginPage
 from selenium import webdriver
-from steps.common import *
-from steps import behave_testuser, behave_password, delete_soledad_server_db, delete_soledad_client_db
-from steps import signup_url
+from selenium.webdriver.common.by import By
+from steps.common import get_invite_code, RandomUser
+from steps import behave_testuser, behave_password, delete_soledad_server_db, delete_soledad_client_db, signup_url
 
 
 def before_all(context):
     set_browser(context)
     create_behave_user(context)
+    context.random_user = RandomUser
 
 
 def after_step(context, step):
@@ -41,6 +42,7 @@ def after_scenario(context, scenario):
 
 def after_all(context):
     _delete_user(context, behave_testuser(), behave_password())
+    _delete_user(context, context.random_user.username, context.random_user.password)
     if hasattr(context, 'browser'):
         context.browser.quit()
 

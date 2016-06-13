@@ -39,7 +39,7 @@ def step_impl(context):
 @when(u'I login')
 def step_impl(context):
     login_page = LoginPage(context)
-    login_page.enter_username(random_username()).enter_password(random_password()).login()
+    login_page.enter_username(context.random_user.username).enter_password(context.random_user.password).login()
     login_page.wait_interstitial_page()
 
 
@@ -71,9 +71,9 @@ def step_impl(context):
 @when(u'I register')
 def step_impl(context):
     signup_page = SignUpPage(context)
-    signup_page.enter_username(random_username())
-    signup_page.enter_password(random_password())
-    signup_page.enter_password_confirmation(random_password())
+    signup_page.enter_username(context.random_user.username)
+    signup_page.enter_password(context.random_user.password)
+    signup_page.enter_password_confirmation(context.random_user.password)
     signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
 

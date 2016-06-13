@@ -30,6 +30,7 @@ class LeapLoginPage(LoginPage):
         self.url = leap_login_url()
 
     def _visit_page(self):
+        self.context.browser.delete_all_cookies()
         self.context.browser.get(self.url)
 
     def _login(self, username, password):

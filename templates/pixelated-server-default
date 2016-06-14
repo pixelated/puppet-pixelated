@@ -1,5 +1,6 @@
 # managed by puppet
 
+FEEDBACK_URL=
 HOME=/var/lib/pixelated
 LEAP_PROVIDER=<%= @domain %>
 SSL_KEY=/etc/x509/keys/leap_commercial.key

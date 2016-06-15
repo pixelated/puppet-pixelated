@@ -4,7 +4,7 @@ class pixelated::apt {
   include apt
 
   apt::sources_list { 'pixelated.list':
-    content => "deb http://packages.pixelated-project.org/debian ${::lsbdistcodename}-snapshots main\ndeb http://packages.pixelated-project.org/debian ${::lsbdistcodename} main\n",
+    content => "deb [arch=amd64] http://packages.pixelated-project.org/debian ${::lsbdistcodename}-snapshots main\ndeb [arch=amd64] http://packages.pixelated-project.org/debian ${::lsbdistcodename} main\n",
     require => Exec[add_pixelated_key],
     notify  => Exec[refresh_apt],
   }

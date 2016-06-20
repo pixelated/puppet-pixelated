@@ -31,7 +31,7 @@ MAX_WAIT_IN_S = 120
 
 
 class RandomUser(object):
-    username = ''.join(random.choice(string.lowercase) for i in range(16))
+    username = 'testuser_'.join(random.choice(string.lowercase) for i in range(16))
     password = ''.join(random.choice(string.lowercase) for i in range(16))
 
 

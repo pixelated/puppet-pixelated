@@ -21,7 +21,7 @@ from base_page_object import BasePageObject
 class MailListActions(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'compose_mail_button': 'div#compose-mails-trigger',
+            'compose_mail_button': 'div#compose-trigger',
             'delete_selected_button': 'input#delete-selected',
             'delete_successful_message': '//span[contains("Your messages were moved to trash!")]',
             'search': '#search-trigger input[type="search"]',

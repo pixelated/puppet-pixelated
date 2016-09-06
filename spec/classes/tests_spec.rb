@@ -11,12 +11,11 @@ describe 'pixelated::tests' do
             :testscenario     => 'single_node',
           }
       end
- 
+
     let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
     let(:pre_condition) { [
       "class stdlib {}",
     ] }
-
 
     it do
       should contain_file('/srv/leap/tests_custom').with(
@@ -31,11 +30,9 @@ describe 'pixelated::tests' do
       )
     end
 
-
-
     it { should contain_file('/srv/leap/tests_custom/pixelated.rb')}
     it { should contain_file('/usr/local/bin/phantomjs')}
-    
+
     it do
       should contain_exec('dummy_register_job').with(
         "require" => "Class[::Check_mk::Agent::Install]"

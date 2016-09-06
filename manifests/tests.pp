@@ -42,15 +42,22 @@ class pixelated::tests {
     purge   => true,
     source  => 'puppet:///modules/pixelated/functional-tests',
   }
+  cron {'run_smoke_tests':
+    command     => "(date; INVITE_CODE_ENABLED=$invite /usr/bin/mk-job pixelated-smoke-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1",
+    environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    user        => 'root',
+    minute      => 27,
+    notify      => Exec['dummy_register_job'],
+  }
   cron {'run_functional_tests':
-    command     => "(date; INVITE_CODE_ENABLED=$invite /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1",
+    command     => ": # This cronjob is temporary, it need to be remove after it have been run in all environments",
     environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     user        => 'root',
     minute      => 27,
     notify      => Exec['dummy_register_job'],
   }
   exec {'dummy_register_job':
-    command     => '/usr/bin/mk-job pixelated-functional-tests /bin/true',
+    command     => '/usr/bin/mk-job pixelated-smoke-tests /bin/true',
     require     => Class['::check_mk::agent::install'],
     refreshonly => true,
   }

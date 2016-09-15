@@ -57,6 +57,11 @@ class pixelated::tests {
     user    => 'root',
   }
 
+  file {'remove_smoke_tests_on_checkmk_folder':
+    ensure => absent,
+    path   => '/var/lib/check_mk_agent/job/root/pixelated-smoke-tests'
+  }
+
   exec {'dummy_register_job':
     command     => '/usr/bin/mk-job pixelated-functional-tests /bin/true',
     require     => Class['::check_mk::agent::install'],

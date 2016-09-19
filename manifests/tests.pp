@@ -53,8 +53,6 @@ class pixelated::tests {
 
   cron {'run_smoke_tests':
     ensure  => absent,
-    command => ': # This cronjob is temporary, it need to be remove after it have been run in all environments',
-    user    => 'root',
   }
 
   file {'remove_smoke_tests_on_checkmk_folder':

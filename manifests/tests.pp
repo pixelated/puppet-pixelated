@@ -51,10 +51,12 @@ class pixelated::tests {
     notify      => Exec['dummy_register_job'],
   }
 
+  # You can remove this after january/2017
   cron {'run_smoke_tests':
     ensure  => absent,
   }
 
+  # You can remove this after january/2017
   file {'remove_smoke_tests_on_checkmk_folder':
     ensure => absent,
     path   => '/var/lib/check_mk_agent/job/root/pixelated-smoke-tests'

@@ -1,6 +1,6 @@
 # This file is managed by Puppet, changes may be overwritten
 if $syslogtag contains_i 'user-agent' then {
-  action(type="omfile" file="/var/log/pixelated/user-agent.log")
+action(type="omfile" file="/var/log/pixelated/user-agent.log" template="RSYSLOG_TraditionalFileFormat")
   stop
 }
 

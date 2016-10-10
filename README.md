@@ -112,3 +112,10 @@ To run a feature:
 
 To run a set of tests:
 ```$behave -t @staging```
+
+## Development
+
+### Run puppet rspec tests
+
+    bundle install --path vendor/bundle
+    bundle exec rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,types\}/\*\*/\*_spec.rb --color

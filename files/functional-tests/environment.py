@@ -18,7 +18,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from steps.common import get_invite_code, RandomUser
 from steps import behave_testuser, behave_password, delete_soledad_server_db, delete_soledad_client_db, signup_url
-
+import subprocess
 
 def before_all(context):
     set_browser(context)
@@ -41,16 +41,18 @@ def after_scenario(context, scenario):
 
 
 def after_all(context):
-    _delete_user(context, behave_testuser(), behave_password())
-    _delete_user(context, context.random_user.username, context.random_user.password)
+    _delete_user(context, behave_testuser())
+    _delete_user(context, context.random_user.username)
     if hasattr(context, 'browser'):
         context.browser.quit()
 
 
-def _delete_user(context, username, password):
-    user_id = LeapLoginPage(context).destroy_account(username, password)
-    delete_soledad_server_db(user_id, username)
-    delete_soledad_client_db(user_id)
+def _delete_user(context, username):
+    try:
+        subprocess.check_call(['./destroy-user-db', '--destroy-identities',
+        '--username', username], cwd='/srv/leap/couchdb/scripts')
+    except Exception as e:
+        print e.returncode, e.output
 
 
 def save_page_source(context, step):

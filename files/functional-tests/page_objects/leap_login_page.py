@@ -37,17 +37,3 @@ class LeapLoginPage(LoginPage):
         self._visit_page()
         self.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
         self.enter_username(username).enter_password(password).login()
-
-    def destroy_account(self, username, password):
-        self._login(username, password)
-        self.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'a[href="/logout"]'))
-        return self._confirm_destroy_account()
-
-    def _confirm_destroy_account(self):
-        current_url = self.context.browser.current_url
-        user_id = current_url.split("/")[-1]
-        self.context.browser.get(current_url + '/edit')
-        delete_button_selector = 'a[href="/users/' + user_id + '"][data-method="delete"]'
-        self.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, delete_button_selector))
-        self._find_elements_by_css_locator(delete_button_selector)[0].click()
-        return user_id

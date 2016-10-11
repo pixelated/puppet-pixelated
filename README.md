@@ -115,7 +115,7 @@ To run a set of tests:
 
 ## Development
 
-### Run puppet rspec tests
+### Run tests
 
     bundle install --path vendor/bundle
-    bundle exec rspec --pattern spec/\{aliases,classes,defines,unit,functions,hosts,integration,types\}/\*\*/\*_spec.rb --color
+    bundle exec rake test

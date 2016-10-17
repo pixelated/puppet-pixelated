@@ -49,10 +49,11 @@ def after_all(context):
 
 def _delete_user(context, username):
     try:
-        subprocess.check_call(['./destroy-user-db', '--destroy-identities',
-        '--username', username], cwd='/srv/leap/couchdb/scripts')
+        subprocess.check_call(
+            ['./destroy-user-db', '--destroy-identities',
+             '--username', username], cwd='/srv/leap/couchdb/scripts')
     except Exception as e:
-        print e.returncode, e.output
+        print(e.returncode, e.output)
 
 
 def save_page_source(context, step):

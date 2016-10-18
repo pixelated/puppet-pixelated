@@ -40,6 +40,7 @@ class pixelated::tests {
     ensure  => directory,
     recurse => true,
     purge   => true,
+    ignore  => '*.pyc',
     source  => 'puppet:///modules/pixelated/functional-tests',
   }
 

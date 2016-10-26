@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
+import os
 from page_objects import SignUpPage, LeapLoginPage
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -27,11 +28,12 @@ def before_all(context):
 
 
 def after_step(context, step):
-    screenshot_filename = '{step_name}.png'
+    screenshot_filename = 'test_{step_name}.png'
+    screenshot_path = os.path.join('/var/log/pixelated', screenshot_filename)
 
     if step.status == 'failed':
         take_screenshot(context,
-                        screenshot_filename.format(step_name=step.name))
+                        screenshot_path.format(step_name=step.name))
         log_browser_console(context, step)
         save_page_source(context, step)
 
@@ -74,8 +76,9 @@ def log_browser_console(context, step):
         console_log_file.writelines(log_lines)
 
 
-def take_screenshot(context, filename):
-    context.browser.save_screenshot(filename)
+def take_screenshot(context, path):
+    print('Screenshot saved to: {path}'.format(path=path))
+    context.browser.save_screenshot(path)
 
 
 def set_browser(context):

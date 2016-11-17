@@ -17,7 +17,10 @@ class pixelated::agent {
 
   service { 'pixelated-server':
     ensure  => running,
-    require => Package['pixelated-server'],
+    require => [
+      Package['pixelated-server'],
+      Service['apache']
+    ]
   }
 
   file { $default_file:

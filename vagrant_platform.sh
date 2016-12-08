@@ -15,5 +15,6 @@ else
   cd leap_platform
 fi
 
+cd tests/example-provider
 vagrant up pixelated --no-provision  || vagrant reload
 vagrant provision

@@ -3,13 +3,8 @@ class pixelated::apt {
 
   include apt
 
-  $pixelated_deb = $facts['os']['domain'] ? {
-      'staging.pixelated-project.org' => "deb [arch=amd64] http://packages.pixelated-project.org/debian ${::lsbdistcodename}-snapshot main\n",
-      default => "deb [arch=amd64] http://packages.pixelated-project.org/debian ${::lsbdistcodename} main\n"
-  }
-
   apt::sources_list { 'pixelated.list':
-    content => $pixelated_deb,
+    content => "deb [arch=amd64] http://packages.pixelated-project.org/debian ${::lsbdistcodename} main\n",
     require => Exec[add_pixelated_key],
     notify  => Exec[refresh_apt],
   }

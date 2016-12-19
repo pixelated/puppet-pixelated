@@ -29,7 +29,7 @@ describe 'pixelated::apt' do
     end
 
     it { should contain_apt__sources_list('pixelated.list').
-      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshot main\n") }
+      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshots main\n") }
   end
 
   context 'unstable' do
@@ -41,6 +41,6 @@ describe 'pixelated::apt' do
     end
 
     it { should contain_apt__sources_list('pixelated.list').
-      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshot main\n") }
+      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshots main\n") }
   end
 end

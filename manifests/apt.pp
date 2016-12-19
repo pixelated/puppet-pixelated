@@ -4,7 +4,7 @@ class pixelated::apt {
   include apt
 
   $version = $::domain ? {
-    /^(staging|dev|unstable)\.pixelated-project\.org$/ => '-snapshot',
+    /^(staging|dev|unstable)\.pixelated-project\.org$/ => '-snapshots',
     default                         => '',
   }
 

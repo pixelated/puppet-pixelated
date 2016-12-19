@@ -5,6 +5,7 @@ describe 'pixelated::apt' do
       {
         :operatingsystem => 'Debian',
         :lsbdistid       => 'Debian',
+        :domain          => 'default',
         :lsbdistcodename => 'jessie',
       }
   end
@@ -14,8 +15,32 @@ describe 'pixelated::apt' do
     "define apt::sources_list($content='deb url') {}",
   ] }
 
-  it { should contain_apt__sources_list('pixelated.list') }
+  it { should contain_apt__sources_list('pixelated.list').
+    with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie main\n") }
   it { should contain_file('/srv/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc') }
   it { should contain_exec('add_pixelated_key') }
 
+  context 'staging' do
+    let(:facts) do
+        {
+          :domain          => 'staging.pixelated-project.org',
+          :lsbdistcodename => 'jessie',
+        }
+    end
+
+    it { should contain_apt__sources_list('pixelated.list').
+      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshot main\n") }
+  end
+
+  context 'unstable' do
+    let(:facts) do
+        {
+          :domain          => 'unstable.pixelated-project.org',
+          :lsbdistcodename => 'jessie',
+        }
+    end
+
+    it { should contain_apt__sources_list('pixelated.list').
+      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshot main\n") }
+  end
 end

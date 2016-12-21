@@ -60,7 +60,7 @@ def behave_password():
 
 
 def behave_testuser():
-    return 'behave-testuser'
+    return 'behaveuser'
 
 
 def _netrc_couch_credentials():

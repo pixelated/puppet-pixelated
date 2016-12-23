@@ -16,9 +16,8 @@
 import os
 from page_objects import SignUpPage
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from steps.common import get_invite_code, RandomUser
-from steps import behave_testuser, behave_password, signup_url
+from steps.common import RandomUser
+from steps import behave_testuser
 import subprocess
 
 

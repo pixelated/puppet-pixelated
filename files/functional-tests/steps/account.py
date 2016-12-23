@@ -38,6 +38,7 @@ def step_impl(context):
 
 @when(u'I login')
 def step_impl(context):
+    context.browser.get(login_url())
     login_page = LoginPage(context)
     login_page.enter_username(context.random_user.username).enter_password(context.random_user.password).login()
     login_page.wait_interstitial_page()

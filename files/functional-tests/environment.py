@@ -17,7 +17,6 @@ import os
 from page_objects import SignUpPage
 from selenium import webdriver
 from steps.common import RandomUser
-from steps import behave_testuser
 import subprocess
 
 
@@ -42,7 +41,6 @@ def after_scenario(context, scenario):
 
 
 def after_all(context):
-    _delete_user(context, behave_testuser())
     _delete_user(context, context.random_user.username)
     if hasattr(context, 'browser'):
         context.browser.quit()

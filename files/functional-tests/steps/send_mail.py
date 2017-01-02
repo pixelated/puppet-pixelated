@@ -57,28 +57,28 @@ def step_impl(context):
 @when(u'I open the email')
 def step_impl(context):
     subject = 'email to myself %s' % random_subject()
-    behave_user = behave_testuser()
+    email_from = RandomUser.username
 
     maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
+    maillist.select_mail(email_from, subject)
 
 
 @when(u'I open the undecryptable email')
 def step_impl(context):
     subject = 'undecryptable email %s' % random_subject()
-    behave_user = behave_testuser()
+    email_from = RandomUser.username
 
     maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
+    maillist.select_mail(email_from, subject)
 
 
 @when(u'I open the unencrypted email')
 def step_impl(context):
     subject =  'unencrypted email %s' % random_subject()
-    behave_user = behave_testuser()
+    email_from = RandomUser.username
 
     maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
+    maillist.select_mail(email_from, subject)
 
 
 @then(u'I see a encrypted flag')

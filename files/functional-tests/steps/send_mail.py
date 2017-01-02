@@ -60,9 +60,8 @@ def step_impl(context):
     notification.wait_for_notification("message_sent")
 
 
-@given(u'I send an email encrypted to someone else')
+@when(u'I send an email encrypted to someone else')
 def step_impl(context):
-    context.external_user = RandomUser
     send_external_email(context, 'undecryptable email %s' %random_subject(), encrypted_body())
 
 
@@ -81,9 +80,8 @@ def step_impl(context):
     mail_page.check_mail_flag('undercryptable_flag')
 
 
-@given(u'I send an unencrypted email')
+@when(u'I send an unencrypted email')
 def step_impl(context):
-    context.external_user = RandomUser
     send_external_email(context, 'unencrypted email %s' %random_subject(), 'some body')
 
 

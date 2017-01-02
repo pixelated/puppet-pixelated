@@ -78,6 +78,17 @@ def step_impl(context):
     signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
 
+@given(u'there is another user')
+def step_impl(context):
+    context.browser.get(signup_url())
+    context.external_user = RandomUser
+    signup_page = SignUpPage(context)
+    signup_page.enter_username(context.external_user.username)
+    signup_page.enter_password(context.external_user.password)
+    signup_page.enter_password_confirmation(context.external_user.password)
+    signup_page.enter_invite_code(get_invite_code())
+    signup_page.click_signup_button()
+
 
 @then(u'I see the control-panel')
 def step_impl(context):

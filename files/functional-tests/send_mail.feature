@@ -26,8 +26,7 @@ Feature: send_mail
 
   @unencrypted
   Scenario: user receives an unencrypted email
-    Given there is another user
-    When I send an unencrypted email
+    Given I send an unencrypted email
     And I login
     When I open the unencrypted email
     Then I see a unencrypted email flag
@@ -35,8 +34,7 @@ Feature: send_mail
   @wip
   @undecryptable
   Scenario: user receives an email we cannot decrypt
-    Given there is another user
-    When I send an email encrypted to someone else
+    Given I send an email encrypted to someone else
     And I login
     When I open the undecryptable email
     Then I see a undecryptable flag

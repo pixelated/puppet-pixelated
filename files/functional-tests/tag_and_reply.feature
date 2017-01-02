@@ -21,7 +21,7 @@ Feature: Tag and reply
   So that I can easily find them
 
   Scenario: User tags a mail, replies to it then checks that mail is in the right tag
-    Given I login
+    When I login
     When I open the first mail in the 'inbox'
     When I add the tag 'website' to that mail
     Then I see that mail under the 'website' tag

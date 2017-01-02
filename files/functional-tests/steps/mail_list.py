@@ -20,7 +20,9 @@ from ..page_objects import PixelatedPage
 from ..page_objects import MailList
 from ..page_objects import MailListActions
 
-
+#FROM USER AGENT REPO
+from selenium.common.exceptions import NoSuchElementException
+from time import sleep
 
 
 @then('I see the email on the mail list')
@@ -28,10 +30,6 @@ def impl(context):
     pixelated_page = PixelatedPage(context)
     pixelated_page.is_mail_on_list(context.pixelated_email, pixelated_page.random_subject(), 240)
 
-
-#FROM USER AGENT REPO
-from selenium.common.exceptions import NoSuchElementException
-from time import sleep
 
 def find_current_mail(context):
     return context.browser.find_element_by_id(context.current_mail_id)

@@ -21,7 +21,7 @@ Feature: compose mail, save draft and send mail
   So I can review and send them later
 
   Scenario: user composes and email, save the draft, later sends the draft and checks the sent message
-    Given I login
+    When I login
     When I compose a message to 'pixelated@friends.org'
     When I select the tag 'drafts'
     When I open the first mail in the mail list

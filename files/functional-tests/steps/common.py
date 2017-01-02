@@ -77,10 +77,3 @@ def open_email(context, subject):
     locator = '//ul[@id="mail-list"]//*[contains(.,"%s")]/parent::a' % subject
     wait_long_until_element_is_visible_by_locator(context, (By.XPATH, locator)).click()
 
-
-
-
-
-
-
-

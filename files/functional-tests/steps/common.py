@@ -62,14 +62,14 @@ def save_source(context, filename='/tmp/source.html'):
         out.write(context.browser.page_source.encode('utf8'))
 
 
-def send_external_email(subject, body):
+def send_external_email(context, subject, body):
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = RandomUser.email
-    msg['To'] = RandomUser.email
+    msg['From'] = context.random_user.email
+    msg['To'] = context.external_user.email
 
     s = smtplib.SMTP(hostname)
-    s.sendmail(RandomUser.email, [RandomUser.email], msg.as_string())
+    s.sendmail(context.random_user.email, [context.external_user.email], msg.as_string())
     s.quit()
 
 

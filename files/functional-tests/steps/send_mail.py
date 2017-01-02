@@ -23,30 +23,11 @@ from ..page_objects import Notification
 
 from behave import *
 from common import *
-from steps import behave_email, behave_password, behave_testuser, login_url
-
-
-@given(u'I login as behave-testuser')
-def step_impl(context):
-    context.browser.get(login_url())
-    login_page = LoginPage(context)
-    login_page.enter_username(behave_testuser()).enter_password(behave_password()).login()
-    login_page.wait_interstitial_page()
-
-
-@given(u'I send an unencrypted email')
-def step_impl(context):
-    send_external_email('unencrypted email %s' %random_subject(), 'some body')
-
-
-@given(u'I send an email encrypted to someone else')
-def step_impl(context):
-    send_external_email('undecryptable email %s' %random_subject(), encrypted_body())
 
 
 @when(u'I send a mail to myself')
 def step_impl(context):
-    email_to = behave_email()
+    email_to = context.random_user.email
     compose_box = ComposeBox(context)
     maillist_actions = MailListActions(context)
 
@@ -57,37 +38,13 @@ def step_impl(context):
     compose_box.send_mail()
 
 
-@when(u'I see that the mail was sent')
-def step_impl(context):
-    notification = Notification(context)
-    notification.wait_for_notification("message_sent")
-
-
 @when(u'I open the email')
 def step_impl(context):
     subject = 'email to myself %s' % random_subject()
-    behave_user = behave_testuser()
+    email_from = context.random_user.username
 
     maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
-
-
-@when(u'I open the undecryptable email')
-def step_impl(context):
-    subject = 'undecryptable email %s' % random_subject()
-    behave_user = behave_testuser()
-
-    maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
-
-
-@when(u'I open the unencrypted email')
-def step_impl(context):
-    subject =  'unencrypted email %s' % random_subject()
-    behave_user = behave_testuser()
-
-    maillist = MailList(context)
-    maillist.select_mail(behave_user, subject)
+    maillist.select_mail(email_from, subject)
 
 
 @then(u'I see a encrypted flag')
@@ -96,16 +53,50 @@ def step_impl(context):
     mail_page.check_mail_flag('encrypted_flag')
 
 
-@then(u'I see a unencrypted email flag')
+@when(u'I see that the mail was sent')
 def step_impl(context):
-    mail_page = MailPage(context)
-    mail_page.check_mail_flag('unencrypted_flag')
+    notification = Notification(context)
+    notification.wait_for_notification("message_sent")
+
+
+@given(u'I send an email encrypted to someone else')
+def step_impl(context):
+    send_external_email(context, 'undecryptable email %s' %random_subject(), encrypted_body())
+
+
+@when(u'I open the undecryptable email')
+def step_impl(context):
+    subject = 'undecryptable email %s' % random_subject()
+    email_from = context.random_user.username
+
+    maillist = MailList(context)
+    maillist.select_mail(email_from, subject)
 
 
 @then(u'I see a undecryptable flag')
 def step_impl(context):
     mail_page = MailPage(context)
-    mail_page.check_mail_flag('undercryptable_flag')
+    mail_page.check_mail_flag('undecryptable_flag')
+
+
+@given(u'I send an unencrypted email')
+def step_impl(context):
+    send_external_email(context, 'unencrypted email %s' %random_subject(), 'some body')
+
+
+@when(u'I open the unencrypted email')
+def step_impl(context):
+    subject =  'unencrypted email %s' % random_subject()
+    email_from = context.random_user.username
+
+    maillist = MailList(context)
+    maillist.select_mail(email_from, subject)
+
+
+@then(u'I see a unencrypted email flag')
+def step_impl(context):
+    mail_page = MailPage(context)
+    mail_page.check_mail_flag('unencrypted_flag')
 
 
 def encrypted_body():

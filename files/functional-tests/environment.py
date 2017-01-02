@@ -14,16 +14,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with Pixelated. If not, see <http://www.gnu.org/licenses/>.
 import os
-from page_objects import SignUpPage, LeapLoginPage
+from page_objects import SignUpPage
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from steps.common import get_invite_code, RandomUser
-from steps import behave_testuser, behave_password, delete_soledad_server_db, delete_soledad_client_db, signup_url
+from steps.common import RandomUser
 import subprocess
+
 
 def before_all(context):
     set_browser(context)
-    create_behave_user(context)
     context.random_user = RandomUser
 
 
@@ -43,7 +41,6 @@ def after_scenario(context, scenario):
 
 
 def after_all(context):
-    _delete_user(context, behave_testuser())
     _delete_user(context, context.random_user.username)
     if hasattr(context, 'browser'):
         context.browser.quit()
@@ -88,17 +85,3 @@ def set_browser(context):
     context.browser.set_window_size(1280, 1024)
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(60)
-
-
-def create_behave_user(context):
-    username = behave_testuser()
-    password = behave_password()
-    context.browser.get(signup_url())
-    signup_page = SignUpPage(context)
-    signup_page.wait_until_element_is_visible_by_locator((By.CSS_SELECTOR, 'input#srp_username'))
-    signup_page.enter_username(username)
-    signup_page.enter_password(password)
-    signup_page.enter_password_confirmation(password)
-    signup_page.enter_invite_code(get_invite_code())
-    signup_page.click_signup_button()
-    # context.browser.quit()

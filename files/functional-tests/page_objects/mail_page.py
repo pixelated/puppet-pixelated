@@ -23,7 +23,7 @@ class MailPage(BasePageObject):
         self._locators = {
             'encrypted_flag': '.security-status__label--encrypted',
             'unencrypted_flag': '.security-status__label--not-encrypted',
-            'undercryptable_flag': '.security-status__label--encryption-error',
+            'undecryptable_flag': '.security-status__label--encryption-error',
             'subject': '#mail-view .subject',
             'body': '#mail-view .bodyArea',
             'tags': '#mail-view .tagsArea .tag',

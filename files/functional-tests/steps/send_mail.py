@@ -76,7 +76,7 @@ def step_impl(context):
 @then(u'I see a undecryptable flag')
 def step_impl(context):
     mail_page = MailPage(context)
-    mail_page.check_mail_flag('undercryptable_flag')
+    mail_page.check_mail_flag('undecryptable_flag')
 
 
 @when(u'I send an unencrypted email')

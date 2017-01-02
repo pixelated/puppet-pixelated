@@ -78,6 +78,13 @@ def step_impl(context):
     signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
 
+
+@then(u'I see the control-panel')
+def step_impl(context):
+    controlpanel_page = ControlPanelPage(context)
+    controlpanel_page.is_control_panel_home()
+
+
 @given(u'there is another user')
 def step_impl(context):
     context.browser.get(signup_url())
@@ -88,9 +95,5 @@ def step_impl(context):
     signup_page.enter_password_confirmation(context.external_user.password)
     signup_page.enter_invite_code(get_invite_code())
     signup_page.click_signup_button()
-
-
-@then(u'I see the control-panel')
-def step_impl(context):
     controlpanel_page = ControlPanelPage(context)
     controlpanel_page.is_control_panel_home()

@@ -19,7 +19,7 @@ Feature: send_mail
 
   @mail_to_myself
   Scenario: user logs in end sends a mail to self
-    When I login
+    Given I'm logged in
     When I send a mail to myself
     When I open the email
     Then I see a encrypted flag
@@ -41,7 +41,7 @@ Feature: send_mail
 
   @logout
   Scenario: user logs out
-    When I login
+    Given I'm logged in
     When I logout
     And I visit the user-agent
     Then I should see a login button

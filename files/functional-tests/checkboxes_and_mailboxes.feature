@@ -22,7 +22,7 @@ Feature: Checkboxes
   So I can manage more than one email at once
 
   Scenario: User has a list of emails in each mailboxes that needs to be managed
-    When I login
+    Given I'm logged in
     When I mark the first unread email as read
       And I delete the email
     When I select the tag 'trash'

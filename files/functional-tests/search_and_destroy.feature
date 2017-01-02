@@ -23,7 +23,7 @@ Feature: search mail and deletion
   So I can manage them
 
   Scenario: User searches for a mail and deletes it
-    When I login
+    Given I'm logged in
     When I search for a mail with the words "mail"
     When I open the first mail in the mail list
     Then I see one or more mails in the search results

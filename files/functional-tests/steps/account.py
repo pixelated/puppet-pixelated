@@ -36,6 +36,7 @@ def step_impl(context):
     context.browser.find_element_by_name('login')
 
 
+@given(u'I\'m logged in')
 @when(u'I login')
 def step_impl(context):
     context.browser.get(login_url())

@@ -28,6 +28,7 @@ from common import *
 @when(u'I send a mail to myself')
 def step_impl(context):
     email_to = context.random_user.email
+    print("-----------------Random user email: ", context.random_user.email)
     compose_box = ComposeBox(context)
     maillist_actions = MailListActions(context)
 

@@ -51,18 +51,6 @@ def leap_login_url():
     return url_home() + '/login'
 
 
-def behave_email():
-    return '%s@%s' % (behave_testuser(), hostname)
-
-
-def behave_password():
-    return 'Eido6aeg3za9ooNiekiemahm'
-
-
-def behave_testuser():
-    return 'behaveuser'
-
-
 def _netrc_couch_credentials():
     with open('/etc/couchdb/couchdb.netrc', 'r') as netrc:
         netrc_line = netrc.readline().strip().split(' ')

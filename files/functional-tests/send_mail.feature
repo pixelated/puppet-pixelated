@@ -19,16 +19,15 @@ Feature: send_mail
 
   @mail_to_myself
   Scenario: user logs in end sends a mail to self
-    Given I login as behave-testuser
+    Given I login
     When I send a mail to myself
-#    And I see that the mail was sent
     When I open the email
     Then I see a encrypted flag
 
   @unencrypted
   Scenario: user receives an unencrypted email
     Given I send an unencrypted email
-    And I login as behave-testuser
+    And I login
     When I open the unencrypted email
     Then I see a unencrypted email flag
 
@@ -36,13 +35,13 @@ Feature: send_mail
   @undecryptable
   Scenario: user receives an email we cannot decrypt
     Given I send an email encrypted to someone else
-    And I login as behave-testuser
+    And I login
     When I open the undecryptable email
     Then I see a undecryptable flag
 
   @logout
-  Scenario: behave-testuser logs out
-    Given I login as behave-testuser
+  Scenario: user logs out
+    Given I login
     When I logout
     And I visit the user-agent
     Then I should see a login button

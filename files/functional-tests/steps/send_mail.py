@@ -23,15 +23,6 @@ from ..page_objects import Notification
 
 from behave import *
 from common import *
-from steps import behave_email, behave_password, behave_testuser, login_url
-
-
-@given(u'I login as behave-testuser')
-def step_impl(context):
-    context.browser.get(login_url())
-    login_page = LoginPage(context)
-    login_page.enter_username(behave_testuser()).enter_password(behave_password()).login()
-    login_page.wait_interstitial_page()
 
 
 @given(u'I send an unencrypted email')
@@ -46,7 +37,7 @@ def step_impl(context):
 
 @when(u'I send a mail to myself')
 def step_impl(context):
-    email_to = behave_email()
+    email_to = RandomUser.email
     compose_box = ComposeBox(context)
     maillist_actions = MailListActions(context)
 

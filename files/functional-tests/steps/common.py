@@ -20,7 +20,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from email.mime.text import MIMEText
-from steps import behave_email, hostname
+from steps import hostname
 
 import string
 import random
@@ -33,6 +33,7 @@ MAX_WAIT_IN_S = 120
 class RandomUser(object):
     username = 'test_user_' + ''.join(random.choice(string.lowercase) for i in range(16))
     password = ''.join(random.choice(string.lowercase) for i in range(16))
+    email = '%s@%s' % (username, hostname)
 
 
 def get_invite_code():
@@ -64,11 +65,11 @@ def save_source(context, filename='/tmp/source.html'):
 def send_external_email(subject, body):
     msg = MIMEText(body)
     msg['Subject'] = subject
-    msg['From'] = behave_email()
-    msg['To'] = behave_email()
+    msg['From'] = RandomUser.email
+    msg['To'] = RandomUser.email
 
     s = smtplib.SMTP(hostname)
-    s.sendmail(behave_email(), [behave_email()], msg.as_string())
+    s.sendmail(RandomUser.email, [RandomUser.email], msg.as_string())
     s.quit()
 
 

@@ -18,6 +18,7 @@ class pixelated::agent {
 
   service { 'pixelated-server':
     ensure  => running,
+    enable  => true,
     require => [
       Package['pixelated-server'],
       Service['apache']

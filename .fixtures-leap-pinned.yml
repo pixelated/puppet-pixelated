@@ -9,6 +9,6 @@ fixtures:
     templatewlv: "#{source_dir}/spec/fixtures/modules/leap_platform/puppet/modules/templatewlv"
   repositories:
     leap_platform:
-      repo: "https://github.com/pixelated/leap_platform.git"
+      repo: "https://0xacab.org/pixelated/platform.git"
       flags: "--recursive"
 

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PATH=/bin
+
+systemctl restart pixelated-server.service

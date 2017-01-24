@@ -14,6 +14,15 @@ class pixelated::apt {
     notify  => Exec[refresh_apt],
   }
 
+  file { '/srv/leap/restart-pixelated-server':
+    source => 'puppet:///modules/pixelated/restart-pixelated-server'',
+  }
+
+  apt::apt_conf {'restart-service':
+    content => 'DPkg::Post-Install-Pkgs { "/srv/leap/restart-pixelated-server"; }'
+    require => File['/srv/leap/restart-pixelated-server']
+  }
+
   file { '/srv/leap/0x287A1542472DC0E3_packages@pixelated-project.org.asc':
     source => 'puppet:///modules/pixelated/0x287A1542472DC0E3_packages@pixelated-project.org.asc',
     notify => Exec['add_pixelated_key']

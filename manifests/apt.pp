@@ -18,7 +18,7 @@ class pixelated::apt {
     source => 'puppet:///modules/pixelated/restart-pixelated-server'',
   }
 
-  apt::apt_conf {'restart-service':
+  apt::apt_conf { 'restart-service':
     content => 'DPkg::Post-Install-Pkgs { "/srv/leap/restart-pixelated-server"; }'
     require => File['/srv/leap/restart-pixelated-server']
   }

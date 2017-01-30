@@ -8,6 +8,7 @@ class pixelated::apt::preferences {
 
   apt::preferences_snippet { ['soledad-server',
     'soledad-common',
+    'soledad-client',
     'leap-keymanager',
     'leap-auth']:
       pin      => 'release o=pixelated',

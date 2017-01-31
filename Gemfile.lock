@@ -58,6 +58,7 @@ GEM
       puppet
     rspec-puppet-utils (2.2.1)
     rspec-support (3.1.2)
+    safe_yaml (1.0.4)
     spdx-licenses (1.1.0)
     stomp (1.4.3)
     systemu (2.6.5)
@@ -74,6 +75,7 @@ DEPENDENCIES
   rspec-puppet
   rspec-puppet-facts
   rspec-puppet-utils
+  safe_yaml
 
 BUNDLED WITH
-   1.11.2
+   1.13.7

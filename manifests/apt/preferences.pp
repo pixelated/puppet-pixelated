@@ -10,8 +10,7 @@ class pixelated::apt::preferences {
     'soledad-common',
     'soledad-client',
     'leap-mx',
-    'leap-keymanager',
-    'leap-auth']:
+    'leap-common']:
       pin      => 'release o=pixelated',
       priority => 1000,
   }

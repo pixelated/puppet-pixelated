@@ -21,7 +21,7 @@ describe 'pixelated' do
       "define apache::vhost::file($content,$mod_security) {}",
       "define apt::sources_list($content='deb url') {}",
       "define apt::apt_conf($source='file url',$refresh_apt='true') {}",
-      "define apt::preferences_snippet($release='stable',$priority='999',$pin='release o=Debian',$package='*') {}",
+      "define apt::preferences_snippet($release='stable',$priority='999',$pin='release o=Debian',$package='*',$ensure='present') {}",
     ] }
 
     it { should contain_class('pixelated::agent') }

@@ -11,3 +11,4 @@
 vendor/
 # ignore rbenv files
 .ruby-version
+.rbenv-gemsets

@@ -12,11 +12,13 @@ class pixelated::apt::preferences {
     pin      => 'origin "packages.pixelated-project.org"'
   }
 
-  apt::preferences_snippet { ['soledad-server',
-    'soledad-common',
-    'soledad-client',
-    'leap-keymanager',
-    'leap-auth']:
+  file { [
+    '/etc/apt/preferences.d/soledad-client',
+    '/etc/apt/preferences.d/soledad-server',
+    '/etc/apt/preferences.d/soledad-common',
+    '/etc/apt/preferences.d/leap-keymanager',
+    '/etc/apt/preferences.d/leap-auth']:
       ensure => absent
   }
+
 }

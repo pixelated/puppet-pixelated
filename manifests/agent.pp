@@ -6,6 +6,7 @@ class pixelated::agent {
   include ::pixelated::syslog
   include ::pixelated::check_mk
   include ::pixelated::tests
+  include ::pixelated::services
 
   $domain_hash = hiera('domain')
   $domain      = $domain_hash['full_suffix']
@@ -84,4 +85,3 @@ class pixelated::agent {
   }
 
 }
-

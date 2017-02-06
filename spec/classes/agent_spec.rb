@@ -1,11 +1,9 @@
 require 'spec_helper'
-  describe 'pixelated::agent' do
-    after :each do
-      Facter.clear
-      Facter.clear_messages
-    end
-
-
+describe 'pixelated::agent' do
+  after :each do
+    Facter.clear
+    Facter.clear_messages
+  end
 
   context 'single node' do
     let(:facts) do
@@ -17,7 +15,7 @@ require 'spec_helper'
           :testscenario     => 'single_node',
         }
     end
-    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
+    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) }
     let(:pre_condition) { [
       "class stdlib {}",
       "define rsyslog::snippet($content) {}",
@@ -44,5 +42,4 @@ require 'spec_helper'
       should contain_file('/srv/leap/webapp/config/customization/views/users/show.html.haml').with_content(/mail.example.com/)
     end
   end
-
 end

@@ -7,7 +7,7 @@ class pixelated::apt::preferences {
   }
 
   apt::preferences_snippet { 'pixelated':
-    priority => 1001,
+    priority => 1000,
     package  => '*',
     pin      => 'origin "packages.pixelated-project.org"'
   }

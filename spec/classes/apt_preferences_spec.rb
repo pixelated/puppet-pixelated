@@ -17,7 +17,7 @@ describe 'pixelated::apt::preferences' do
 
   describe 'pixelated packages' do
     it { should contain_apt__preferences_snippet("pixelated").with_pin('origin "packages.pixelated-project.org"')}
-    it { should contain_apt__preferences_snippet("pixelated").with_priority('1001')}
+    it { should contain_apt__preferences_snippet("pixelated").with_priority('1000')}
   end
 
   %w( soledad-server soledad-client soledad-common leap-keymanager leap-auth).each do | file |

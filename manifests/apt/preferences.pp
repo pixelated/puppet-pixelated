@@ -6,13 +6,19 @@ class pixelated::apt::preferences {
     priority => 999
   }
 
-  apt::preferences_snippet { ['soledad-server',
-    'soledad-common',
-    'soledad-client',
-    'leap-keymanager',
-    'leap-auth']:
-      pin      => 'release o=pixelated',
-      priority => 999,
+  apt::preferences_snippet { 'pixelated':
+    priority => 1001,
+    package  => '*',
+    pin      => 'origin "packages.pixelated-project.org"'
+  }
+
+  file { [
+    '/etc/apt/preferences.d/soledad-client',
+    '/etc/apt/preferences.d/soledad-server',
+    '/etc/apt/preferences.d/soledad-common',
+    '/etc/apt/preferences.d/leap-keymanager',
+    '/etc/apt/preferences.d/leap-auth']:
+      ensure => absent
   }
 
 }

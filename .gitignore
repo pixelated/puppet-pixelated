@@ -6,3 +6,9 @@
 # ignore files created by functional test
 /files/functional-tests/ghostdriver.log
 *.pyc
+# ignore bundles
+.bundle/
+vendor/
+# ignore rbenv files
+.ruby-version
+.rbenv-gemsets

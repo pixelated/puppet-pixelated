@@ -8,7 +8,7 @@ class Pixelated < LeapTest
   def setup
   end
   def test_01_Are_daemons_running?
-    assert_running '/usr/bin/pixelated-user-agent'
+    assert_running service: '/usr/bin/pixelated-user-agent'
     pass
   end
   def test_02_can_connect_to_useragent?
@@ -16,4 +16,3 @@ class Pixelated < LeapTest
     pass
   end
 end
-

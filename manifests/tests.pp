@@ -21,7 +21,7 @@ class pixelated::tests {
     mode   => '0755',
   }
 
-  ensure_packages(['python-pip', 'curl', 'bzip2', 'python-enum','python-pycurl'])
+  ensure_packages(['python-pip', 'curl', 'bzip2', 'python-enum','python-pycurl', 'moreutils'])
 
   package{['behave','selenium']:
     ensure   => installed,
@@ -45,11 +45,12 @@ class pixelated::tests {
   }
 
   cron {'run_functional_tests':
-    command     => "(date; INVITE_CODE_ENABLED=${invite} /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --stop --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1",
+    command     => "(date; INVITE_CODE_ENABLED=${invite} /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --stop --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/ | ts ) >> /var/log/check_mk_jobs.log 2>&1",
     environment => 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     user        => 'root',
     minute      => 27,
     notify      => Exec['dummy_register_job'],
+    require     => Package['moreutils']
   }
 
   # You can remove this after january/2017

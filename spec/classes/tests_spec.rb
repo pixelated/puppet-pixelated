@@ -12,7 +12,7 @@ describe 'pixelated::tests' do
           }
       end
 
-    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
+    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) }
     let(:pre_condition) { [
       "class stdlib {}",
     ] }
@@ -40,7 +40,7 @@ describe 'pixelated::tests' do
     end
     it do
       should contain_cron('run_functional_tests').with(
-        "command" => """(date; INVITE_CODE_ENABLED=true /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --stop --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/) >> /var/log/check_mk_jobs.log 2>&1"
+        "command" => """(date; INVITE_CODE_ENABLED=true /usr/bin/mk-job pixelated-functional-tests /usr/local/bin/behave --stop --tags @staging --tags ~@wip --no-capture -k /srv/leap/tests_custom/functional-tests/ | ts ) >> /var/log/check_mk_jobs.log 2>&1"
       )
     end
   end

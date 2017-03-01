@@ -92,8 +92,8 @@ Have fun!
 
 ### Running Funcional Tests (local)
 
-From: 
-```$cd /puppet-pixelated/files/functional-tests/```
+From:
+```$cd files/functional-tests/```
 
 Install python dependencies:
 ```$pip install -r test_requirements.txt```
@@ -101,7 +101,7 @@ Install python dependencies:
 Install phantomjs:
 ```$npm install phantomjs -g```
 
-Setting staging host as pixelated-platform on the TESTHOST environment variable: 
+Setting staging host as pixelated-platform on the TESTHOST environment variable:
 ```$export TESTHOST=staging.pixelated-project.org```
 
 And to run:

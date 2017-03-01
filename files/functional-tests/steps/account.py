@@ -33,7 +33,7 @@ def step_impl(context):
 
 @then(u'I should see a login button')
 def step_impl(context):
-    context.browser.find_element_by_name('login')
+    context.browser.find_element_by_css_selector('input[type=submit]')
 
 
 @given(u'I\'m logged in')

@@ -21,8 +21,8 @@ from selenium.common.exceptions import TimeoutException
 class LoginPage(BasePageObject):
     def __init__(self, context, timeout=10):
         self._locators = {
-            'username': 'input#email',
-            'password': 'input#password',
+            'username': 'input[name=username]',
+            'password': 'input[name=password]',
             'login_button': 'input[type=submit]',
             'hive_svg': 'svg#hive'
         }

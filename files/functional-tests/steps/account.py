@@ -33,7 +33,7 @@ def step_impl(context):
 
 @then(u'I should see a login button')
 def step_impl(context):
-    context.browser.find_element_by_css_selector('input[type=submit]')
+    context.browser.find_element_by_css_selector('button[type=submit]')
 
 
 @given(u'I\'m logged in')
@@ -47,11 +47,11 @@ def step_impl(context):
 
 @then(u'I see the inbox')
 def step_impl(context):
-        # phantomjs can not deal with the interstitial. We need to load the
-        # website manually after the user-agent has started
-        time.sleep(30)
-        taglist = TagList(context)
-        taglist.is_pixelated_loaded()
+    # phantomjs can not deal with the interstitial. We need to load the
+    # website manually after the user-agent has started
+    time.sleep(30)
+    taglist = TagList(context)
+    taglist.is_pixelated_loaded()
 
 
 @when(u'I logout')

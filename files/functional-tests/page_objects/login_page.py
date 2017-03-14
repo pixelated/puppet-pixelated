@@ -23,7 +23,7 @@ class LoginPage(BasePageObject):
         self._locators = {
             'username': 'input[name=username]',
             'password': 'input[name=password]',
-            'login_button': 'input[type=submit]',
+            'login_button': 'button[type=submit]',
             'hive_svg': 'svg#hive'
         }
         super(LoginPage, self).__init__(context, timeout)

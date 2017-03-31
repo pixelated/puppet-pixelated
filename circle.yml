@@ -1,0 +1,21 @@
+machine:
+  ruby:
+    version:
+      2.1.8
+  environment:
+    LC_ALL: 'en_US.UTF-8'
+
+dependencies:
+  override:
+    - sudo apt-get install rbenv
+    - rbenv rehash
+    - bundle install
+
+test:
+  override:
+    - bundle exec rake validate
+    - cp .fixtures-latest.yml .fixtures.yml
+    - bundle exec rake spec
+    - cp .fixtures-leap-pinned.yml .fixtures.yml
+    - bundle exec rake spec
+

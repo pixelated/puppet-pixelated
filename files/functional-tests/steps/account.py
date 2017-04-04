@@ -67,7 +67,7 @@ def step_impl(context):
 
 @then(u'I should see a signup button')
 def step_impl(context):
-    context.browser.find_element_by_css_selector('input[type=submit]')
+    context.browser.find_element_by_name('button')
 
 
 @when(u'I register')

@@ -58,7 +58,7 @@ class SignUpPage(BasePageObject):
         field.send_keys(value)
 
     def _signup_button(self):
-        return self.context.browser.find_element_by_css_selector("input[type=submit]")
+        return self.context.browser.find_element_by_name("button")
 
 
 class ControlPanelPage(BasePageObject):

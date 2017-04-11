@@ -43,4 +43,16 @@ describe 'pixelated::apt' do
     it { should contain_apt__sources_list('pixelated.list').
       with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshots main\n") }
   end
+
+  context 'vagrant' do
+    let(:facts) do
+        {
+          :domain          => 'pixelated-project.local',
+          :lsbdistcodename => 'jessie',
+        }
+    end
+
+    it { should contain_apt__sources_list('pixelated.list').
+      with_content("deb [arch=amd64] http://packages.pixelated-project.org/debian jessie-snapshots main\n") }
+  end
 end

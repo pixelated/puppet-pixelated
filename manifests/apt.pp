@@ -3,9 +3,13 @@ class pixelated::apt {
 
   include apt
 
+  # Use latest packages from i.e. jessie-snapshots (possibly unstable) for
+  # special domains
+
   $version = $::domain ? {
     /^(staging|dev|unstable)\.pixelated-project\.org$/ => '-snapshots',
-    default                         => '',
+    /^pixelated-project.local$/                        => '-snapshots',
+    default                                            => '',
   }
 
   apt::sources_list { 'pixelated.list':

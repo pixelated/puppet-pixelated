@@ -103,8 +103,8 @@ Install python dependencies:
 Install phantomjs:
 `$ npm install phantomjs -g`
 
-Setting staging host as pixelated-platform on the TESTHOST environment variable:
-`$ export TESTHOST=staging.pixelated-project.org`
+Setting your host as pixelated-platform on the TESTHOST environment variable:
+`$ export TESTHOST=<your-host-url>`
 
 And to run:
 $behave

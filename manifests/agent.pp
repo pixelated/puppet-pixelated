@@ -1,6 +1,5 @@
 # configure and install the pixelated user agent
 class pixelated::agent {
-  include ::pixelated::apt
   include ::pixelated::apt::preferences
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
@@ -84,4 +83,3 @@ class pixelated::agent {
   }
 
 }
-

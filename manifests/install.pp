@@ -43,6 +43,7 @@ class pixelated::install (
       source   => "/var/tmp/${pixelated_server_deb}",
       require  => [
         Exec['fetch_pixelated_server'],
-        Package['pixelated-user-agent'] ]
+        Package['pixelated-user-agent'],
+        Package['ssl-cert'] ]
   }
 }

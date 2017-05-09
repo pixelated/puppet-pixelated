@@ -15,4 +15,14 @@ class pixelated::apt::preferences {
       ensure => absent
   }
 
+
+  # Remove legacy apt repo resources
+  file { '/etc/apt/sources.list.d/pixelated.list':
+    ensure =>  absent,
+    notify => Exec[refresh_apt],
+  }
+  apt::preferences_snippet { 'pixelated':
+    ensure =>  absent,
+  }
+
 }

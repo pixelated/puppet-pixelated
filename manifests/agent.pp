@@ -1,6 +1,7 @@
 # configure and install the pixelated user agent
 class pixelated::agent {
   include ::pixelated::apt::preferences
+  include ::pixelated::install
   include ::pixelated::unattended_upgrades
   include ::pixelated::syslog
   include ::pixelated::check_mk
@@ -10,10 +11,6 @@ class pixelated::agent {
   $domain      = $domain_hash['full_suffix']
   $services    = hiera('services')
   $default_file = '/etc/default/pixelated-server'
-
-  package { 'pixelated-server':
-    ensure => installed,
-  }
 
   service { 'pixelated-server':
     ensure   => running,

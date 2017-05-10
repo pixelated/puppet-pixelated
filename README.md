@@ -17,19 +17,20 @@ It sets up the [Pixelated User-Agent](https://github.com/pixelated/pixelated-use
 Testing Pixelated
 =================
 
-If you want to have a look at pixelated, the easiest way ist to run everything inside [vagrant](https://www.vagrantup.com/). The following command
-installs a working LEAP Platform, the pixelated-user-agent. You can create accounts
-by visiting the LEAP Webapp at <https://localhost:4443/signup> and see Pixelated in action at <https://localhost:8080/>.
-Be aware that you will not be able to send mails outside, but you can test sending mails internally from one user to another.
+If you want to have a look at pixelated, the easiest way is to run everything inside [vagrant](https://www.vagrantup.com/). The following command installs the Pixelated User Agent and the Leap Platform at once (this may take a while, please be patient):
 
-```bash
- curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh | sh
 ```
+$ curl https://raw.githubusercontent.com/pixelated/puppet-pixelated/master/vagrant_platform.sh | sh
+```
+
+Once installed, you can create accounts by visiting the LEAP Webapp at [localhost:4443/signup](https://localhost:4443/signup) and see Pixelated in action at [localhost:8080](https://localhost:8080/).
+
+NOTE: Be aware that you will not be able to send mails outside, but you can test sending mails internally from one user to another.
 
 Manual installation
 ===================
 
-## 1 Creating a LEAP Provider
+### 1 Creating a LEAP Provider
 
 Pixelated is built on top of LEAP, so in order to have a Pixelated Platform, you need to have a LEAP Platform.
 
@@ -52,29 +53,28 @@ You can access your LEAP provider with only local DNS overrides, but you cannot 
 Add the pixelated-platform files to `files/puppet` inside your LEAP configuration folder.
 
 ```bash
-    cd ~/leap/example
-    mkdir -p files/puppet/modules
+$ cd ~/leap/example
+$ mkdir -p files/puppet/modules
 ```
-
 
 The documentation for the installation of the LEAP Platform suggests that you make the configuration folder (`~/leap/example` is the name they suggest) versioned using Git to make it easier to track and undo any changes on the configuration. If you followed this suggestion of the tutorial, the easiest way to get the Pixelated platform is to add it as a submodule.
 
 ```bash
-    git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
+$ git submodule add https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
 ```
 
 If you haven't added version control to your LEAP configuration, you can simply clone the Pixelated platform files into your node configuration.
 
 ```bash
-    git clone https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
+$ git clone https://github.com/pixelated/puppet-pixelated.git files/puppet/modules/pixelated
 ```
 
 Include the `::pixelated` class in the `custom` class, which gets automatically applied by the leap_platform.
 
 ```bash
-   mkdir -p files/puppet/modules/custom/manifests
-   echo '{}' > services/pixelated.json
-   echo 'class custom { include ::pixelated}' > files/puppet/modules/custom/manifests/init.pp
+$ mkdir -p files/puppet/modules/custom/manifests
+$ echo '{}' > services/pixelated.json
+$ echo 'class custom { include ::pixelated}' > files/puppet/modules/custom/manifests/init.pp
 ```
 
 
@@ -82,8 +82,10 @@ Include the `::pixelated` class in the `custom` class, which gets automatically 
 
 With Pixelated added to the configuration simply re-run the LEAP deployment.
 
-    leap deploy
-    leap test
+```
+$ leap deploy
+$ leap test
+```
 
 When this completes Pixelated should be ready and available on port 8080 on your LEAP provider.
 
@@ -93,29 +95,31 @@ Have fun!
 ### Running Funcional Tests (local)
 
 From:
-```$cd files/functional-tests/```
+`$ cd files/functional-tests`
 
 Install python dependencies:
-```$pip install -r test_requirements.txt```
+`$ pip install -r test_requirements.txt`
 
 Install phantomjs:
-```$npm install phantomjs -g```
+`$ npm install phantomjs -g`
 
 Setting staging host as pixelated-platform on the TESTHOST environment variable:
-```$export TESTHOST=staging.pixelated-project.org```
+`$ export TESTHOST=staging.pixelated-project.org`
 
 And to run:
 $behave
 
 To run a feature:
-```$behave -t @mail_to_myself```
+`$ behave -t @mail_to_myself`
 
 To run a set of tests:
-```$behave -t @staging```
+`$ behave -t @staging`
 
 ## Development
 
 ### Run tests
 
-    bundle install --path vendor/bundle
-    bundle exec rake test
+```
+$ bundle install --path vendor/bundle
+$ bundle exec rake test
+```

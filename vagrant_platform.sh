@@ -9,9 +9,8 @@ if [ -d ./leap_platform ]
 then
   cd leap_platform
   /usr/bin/git pull
-  /usr/bin/git submodule update --init
 else
-  /usr/bin/git clone --branch develop --recursive https://leap.se/git/leap_platform.git
+  /usr/bin/git clone https://leap.se/git/leap_platform.git
   cd leap_platform
 fi
 

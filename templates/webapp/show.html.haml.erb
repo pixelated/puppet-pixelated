@@ -3,4 +3,4 @@
   .row-fluid
     %br
     %h4
-      = link_to 'Go to your Pixelated inbox', 'https://mail.<%= scope.lookupvar('::pixelated::agent::domain')  %>'
+      = link_to 'Go to your Pixelated inbox', 'https://<%= scope.lookupvar('::pixelated::agent::domain') %>:8080'

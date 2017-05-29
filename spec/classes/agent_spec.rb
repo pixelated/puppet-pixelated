@@ -17,7 +17,7 @@ require 'spec_helper'
           :testscenario     => 'single_node',
         }
     end
-    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) } 
+    let!(:ensure_packages) { MockFunction.new('ensure_packages',{:type => :statement}) }
     let(:pre_condition) { [
       "class stdlib {}",
       "define rsyslog::snippet($content) {}",
@@ -41,7 +41,7 @@ require 'spec_helper'
     it "should configure leap webapp" do
       should contain_file('/srv/leap/webapp/config/customization/locales/en.yml').with( 'require' => 'File[/srv/leap/webapp/config/customization/views/common]',)
       should contain_file('/srv/leap/webapp/config/customization/views/common/_download_button.html.haml')
-      should contain_file('/srv/leap/webapp/config/customization/views/users/show.html.haml').with_content(/mail.example.com/)
+      should contain_file('/srv/leap/webapp/config/customization/views/users/show.html.haml').with_content(/example.com:8080/)
     end
   end
 

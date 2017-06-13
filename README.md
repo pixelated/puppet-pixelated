@@ -1,7 +1,7 @@
 puppet-pixelated
 ================
 
-[![Build Status](https://snap-ci.com/pixelated/puppet-pixelated/branch/master/build_image)](https://snap-ci.com/pixelated/puppet-pixelated/branch/master)
+[![CircleCI](https://circleci.com/gh/pixelated/puppet-pixelated.svg?style=svg)](https://circleci.com/gh/pixelated/puppet-pixelated)
 
 **Pixelated is in an early stage of development! Things may not work to their full extent yet**
 
